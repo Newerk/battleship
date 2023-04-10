@@ -1,12 +1,14 @@
 import _ from 'lodash';
 
- function component() {
-   const element = document.createElement('div');
-
-  // Lodash, now imported by this script
-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-   return element;
- }
-
- document.body.appendChild(component());
+export let Ship = (length) => {
+  return {
+    length,
+    hits: 0,
+    hit() {
+      this.hits++;
+    },
+    isSunk() {
+      return (this.hits === this.length) ? true : false;
+    }
+  }
+}
