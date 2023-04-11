@@ -37,3 +37,19 @@ export const Gameboard = () => {
         }
     }
 }
+
+export function _buildBoard() {
+    let board = [];
+    let letters = 'ABCDEFGHIJ';
+    for (let i = 0; i < 10; i++) {
+        for (let j = 1; j <= 10; j++) {
+            board.push({
+                coord: [letters.charAt(i), j],
+                occupiedBy: 'water', //values will be 'water' by default, but if a ship is on the coord, it will be changed to 'ship' or the name of specifc ship on the coord (still deciding)
+                hit: false
+            });
+        }
+    }
+    return board;
+}
+
