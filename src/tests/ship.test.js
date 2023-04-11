@@ -1,14 +1,14 @@
-import { Ship } from '../index.js'
+import { Ship } from '../ship'
 
 test("Ship's starting state", () => {
-    let example = Ship(4);
+    const example = Ship(4);
     expect(example.length).toBe(4)
     expect(example.hits).toBe(0)
     expect(example.isSunk()).toBe(false)
 })
 
 test("Ship is hit 3 times", () => {
-    let example = Ship(4);
+    const example = Ship(4);
     example.hit();
     example.hit();
     example.hit();
@@ -18,7 +18,7 @@ test("Ship is hit 3 times", () => {
 })
 
 test("Ship is sunken", () => {
-    let example = Ship(4);
+    const example = Ship(4);
     example.hit();
     example.hit();
     example.hit();
