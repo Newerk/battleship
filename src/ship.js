@@ -2,6 +2,8 @@ export const Ship = (length) => {
     return {
         length,
         hits: 0,
+        axis: "Y",
+        occupiedCoords: [],
         hit() {
             this.hits++;
         },

@@ -1,19 +1,27 @@
-import { Gameboard, _buildBoard } from "../gameboard";
+import _ from "lodash";
+import { Gameboard, buildBoard } from "../gameboard";
+import { Ship } from "../ship";
+
+let playersBoard = buildBoard();
+let enemysBoard = buildBoard();
 
 
 //Player's Gameboard
 test('Place Ship on Board', () => {
-    expect(true).toBe(false);
-})
+    const testShip = Ship(3);
 
-test('Ships do not overlap', () => {//delete once code implements ships not overlapping
-    expect(true).toBe(false);
+    //place ship on board vertically on coord D1
+    Gameboard().placeShip(testShip, ["D", 1], "Y");
 
+    expect(_.includes(Gameboard().occupiedCoords, [["D", 1], ["D", 2], ["D", 3]])).toBe(true);
 })
 
 test('Enemy Hits a ship', () => {
-    expect(true).toBe(false);
-
+    const testShip = Ship(3);
+    Gameboard().placeShip(testShip, ["D", 1], "Y");
+    Gameboard().receiveAttack(["D", 3])
+    
+    expect(_.includes(Gameboard().occupiedCoords, [["D", 1], ["D", 2], ["D", 3]])).toBe(true);
 })
 
 test('Enemy Misses a ship', () => {
@@ -58,6 +66,7 @@ test('build board', () => {
         return board;
     }
 
-    expect(_buildBoard()).toEqual(JSON.stringify(testBoard()))//test is only written like this so that I can see what the board array looks like. beautify code: https://beautifier.io/
+    // expect(buildBoard()).toEqual(JSON.stringify(testBoard()))//test is only written like this so that I can see what the board array looks like. beautify code: https://beautifier.io/
+    expect(buildBoard()).toEqual(testBoard())
 })
 

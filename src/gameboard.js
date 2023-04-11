@@ -14,14 +14,26 @@ export const Gameboard = () => {
         hits: [],
         misses: [],
         ships,
-        placeShip(selectedShip, coord, axis) { },
+        occupiedCoords: [], //board-wide spots occupied by ships
+        placeShip(selectedShip, coord, axis) {
+            //updates Gameboard occupied coords with ship's location. Verifies that ship doesnt hang off the board, and that a spot is not already occupied
+        },
         receiveAttack(coord) {
             if (_.includes(this.hits, coord) || _.includes(this.misses, coord)) {
                 return;
             }
             if (/*attack hits*/'') {
                 //get the ship on the coord and call its hit() function
-                this.hits.push(coord)
+                for (const key in this.ships) {
+                    const shipType = this.ships[key];//specific ship [carrier, battleship, cruiser, submarine, destroyer]
+
+                    if (_.includes(shipType.occupiedCoords, coord)) {
+                        this.hits.push(coord);
+                        shipType.hit();
+                        shipType.isSunk();//might be uneeded***
+                    }
+
+                }
             } if (/*attack misses*/'') {
                 this.misses.push(coord)
             }
@@ -38,7 +50,7 @@ export const Gameboard = () => {
     }
 }
 
-export function _buildBoard() {
+export function buildBoard() {
     let board = [];
     let letters = 'ABCDEFGHIJ';
     for (let i = 0; i < 10; i++) {

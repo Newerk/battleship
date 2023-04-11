@@ -4,6 +4,7 @@ test("Ship's starting state", () => {
     const example = Ship(4);
     expect(example.length).toBe(4)
     expect(example.hits).toBe(0)
+    expect(example.axis).toBe("Y")
     expect(example.isSunk()).toBe(false)
 })
 
