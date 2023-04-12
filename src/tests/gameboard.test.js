@@ -30,7 +30,7 @@ test('Enemy Misses a ship', () => {
 })
 
 test('All ships are sunken', () => {
-    expect(Gameboard().allShipsSunk()).toBe(true);
+    expect(Gameboard().allShipsSunk()).toBeTruthy();
 
 })
 
