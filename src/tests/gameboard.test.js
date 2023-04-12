@@ -11,9 +11,9 @@ test('Place Ship on Board', () => {
     const testShip = Ship(3);
 
     //place ship on board vertically on coord D1
-    playersBoard.placeShip(testShip, ["D1"], "Y");
+    playersBoard.placeShip(testShip, "D1", "Y");
 
-    expect(_.includes(playersBoard.shipOccupiedCoords, ["D1", "D2", "D3"])).toBe(true);
+    expect(_.includes(playersBoard.shipOccupiedCoords(), ["D1", "D2", "D3"])).toBe(true);
 })
 
 test('Enemy Hits a ship', () => {
@@ -22,9 +22,8 @@ test('Enemy Hits a ship', () => {
     game.placeShip(testShip, "D1", "Y");
     game.receiveAttack("D3")
 
-    expect(true).toBe(false);
-
-
+    expect(_.includes(game.hitAttacks(), "D3")).toBeTruthy();
+    expect(_.includes(game.missedAttacks(), "D3")).toBeFalsy();
 })
 
 test('Enemy Misses a ship', () => {
@@ -34,9 +33,8 @@ test('Enemy Misses a ship', () => {
     game.placeShip(testShip, "D1", "Y");
     game.receiveAttack("A2")
 
-    expect(true).toBe(false);
-
-
+    expect(_.includes(game.missedAttacks(), "D3")).toBeTruthy();
+    expect(_.includes(game.hitAttacks(), "D3")).toBeFalsy();
 })
 
 test('All ships are sunken', () => {
@@ -57,7 +55,7 @@ test('Missed attacks', () => {
     //returns array of recorded missed attacks
     let game = Gameboard()
     const testShip = Ship(3);
-    game.placeShip(testShip, ["D1"], "Y");
+    game.placeShip(testShip, "D1", "Y");
     game.receiveAttack("F7");
     game.receiveAttack("C10");
     game.receiveAttack("D2");
@@ -71,7 +69,7 @@ test('Hit attacks', () => {
     //returns array of recorded hit attacks
     let game = Gameboard()
     const testShip = Ship(3);
-    game.placeShip(testShip, ["D1"], "Y");
+    game.placeShip(testShip, "D1", "Y");
     game.receiveAttack("D2");
     game.receiveAttack("D3");
     game.receiveAttack("F7");

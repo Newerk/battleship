@@ -28,7 +28,7 @@ export const Gameboard = () => {
 
     let _hits = [];
     let _misses = [];
-    let shipOccupiedCoords = [];
+    let _shipOccupiedCoords = [];
 
     return {
         placeShip(selectedShip, coord, axis) {
@@ -72,7 +72,10 @@ export const Gameboard = () => {
         get hitAttacks() {
             return _hits;
         },
-        board//use this to see current state of the board. May be removed from return object soon to keep this information private inside the factory function
+        get shipOccupiedCoords(){
+            return _shipOccupiedCoords;
+        },
+        board,//use this to see current state of the board. May be removed from return object soon to keep this information private inside the factory function
     }
 }
 
