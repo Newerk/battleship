@@ -59,7 +59,7 @@ test('All ships are sunken', () => {
     game.receiveAttack("D2")
     game.receiveAttack("D3")
 
-    expect(testBoard.allShipsSunk()).toBeTruthy();
+    expect(game.allShipsSunk()).toBeTruthy();
 
 })
 
@@ -75,7 +75,7 @@ test('Missed attacks', () => {
     game.receiveAttack("D2");
     game.receiveAttack("D3");
 
-    expect(game.missedAttacks()).toEqual(["F7", "C10"]);
+    expect(game.missedAttacks).toEqual(["F7", "C10"]);
 
 })
 
@@ -89,7 +89,7 @@ test('Hit attacks', () => {
     game.receiveAttack("F7");
     game.receiveAttack("C10")
 
-    expect(game.hitAttacks()).toEqual(["D2", "D3"]);
+    expect(game.hitAttacks).toEqual(["D2", "D3"]);
 
 })
 
