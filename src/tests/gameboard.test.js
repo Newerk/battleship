@@ -20,7 +20,7 @@ test('Enemy Hits a ship', () => {
     const testShip = Ship(3);
     Gameboard().placeShip(testShip, ["D", 1], "Y");
     Gameboard().receiveAttack(["D", 3])
-    
+
     expect(_.includes(Gameboard().occupiedCoords, [["D", 1], ["D", 2], ["D", 3]])).toBe(true);
 })
 
@@ -30,8 +30,7 @@ test('Enemy Misses a ship', () => {
 })
 
 test('All ships are sunken', () => {
-    expect(Gameboard().allShipsSunk()).toBe(true);
-
+    expect(Gameboard().allShipsSunk()).toBeTruthy();
 })
 
 

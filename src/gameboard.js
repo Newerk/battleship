@@ -10,37 +10,37 @@ export const Gameboard = () => {
         destroyer: Ship(2)
     }
 
+    let hits = [];
+    let misses = [];
+    let occupiedCoords = []; //board-wide spots occupied by ships
+
     return {
-        hits: [],
-        misses: [],
-        ships,
-        occupiedCoords: [], //board-wide spots occupied by ships
         placeShip(selectedShip, coord, axis) {
             //updates Gameboard occupied coords with ship's location. Verifies that ship doesnt hang off the board, and that a spot is not already occupied
         },
         receiveAttack(coord) {
-            if (_.includes(this.hits, coord) || _.includes(this.misses, coord)) {
+            if (_.includes(hits, coord) || _.includes(misses, coord)) {
                 return;
             }
             if (/*attack hits*/'') {
                 //get the ship on the coord and call its hit() function
-                for (const key in this.ships) {
-                    const shipType = this.ships[key];//specific ship [carrier, battleship, cruiser, submarine, destroyer]
+                for (const key in ships) {
+                    const shipType = ships[key];//specific ship [carrier, battleship, cruiser, submarine, destroyer]
 
                     if (_.includes(shipType.occupiedCoords, coord)) {
-                        this.hits.push(coord);
+                        hits.push(coord);
                         shipType.hit();
                         shipType.isSunk();//might be uneeded***
                     }
 
                 }
             } if (/*attack misses*/'') {
-                this.misses.push(coord)
+                misses.push(coord)
             }
         },
         allShipsSunk() {
-            for (const key in this.ships) {
-                const sunkenValue = this.ships[key].isSunk();
+            for (const key in ships) {
+                const sunkenValue = ships[key].isSunk();
                 if (sunkenValue === false) {
                     return false;
                 }
