@@ -3,7 +3,7 @@ export const Ship = (length) => {
         length,
         hits: 0,
         axis: "Y",
-        occupiedCoords: [],
+        occupying: [],
         hit() {
             this.hits++;
         },

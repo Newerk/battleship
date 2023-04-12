@@ -12,12 +12,12 @@ export const Gameboard = () => {
 
     let hits = [];
     let misses = [];
-    let occupiedCoords = []; //board-wide spots occupied by ships
-
 
     return {
         placeShip(selectedShip, coord, axis) {
-            //updates Gameboard occupied coords with ship's location. Verifies that ship doesnt hang off the board, and that a spot is not already occupied
+            //updates board occupidBy with coords of ship. Verifies that ship doesnt hang off the board, and that a spot is not already occupied
+            /*ex: let enemyBoard = buildBoard()
+            */
         },
         receiveAttack(coord) {
             if (_.includes(hits, coord) || _.includes(misses, coord)) {
@@ -28,7 +28,7 @@ export const Gameboard = () => {
                 for (const key in ships) {
                     const shipType = ships[key];//specific ship [carrier, battleship, cruiser, submarine, destroyer]
 
-                    if (_.includes(shipType.occupiedCoords, coord)) {
+                    if (_.includes(shipType.occupying, coord)) {
                         hits.push(coord);
                         shipType.hit();
                         shipType.isSunk();//might be uneeded***
@@ -52,16 +52,16 @@ export const Gameboard = () => {
 }
 
 export function buildBoard() {
-    let board = [];
+    let board = {};
     let letters = 'ABCDEFGHIJ';
     for (let i = 0; i < 10; i++) {
         for (let j = 1; j <= 10; j++) {
-            board.push({
-                coord: [letters.charAt(i), j],
+            board[`${letters.charAt(i) + j}`] = {
                 occupiedBy: 'water', //values will be 'water' by default, but if a ship is on the coord, it will be changed to 'ship' or the name of specifc ship on the coord (still deciding)
                 hit: false
-            });
+            }
         }
     }
     return board;
+
 }

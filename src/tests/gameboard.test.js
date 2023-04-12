@@ -17,15 +17,17 @@ test('Place Ship on Board', () => {
 })
 
 test('Enemy Hits a ship', () => {
+    const game = Gameboard();
     const testShip = Ship(3);
-    Gameboard().placeShip(testShip, ["D", 1], "Y");
-    Gameboard().receiveAttack(["D", 3])
-    
-    expect(_.includes(Gameboard().occupiedCoords, [["D", 1], ["D", 2], ["D", 3]])).toBe(true);
+    game.placeShip(testShip, ["D", 1], "Y");
+    game.receiveAttack(["D", 3])
+
 })
 
 test('Enemy Misses a ship', () => {
-    expect(true).toBe(false);
+    const testShip = Ship(3);
+    game.placeShip(testShip, ["D", 1], "Y");
+    game.receiveAttack(["A", 2])
 
 })
 
@@ -51,16 +53,14 @@ test('Hit attacks', () => {
 
 test('build board', () => {
     function testBoard() {
-        let board = [];
+        let board = {};
         let letters = 'ABCDEFGHIJ';
         for (let i = 0; i < 10; i++) {
             for (let j = 1; j <= 10; j++) {
-                board.push({
-                    coord: [letters.charAt(i), j],
+                board[`${letters.charAt(i) + j}`] = {
                     occupiedBy: 'water',
                     hit: false
                 }
-                );
             }
         }
         return board;
