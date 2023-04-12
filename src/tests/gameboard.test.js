@@ -12,8 +12,11 @@ test('Place Ship on Board', () => {
 
     //place ship on board vertically on coord D1
     playersBoard.placeShip(testShip, "D1", "Y");
-    
-    expect(_.forEach(["D1", "D2", "D3"], (el) => (!_.includes(playersBoard.shipOccupiedCoords, el)) ? false : true)).toBeTruthy();
+
+    expect(_.includes(playersBoard.shipOccupiedCoords, "F3")).toBeFalsy();
+    expect(_.every(["D1", "D2", "D3"], (el) => _.includes(playersBoard.shipOccupiedCoords, el))).toBeTruthy();
+    expect(_.every(["D1", "D2", "D3", "D4"], (el) => _.includes(playersBoard.shipOccupiedCoords, el))).toBeFalsy();
+
 })
 
 test('Enemy Hits a ship', () => {
