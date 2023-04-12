@@ -26,8 +26,8 @@ export const Gameboard = () => {
         destroyer: Ship(2)
     }
 
-    let hits = [];
-    let misses = [];
+    let _hits = [];
+    let _misses = [];
     let shipOccupiedCoords = [];
 
     return {
@@ -38,7 +38,7 @@ export const Gameboard = () => {
 
         },
         receiveAttack(coord) {
-            if (_.includes(hits, coord) || _.includes(misses, coord)) {
+            if (_.includes(_hits, coord) || _.includes(_misses, coord)) {
                 return;
             }
             if (/*attack hits*/'') {
@@ -47,7 +47,7 @@ export const Gameboard = () => {
                     const shipType = ships[key];//specific ship [carrier, battleship, cruiser, submarine, destroyer]
 
                     if (_.includes(shipType.occupying, coord)) {
-                        hits.push(coord);
+                        _hits.push(coord);
                         shipType.hit();
                         shipType.isSunk();//might be uneeded***
                     }
@@ -65,7 +65,13 @@ export const Gameboard = () => {
                 }
             }
             return true;
-        }, 
+        },
+        get missedAttacks() {
+            return _misses;
+        },
+        get hitAttacks() {
+            return _hits;
+        },
         board//use this to see current state of the board. May be removed from return object soon to keep this information private inside the factory function
     }
 }
