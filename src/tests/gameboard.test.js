@@ -7,7 +7,7 @@ let enemysBoard = Gameboard();
 
 
 //Player's Gameboard
-test('Place Ship on Board', () => {
+test('Place Ship Vertically on Board', () => {
     const testShip = Ship(3);
 
     //place ship on board vertically on coord D1
@@ -18,6 +18,17 @@ test('Place Ship on Board', () => {
     expect(_.every(["D1", "D2", "D3", "D4"], (el) => _.includes(playersBoard.shipOccupiedCoords, el))).toBeFalsy();
 
 })
+
+test('Place Ship Horizontaly on Board', () => {
+    const testShip = Ship(3);
+
+    //place ship on board horizontally on coord A1
+    playersBoard.placeShip(testShip, "A1", "X");
+    
+    expect(_.includes(playersBoard.shipOccupiedCoords, "F3")).toBeFalsy();
+    expect(_.every(["A1", "B1", "C1"], (el) => _.includes(playersBoard.shipOccupiedCoords, el))).toBeTruthy();
+})
+
 
 test('Enemy Hits a ship', () => {
     const game = Gameboard();

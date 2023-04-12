@@ -44,6 +44,14 @@ export const Gameboard = () => {
             if (axis === "X") {
                 //code here, expect the length if ship to go from left ro right:
                 //ex: adding a 3 length ship to coord A1 horizontally will occupy spots A1,B1,C1
+                let count = parseInt(letters.indexOf(coord[0]));
+
+                for (let i = 0; i < selectedShip.length; i++) {
+                    board[`${letters.charAt(count)}${coord[1]}`].occupiedBy = `${selectedShip}`;
+                    _shipOccupiedCoords.push(`${letters.charAt(count)}${coord[1]}`);
+                    count++;
+                }
+
             }
 
         },
