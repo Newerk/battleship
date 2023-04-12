@@ -5,18 +5,14 @@ export const Gameboard = () => {
     let board = {};
     let letters = 'ABCDEFGHIJ';
 
-    const buildBoard = (() => {
-        for (let i = 0; i < 10; i++) {
-            for (let j = 1; j <= 10; j++) {
-                board[`${letters.charAt(i) + j}`] = {
-                    occupiedBy: 'water', //values will be 'water' by default, but if a ship is on the coord, it will be changed to 'ship' or the name of specifc ship on the coord (still deciding)
-                    hit: false
-                }
+    for (let i = 0; i < 10; i++) {
+        for (let j = 1; j <= 10; j++) {
+            board[`${letters.charAt(i) + j}`] = {
+                occupiedBy: 'water', //values will be 'water' by default, but if a ship is on the coord, it will be changed to 'ship' or the name of specifc ship on the coord (still deciding)
+                hit: false
             }
         }
-        return board;
-
-    })();
+    }
 
     const ships = {
         carrier: Ship(5),
@@ -32,9 +28,23 @@ export const Gameboard = () => {
 
     return {
         placeShip(selectedShip, coord, axis) {
-            /*updates board occupidBy with coords of ship. Verifies that ship doesnt hang off the board(this can be done by checking if coord exists as a property in the board object),
+            /*updates board occupidBy with coords of ship. Verifies that ship doesnt hang off the board(this can be done by checking if coord exists as a property in the board object or regex),
              and that a spot is not already occupied*/
             /*important: must consider which board is placing its ship*/
+
+            if (axis === "Y") {
+                let count = parseInt(coord[1]);
+
+                for (let i = 0; i < selectedShip.length; i++) {
+                    board[`${coord[0]}${count}`].occupiedBy = `${selectedShip}`;
+                    _shipOccupiedCoords.push(`${coord[0]}${count}`);
+                    count++;
+                }
+            }
+            if (axis === "X") {
+                //code here, expect the length if ship to go from left ro right:
+                //ex: adding a 3 length ship to coord A1 horizontally will occupy spots A1,B1,C1
+            }
 
         },
         receiveAttack(coord) {
@@ -54,7 +64,7 @@ export const Gameboard = () => {
 
                 }
             } if (/*attack misses*/'') {
-                misses.push(coord)
+                _misses.push(coord)
             }
         },
         allShipsSunk() {
@@ -72,7 +82,7 @@ export const Gameboard = () => {
         get hitAttacks() {
             return _hits;
         },
-        get shipOccupiedCoords(){
+        get shipOccupiedCoords() {
             return _shipOccupiedCoords;
         },
         board,//use this to see current state of the board. May be removed from return object soon to keep this information private inside the factory function

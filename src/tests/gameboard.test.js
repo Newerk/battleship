@@ -13,7 +13,10 @@ test('Place Ship on Board', () => {
     //place ship on board vertically on coord D1
     playersBoard.placeShip(testShip, "D1", "Y");
 
-    expect(_.includes(playersBoard.shipOccupiedCoords(), ["D1", "D2", "D3"])).toBe(true);
+    expect(_.includes(playersBoard.shipOccupiedCoords, "D1")).toBeTruthy();
+    expect(_.includes(playersBoard.shipOccupiedCoords, "D2")).toBeTruthy();
+    expect(_.includes(playersBoard.shipOccupiedCoords, "D3")).toBeTruthy();
+    expect(_.forEach(["D1", "D2", "D3"], (el) => (!_.includes(playersBoard.shipOccupiedCoords, el)) ? false : true)).toBeTruthy();
 })
 
 test('Enemy Hits a ship', () => {
@@ -22,8 +25,8 @@ test('Enemy Hits a ship', () => {
     game.placeShip(testShip, "D1", "Y");
     game.receiveAttack("D3")
 
-    expect(_.includes(game.hitAttacks(), "D3")).toBeTruthy();
-    expect(_.includes(game.missedAttacks(), "D3")).toBeFalsy();
+    expect(_.includes(game.hitAttacks, "D3")).toBeTruthy();
+    expect(_.includes(game.missedAttacks, "D3")).toBeFalsy();
 })
 
 test('Enemy Misses a ship', () => {
@@ -33,8 +36,8 @@ test('Enemy Misses a ship', () => {
     game.placeShip(testShip, "D1", "Y");
     game.receiveAttack("A2")
 
-    expect(_.includes(game.missedAttacks(), "D3")).toBeTruthy();
-    expect(_.includes(game.hitAttacks(), "D3")).toBeFalsy();
+    expect(_.includes(game.missedAttacks, "D3")).toBeTruthy();
+    expect(_.includes(game.hitAttacks, "D3")).toBeFalsy();
 })
 
 test('All ships are sunken', () => {
