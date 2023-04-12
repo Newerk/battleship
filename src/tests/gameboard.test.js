@@ -1,9 +1,9 @@
 import _ from "lodash";
-import { Gameboard, buildBoard } from "../gameboard";
+import { Gameboard } from "../gameboard";
 import { Ship } from "../ship";
 
-let playersBoard = buildBoard();
-let enemysBoard = buildBoard();
+let playersBoard = Gameboard();
+let enemysBoard = Gameboard();
 
 
 //Player's Gameboard
@@ -11,23 +11,29 @@ test('Place Ship on Board', () => {
     const testShip = Ship(3);
 
     //place ship on board vertically on coord D1
-    Gameboard().placeShip(testShip, ["D", 1], "Y");
+    Gameboard().placeShip(testShip, ["D1"], "Y");
 
-    expect(_.includes(Gameboard().occupiedCoords, [["D", 1], ["D", 2], ["D", 3]])).toBe(true);
+    expect(_.includes(Gameboard().occupiedCoords, ["D1", "D2", "D3"])).toBe(true);
 })
 
 test('Enemy Hits a ship', () => {
     const game = Gameboard();
     const testShip = Ship(3);
-    game.placeShip(testShip, ["D", 1], "Y");
-    game.receiveAttack(["D", 3])
+    game.placeShip(testShip, "D1", "Y");
+    game.receiveAttack("D3")
+
+    expect(true).toBe(false);
+
 
 })
 
 test('Enemy Misses a ship', () => {
     const testShip = Ship(3);
-    game.placeShip(testShip, ["D", 1], "Y");
-    game.receiveAttack(["A", 2])
+    game.placeShip(testShip, "D1", "Y");
+    game.receiveAttack("A2")
+
+    expect(true).toBe(false);
+
 
 })
 
@@ -52,20 +58,7 @@ test('Hit attacks', () => {
 
 
 test('build board', () => {
-    function testBoard() {
-        let board = {};
-        let letters = 'ABCDEFGHIJ';
-        for (let i = 0; i < 10; i++) {
-            for (let j = 1; j <= 10; j++) {
-                board[`${letters.charAt(i) + j}`] = {
-                    occupiedBy: 'water',
-                    hit: false
-                }
-            }
-        }
-        return board;
-    }
-
-    // expect(buildBoard()).toEqual(JSON.stringify(testBoard()))//test is only written like this so that I can see what the board array looks like. beautify code: https://beautifier.io/
-    expect(buildBoard()).toEqual(testBoard())
+    let testBoard = Gameboard();
+    // expect(Gameboard().board).toEqual(JSON.stringify(testBoard.board))//test is only written like this so that I can see what the board array looks like. beautify code: https://beautifier.io/
+    expect(Gameboard().board).toEqual(testBoard.board)
 })
