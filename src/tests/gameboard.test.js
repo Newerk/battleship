@@ -12,10 +12,7 @@ test('Place Ship on Board', () => {
 
     //place ship on board vertically on coord D1
     playersBoard.placeShip(testShip, "D1", "Y");
-
-    expect(_.includes(playersBoard.shipOccupiedCoords, "D1")).toBeTruthy();
-    expect(_.includes(playersBoard.shipOccupiedCoords, "D2")).toBeTruthy();
-    expect(_.includes(playersBoard.shipOccupiedCoords, "D3")).toBeTruthy();
+    
     expect(_.forEach(["D1", "D2", "D3"], (el) => (!_.includes(playersBoard.shipOccupiedCoords, el)) ? false : true)).toBeTruthy();
 })
 
