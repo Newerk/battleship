@@ -28,6 +28,7 @@ export const Gameboard = () => {
 
     let hits = [];
     let misses = [];
+    let shipOccupiedCoords = [];
 
     return {
         placeShip(selectedShip, coord, axis) {

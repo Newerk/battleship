@@ -13,7 +13,7 @@ test('Place Ship on Board', () => {
     //place ship on board vertically on coord D1
     Gameboard().placeShip(testShip, ["D1"], "Y");
 
-    expect(_.includes(Gameboard().occupiedCoords, ["D1", "D2", "D3"])).toBe(true);
+    expect(_.includes(Gameboard().shipOccupiedCoords, ["D1", "D2", "D3"])).toBe(true);
 })
 
 test('Enemy Hits a ship', () => {
