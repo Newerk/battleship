@@ -58,22 +58,22 @@ export const Gameboard = () => {
 
         },
         receiveAttack(coord) {
-            if (_.includes(_hits, coord) || _.includes(_misses, coord)) {
-                return;
-            }
             if (_.includes(_shipOccupiedCoords, coord) && !_.includes(_hits, coord) && !_.includes(_misses, coord)) {
+                _hits.push(coord);
+
                 //get the ship on the coord and call its hit() function
                 for (const key in ships) {
                     const shipType = ships[key];//specific ship [carrier, battleship, cruiser, submarine, destroyer]
 
                     if (_.includes(shipType.occupying, coord)) {
-                        _hits.push(coord);
                         shipType.hit();
                         shipType.isSunk();//might be uneeded***
                     }
 
                 }
-            } if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_misses, coord)) {
+
+            }
+             if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_hits, coord)) {
                 _misses.push(coord)
             }
         },
@@ -94,6 +94,9 @@ export const Gameboard = () => {
         },
         get shipOccupiedCoords() {
             return _shipOccupiedCoords;
+        },
+        get ships() {
+            return ships;
         },
         board,//use this to see current state of the board. May be removed from return object soon to keep this information private inside the factory function
     }
