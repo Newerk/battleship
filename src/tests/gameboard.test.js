@@ -71,8 +71,6 @@ test('All ships are sunken', () => {
     _.forEach(occupiedCoords, (coord) => game.receiveAttack(coord));
 
     expect(game.allShipsSunk()).toBeTruthy();
-    expect(game.board).toEqual(JSON.stringify(game.board))
-
 })
 
 
@@ -102,6 +100,16 @@ test('Hit attacks', () => {
     game.receiveAttack("C10")
 
     expect(game.hitAttacks).toEqual(["D2", "D3"]);
+})
+
+test('Ships overlap', () => {
+    let game = Gameboard();
+    const carrier = game.ships.carrier;
+    const battleship = game.ships.battleship;
+
+    game.placeShip(carrier, "C1", "Y");
+    
+    expect(()=> game.placeShip(carrier, "B3", "X")).toThrow('Ships cannot overlap');
 })
 
 

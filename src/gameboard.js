@@ -36,6 +36,12 @@ export const Gameboard = () => {
                 let count = parseInt(coord[1]);
 
                 for (let i = 0; i < selectedShip.length; i++) {
+                    if (!this.board[`${coord[0]}${count}`]) {//if board does not include this generated coord, you cannot place ship as the spot does not exist, or the ship will expand past the board once placed.
+                        //also makes sure that none of the coords overlap with an already placed ship. verify that coord is not included in _shipOccupiedCord. If it does overlap, force the user to choose a different location. 
+                        //I will have to erase what other coords were placed previously(so that there no unplaced coords stuck in _shipOccupiedCoords)
+                        throw new Error('Ships cannot overlap');
+                    }
+
                     board[`${coord[0]}${count}`].occupiedBy = `ship`;
                     _shipOccupiedCoords.push(`${coord[0]}${count}`);
                     selectedShip.occupying.push(`${coord[0]}${count}`)
