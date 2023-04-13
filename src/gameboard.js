@@ -36,7 +36,7 @@ export const Gameboard = () => {
                 let count = parseInt(coord[1]);
 
                 for (let i = 0; i < selectedShip.length; i++) {
-                    board[`${coord[0]}${count}`].occupiedBy = `${selectedShip}`;
+                    board[`${coord[0]}${count}`].occupiedBy = `ship`;
                     _shipOccupiedCoords.push(`${coord[0]}${count}`);
                     selectedShip.occupying.push(`${coord[0]}${count}`)
                     count++;
@@ -48,7 +48,7 @@ export const Gameboard = () => {
                 let count = parseInt(letters.indexOf(coord[0]));
 
                 for (let i = 0; i < selectedShip.length; i++) {
-                    board[`${letters.charAt(count)}${coord[1]}`].occupiedBy = `${selectedShip}`;
+                    board[`${letters.charAt(count)}${coord[1]}`].occupiedBy = `ship`;
                     _shipOccupiedCoords.push(`${letters.charAt(count)}${coord[1]}`);
                     selectedShip.occupying.push(`${letters.charAt(count)}${coord[1]}`)
                     count++;

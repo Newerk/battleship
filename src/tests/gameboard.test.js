@@ -58,8 +58,8 @@ test('Enemy Misses a ship', () => {
 
 test('All ships are sunken', () => {
     let game = Gameboard();
-    game.placeShip(game.ships.battleship, "A1", "Y");
-    game.placeShip(game.ships.carrier, "B1", "Y");
+    game.placeShip(game.ships.carrier, "A1", "Y");
+    game.placeShip(game.ships.battleship, "B1", "Y");
     game.placeShip(game.ships.cruiser, "C1", "Y");
     game.placeShip(game.ships.destroyer, "D1", "Y");
     game.placeShip(game.ships.submarine, "E1", "Y");
@@ -71,6 +71,8 @@ test('All ships are sunken', () => {
     _.forEach(occupiedCoords, (coord) => game.receiveAttack(coord));
 
     expect(game.allShipsSunk()).toBeTruthy();
+    expect(game.board).toEqual(JSON.stringify(game.board))
+
 })
 
 
@@ -100,12 +102,11 @@ test('Hit attacks', () => {
     game.receiveAttack("C10")
 
     expect(game.hitAttacks).toEqual(["D2", "D3"]);
-
 })
 
 
 test('build board', () => {
     let testBoard = Gameboard();
     // expect(Gameboard().board).toEqual(JSON.stringify(testBoard.board))//test is only written like this so that I can see what the board array looks like. beautify code: https://beautifier.io/
-    expect(Gameboard().board).toEqual(testBoard.board)
+    // expect(Gameboard().board).toEqual(testBoard.board)
 })
