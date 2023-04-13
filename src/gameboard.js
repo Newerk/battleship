@@ -38,6 +38,7 @@ export const Gameboard = () => {
                 for (let i = 0; i < selectedShip.length; i++) {
                     board[`${coord[0]}${count}`].occupiedBy = `${selectedShip}`;
                     _shipOccupiedCoords.push(`${coord[0]}${count}`);
+                    selectedShip.occupying.push(`${coord[0]}${count}`)
                     count++;
                 }
             }
@@ -49,6 +50,7 @@ export const Gameboard = () => {
                 for (let i = 0; i < selectedShip.length; i++) {
                     board[`${letters.charAt(count)}${coord[1]}`].occupiedBy = `${selectedShip}`;
                     _shipOccupiedCoords.push(`${letters.charAt(count)}${coord[1]}`);
+                    selectedShip.occupying.push(`${letters.charAt(count)}${coord[1]}`)
                     count++;
                 }
 
