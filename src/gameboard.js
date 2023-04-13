@@ -59,7 +59,7 @@ export const Gameboard = () => {
             if (_.includes(_hits, coord) || _.includes(_misses, coord)) {
                 return;
             }
-            if (/*attack hits*/'') {
+            if (_.includes(_shipOccupiedCoords, coord) && !_.includes(_hits, coord)) {
                 //get the ship on the coord and call its hit() function
                 for (const key in ships) {
                     const shipType = ships[key];//specific ship [carrier, battleship, cruiser, submarine, destroyer]
@@ -71,7 +71,7 @@ export const Gameboard = () => {
                     }
 
                 }
-            } if (/*attack misses*/'') {
+            } if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_misses, coord)) {
                 _misses.push(coord)
             }
         },
