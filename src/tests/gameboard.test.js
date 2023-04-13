@@ -50,20 +50,27 @@ test('Enemy Misses a ship', () => {
     game.placeShip(testShip, "D1", "Y");
     game.receiveAttack("A2")
 
-    expect(_.includes(game.missedAttacks, "D3")).toBeTruthy();
+    expect(_.includes(game.missedAttacks, "A2")).toBeTruthy();
+    expect(_.includes(game.hitAttacks, "D1")).toBeFalsy();
+    expect(_.includes(game.hitAttacks, "D2")).toBeFalsy();
     expect(_.includes(game.hitAttacks, "D3")).toBeFalsy();
 })
 
 test('All ships are sunken', () => {
     let game = Gameboard();
-    const testShip = game.ships.cruiser;
-    game.placeShip(testShip, "D1", "Y");
-    game.receiveAttack("D1")
-    game.receiveAttack("D2")
-    game.receiveAttack("D3")
+    game.placeShip(game.ships.battleship, "A1", "Y");
+    game.placeShip(game.ships.carrier, "B1", "Y");
+    game.placeShip(game.ships.cruiser, "C1", "Y");
+    game.placeShip(game.ships.destroyer, "D1", "Y");
+    game.placeShip(game.ships.submarine, "E1", "Y");
+
+    let ships = [];
+    let occupiedCoords = []
+    _.forEach(game.ships, (el) => ships.push(el));
+    _.forEach(ships, (name) => _.forEach(name.occupying, (coords) => occupiedCoords.push(coords)));
+    _.forEach(occupiedCoords, (coord) => game.receiveAttack(coord));
 
     expect(game.allShipsSunk()).toBeTruthy();
-
 })
 
 
@@ -78,8 +85,7 @@ test('Missed attacks', () => {
     game.receiveAttack("D2");
     game.receiveAttack("D3");
 
-    // expect(game.missedAttacks).toEqual(["F7", "C10"]);
-    expect(true).toBe(false);
+    expect(game.missedAttacks).toEqual(["F7", "C10"]);
 
 })
 
