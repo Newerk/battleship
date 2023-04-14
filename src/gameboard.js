@@ -39,6 +39,18 @@ export const Gameboard = () => {
                     if (!this.board[`${coord[0]}${count}`]) {//if board does not include this generated coord, you cannot place ship as the spot does not exist, or the ship will expand past the board once placed.
                         //also makes sure that none of the coords overlap with an already placed ship. verify that coord is not included in _shipOccupiedCord. If it does overlap, force the user to choose a different location. 
                         //I will have to erase what other coords were placed previously(so that there no unplaced coords stuck in _shipOccupiedCoords)
+                        throw new Error('Ships cannot extend past the board');
+                    }
+                    if (_.includes(_shipOccupiedCoords, `${coord[0]}${count}`)) {
+                        /*removes the coords that was push to _shipOccupiedCoords before the error was thrown. 
+                        Instead of keeping to this appraoch, it would ideal to only place ships AFTER checking if a move is valid, 
+                        instead of checking while its valid during play. this will rremove the need for this for loop. I can make a function instead that handles move validity
+                        and returns true or false, which I can then use as conditionals for an if statement*/
+                        for (let j = i; j > 0; j--) {
+                            //find and remove from _shipOccupiedCoords
+                            _.find(_shipOccupiedCoords, ``)
+
+                        }
                         throw new Error('Ships cannot overlap');
                     }
 
@@ -49,11 +61,20 @@ export const Gameboard = () => {
                 }
             }
             if (axis === "X") {
-                //code here, expect the length if ship to go from left ro right:
-                //ex: adding a 3 length ship to coord A1 horizontally will occupy spots A1,B1,C1
                 let count = parseInt(letters.indexOf(coord[0]));
 
                 for (let i = 0; i < selectedShip.length; i++) {
+                    if (!this.board[`${letters.charAt(count)}${coord[1]}`]) {
+                        throw new Error('Ships cannot extend past the board');
+                    }
+                    if (_.includes(_shipOccupiedCoords, `${letters.charAt(count)}${coord[1]}`)) {
+                        for (let j = i; j > 0; j--) {
+                            _.find(_shipOccupiedCoords, ``)
+
+                        }
+                        throw new Error('Ships cannot overlap');
+                    }
+
                     board[`${letters.charAt(count)}${coord[1]}`].occupiedBy = `ship`;
                     _shipOccupiedCoords.push(`${letters.charAt(count)}${coord[1]}`);
                     selectedShip.occupying.push(`${letters.charAt(count)}${coord[1]}`)
@@ -79,7 +100,7 @@ export const Gameboard = () => {
                 }
 
             }
-             if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_hits, coord)) {
+            if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_hits, coord)) {
                 _misses.push(coord)
             }
         },

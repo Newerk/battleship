@@ -108,9 +108,17 @@ test('Ships overlap', () => {
     const battleship = game.ships.battleship;
 
     game.placeShip(carrier, "C1", "Y");
-    expect(()=> game.placeShip(carrier, "B3", "X")).toThrow('Ships cannot overlap');
+    expect(() => game.placeShip(battleship, "B3", "X")).toThrow('Ships cannot overlap');
+})
 
-    })
+test('Ships hanging off the board', () => {
+    let game = Gameboard();
+    const carrier = game.ships.carrier;
+
+    expect(() => game.placeShip(carrier, "E7", "Y")).toThrow('Ships cannot extend past the board');
+
+})
+
 
 
 test('build board', () => {
