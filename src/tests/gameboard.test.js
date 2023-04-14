@@ -109,6 +109,7 @@ test('Ships overlap', () => {
 
     game.placeShip(carrier, "C1", "Y");
     expect(() => game.placeShip(battleship, "B3", "X")).toThrow('Ships cannot overlap');
+    expect(game.shipOccupiedCoords).toEqual(["C1", "C2", "C3", "C4", "C5"]);
 })
 
 test('Ships hanging off the board', () => {
