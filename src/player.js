@@ -4,7 +4,7 @@ export const Player = (enemyBoard) => {
     let personalBoard = Gameboard();
 
     function sumOfSpotsTaken() {
-        return Object.values(personalBoard.ships).reduce((prev, current) => prev.length + current.length, 0)
+        return Object.values(personalBoard.ships).reduce((prev, { length }) => prev + length, 0)
     }
 
 
