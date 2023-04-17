@@ -27,7 +27,13 @@ export const Gameboard = () => {
     let _shipOccupiedCoords = [];
 
     return {
+        //This needs to be heavily refactored. Not following the principles of DRY
         placeShip(selectedShip, coord, axis) {
+
+            //*******************************************REFACTOR******************************************************* */
+
+            //*******************************************ORIGINAL******************************************************* */
+
             if (axis === "Y") {
                 let count = parseInt(coord[1]);
 
