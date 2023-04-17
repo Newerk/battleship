@@ -4,20 +4,16 @@ import { Player } from "../player"
 let playerBoard = Gameboard();
 let computerBoard = Gameboard();
 
-let player = Player();
-let computer = Player();
-
-test('CPU Randomly Places Ships at Valid Locations', () => {
-    //code here
-    expect(computerBoard.shipOccupiedCoords.length).toEqual(17)
-})
+let player = Player(computerBoard);
+let computer = Player(playerBoard);
 
 test('Player can attack enemy board', () => {
-    expect()
-})
-test('', () => {
-    expect()
-})
-test('', () => {
-    expect()
+    computerBoard.placeShip(computerBoard.ships.destroyer, "A1", "Y")
+    player.attack("A2");
+    player.attack("A4");
+
+    expect(computerBoard.hitAttacks).toEqual(["A2"])
+    expect(computerBoard.missedAttacks).toEqual(["A4"])
+    expect(player.sumOfSpotsTaken()).toEqual(17)
+
 })
