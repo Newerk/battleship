@@ -14,6 +14,10 @@ test('Player can attack enemy board', () => {
 
     expect(computerBoard.hitAttacks).toEqual(["A2"])
     expect(computerBoard.missedAttacks).toEqual(["A4"])
-    expect(player.sumOfSpotsTaken()).toEqual(17)
+})
 
+test('CPU Randomly Places Ship on Board', () => {
+    expect(computer.randomlyPlaceShips());
+    expect(computer.totalSpotsToBeTaken()).toEqual(17);
+    expect(computer.board).toEqual("")
 })

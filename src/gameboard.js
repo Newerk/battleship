@@ -28,19 +28,22 @@ export const Gameboard = () => {
 
     return {
         placeShip(selectedShip, coord, axis) {
-            
             if (axis === "Y") {
                 let count = parseInt(coord[1]);
 
                 for (let i = 0; i < selectedShip.length; i++) {
                     if (!this.board[`${coord[0]}${count}`]) {
-                        throw new Error('Ships cannot extend past the board');
+                        // i--;
+                        // throw new Error('Ships cannot extend past the board');
+                        break;
                     }
                     if (_.includes(_shipOccupiedCoords, `${coord[0]}${count}`)) {
                         for (let j = i; j > 0; j--) {
                             _shipOccupiedCoords.pop();
                         }
-                        throw new Error('Ships cannot overlap');
+                        // i--;
+                        // throw new Error('Ships cannot overlap');
+                        break;
                     }
 
                     board[`${coord[0]}${count}`].occupiedBy = `ship`;
@@ -54,13 +57,17 @@ export const Gameboard = () => {
 
                 for (let i = 0; i < selectedShip.length; i++) {
                     if (!this.board[`${letters.charAt(count)}${coord[1]}`]) {
-                        throw new Error('Ships cannot extend past the board');
+                        // i--;
+                        // throw new Error('Ships cannot extend past the board');
+                        break;
                     }
                     if (_.includes(_shipOccupiedCoords, `${letters.charAt(count)}${coord[1]}`)) {
                         for (let j = i; j > 0; j--) {
                             _shipOccupiedCoords.pop();
                         }
-                        throw new Error('Ships cannot overlap');
+                        // i--;
+                        // throw new Error('Ships cannot overlap');
+                        break;
 
                     }
 
