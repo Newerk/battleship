@@ -21,7 +21,7 @@ export const Player = (enemyBoard) => {
             enemyBoard.receiveAttack(coord);
         },
         randomlyPlaceShips() {//for the CPU to place ships in valid spots when called. select random coords(in a limited alphabetical and numerical range A-J,1-10) and X/Y axis
-            while (personalBoard.shipOccupiedCoords.length < totalSpotsToBeTaken()) {
+            while (personalBoard.shipOccupiedCoords.length < totalSpotsToBeTaken()) {//need to figure out how to rerun the placeship if an error is thrown until all the ships have been placed instead of terminating the function
                 for (let i = 0; i < Object.keys(personalBoard.ships).length; i++) {
                     personalBoard.placeShip(personalBoard.ships[Object.keys(personalBoard.ships)[i]], randomCoordinate(), randomAxis());
                 }
@@ -30,6 +30,7 @@ export const Player = (enemyBoard) => {
         },
         board: personalBoard.board,
         totalSpotsToBeTaken,
+        occupiedCoords: personalBoard.shipOccupiedCoords,
     }
 }
 

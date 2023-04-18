@@ -15,11 +15,11 @@ export const Gameboard = () => {
     }
 
     const ships = {
-        carrier: Ship(5),
-        battleship: Ship(4),
-        cruiser: Ship(3),
-        submarine: Ship(3),
-        destroyer: Ship(2)
+        carrier: Ship("carrier", 5),
+        battleship: Ship("battleship", 4),
+        cruiser: Ship("cruiser", 3),
+        submarine: Ship("submarine", 3),
+        destroyer: Ship("destroyer", 2)
     }
 
     let _hits = [];
@@ -33,51 +33,53 @@ export const Gameboard = () => {
 
                 for (let i = 0; i < selectedShip.length; i++) {
                     if (!this.board[`${coord[0]}${count}`]) {
-                        // i--;
-                        // throw new Error('Ships cannot extend past the board');
-                        break;
+                        throw new Error('Ships cannot extend past the board');
+                        // break;
+                        // return false;
+
                     }
                     if (_.includes(_shipOccupiedCoords, `${coord[0]}${count}`)) {
                         for (let j = i; j > 0; j--) {
+                            board[`${coord[0]}${count}`].occupiedBy = 'water';
                             _shipOccupiedCoords.pop();
+                            selectedShip.occupying.pop()
+                            // count--;
                         }
-                        // i--;
-                        // throw new Error('Ships cannot overlap');
-                        break;
+                        throw new Error('Ships cannot overlap');
                     }
 
-                    board[`${coord[0]}${count}`].occupiedBy = `ship`;
+                    board[`${coord[0]}${count}`].occupiedBy = selectedShip.type;
                     _shipOccupiedCoords.push(`${coord[0]}${count}`);
                     selectedShip.occupying.push(`${coord[0]}${count}`)
                     count++;
                 }
             }
             if (axis === "X") {
-                let count = parseInt(letters.indexOf(coord[0]));
+                let count = letters.indexOf(coord[0]);
 
                 for (let i = 0; i < selectedShip.length; i++) {
-                    if (!this.board[`${letters.charAt(count)}${coord[1]}`]) {
-                        // i--;
-                        // throw new Error('Ships cannot extend past the board');
-                        break;
+                    if (!this.board[`${letters[count]}${coord[1]}`]) {
+                        throw new Error('Ships cannot extend past the board');
                     }
-                    if (_.includes(_shipOccupiedCoords, `${letters.charAt(count)}${coord[1]}`)) {
+                    if (_.includes(_shipOccupiedCoords, `${letters[count]}${coord[1]}`)) {
                         for (let j = i; j > 0; j--) {
+                            board[`${letters[count]}${coord[1]}`].occupiedBy = 'water';
                             _shipOccupiedCoords.pop();
+                            selectedShip.occupying.pop()
+                            // count--;
                         }
-                        // i--;
-                        // throw new Error('Ships cannot overlap');
-                        break;
-
+                        throw new Error('Ships cannot overlap');
                     }
 
-                    board[`${letters.charAt(count)}${coord[1]}`].occupiedBy = `ship`;
-                    _shipOccupiedCoords.push(`${letters.charAt(count)}${coord[1]}`);
-                    selectedShip.occupying.push(`${letters.charAt(count)}${coord[1]}`)
+                    board[`${letters[count]}${coord[1]}`].occupiedBy = selectedShip.type;
+                    _shipOccupiedCoords.push(`${letters[count]}${coord[1]}`);
+                    selectedShip.occupying.push(`${letters[count]}${coord[1]}`)
                     count++;
                 }
 
             }
+
+            // return true;
 
         },
         receiveAttack(coord) {

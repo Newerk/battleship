@@ -1,8 +1,9 @@
-export const Ship = (length) => {
+export const Ship = (name, length) => {
     return {
         length,
         hits: 0,
         axis: "Y",
+        type: name,
         occupying: [],
         hit() {
             this.hits++;
