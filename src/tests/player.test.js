@@ -19,7 +19,7 @@ test('Player can attack enemy board', () => {
 test('CPU Randomly Places Ship on Board', () => {
     computer.randomlyPlaceShips()
     expect(computer.occupiedCoords.length).toEqual(computer._totalSpotsToBeTaken())
-    expect(computer.board).toEqual("")
+    // expect(computer.board).toEqual("")
 })
 
 

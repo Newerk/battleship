@@ -28,7 +28,7 @@ export const Player = (enemyBoard) => {
             while (personalBoard.shipOccupiedCoords.length < _totalSpotsToBeTaken()) {//need to figure out how to rerun the placeship if an error is thrown until all the ships have been placed instead of terminating the function
                 for (let i = start; i < Object.keys(personalBoard.ships).length; i++) {
                     const placeShip = _runPlaceShip(i);
-                    if (placeShip !== true) {
+                    if (placeShip === false) {
                         return this.randomlyPlaceShips(i);
                     }
                 }

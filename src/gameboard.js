@@ -32,20 +32,22 @@ export const Gameboard = () => {
                 let count = parseInt(coord[1]);
 
                 for (let i = 0; i < selectedShip.length; i++) {
+                    // Ships cannot extend past the board
                     if (!this.board[`${coord[0]}${count}`]) {
+                        for (let j = i; j > 0; j--) {
+                            _shipOccupiedCoords.pop();
+                            selectedShip.occupying.pop()
+                        }
                         return false;
-                        // throw new Error('Ships cannot extend past the board');
-
                     }
+                    //Ships cannot overlap
                     if (_.includes(_shipOccupiedCoords, `${coord[0]}${count}`)) {
                         for (let j = i; j > 0; j--) {
                             board[`${coord[0]}${count}`].occupiedBy = 'water';
                             _shipOccupiedCoords.pop();
                             selectedShip.occupying.pop()
-                            // count--;
                         }
                         return false;
-                        // throw new Error('Ships cannot overlap');
                     }
 
                     board[`${coord[0]}${count}`].occupiedBy = selectedShip.type;
@@ -58,19 +60,22 @@ export const Gameboard = () => {
                 let count = letters.indexOf(coord[0]);
 
                 for (let i = 0; i < selectedShip.length; i++) {
+                    // Ships cannot extend past the board
                     if (!this.board[`${letters[count]}${coord[1]}`]) {
+                        for (let j = i; j > 0; j--) {
+                            _shipOccupiedCoords.pop();
+                            selectedShip.occupying.pop()
+                        }
                         return false;
-                        // throw new Error('Ships cannot extend past the board');
                     }
+                    //Ships cannot overlap
                     if (_.includes(_shipOccupiedCoords, `${letters[count]}${coord[1]}`)) {
                         for (let j = i; j > 0; j--) {
                             board[`${letters[count]}${coord[1]}`].occupiedBy = 'water';
                             _shipOccupiedCoords.pop();
                             selectedShip.occupying.pop()
-                            // count--;
                         }
                         return false;
-                        // throw new Error('Ships cannot overlap');
                     }
 
                     board[`${letters[count]}${coord[1]}`].occupiedBy = selectedShip.type;
