@@ -119,11 +119,3 @@ test('Ships hanging off the board', () => {
     expect(game.placeShip(carrier, "E7", "Y")).toBeFalsy();
 
 })
-
-
-
-test('build board', () => {
-    let testBoard = Gameboard();
-    // expect(Gameboard().board).toEqual(JSON.stringify(testBoard.board))//test is only written like this so that I can see what the board array looks like. beautify code: https://beautifier.io/
-    // expect(Gameboard().board).toEqual(testBoard.board)
-})
