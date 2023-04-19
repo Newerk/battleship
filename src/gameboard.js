@@ -33,9 +33,8 @@ export const Gameboard = () => {
 
                 for (let i = 0; i < selectedShip.length; i++) {
                     if (!this.board[`${coord[0]}${count}`]) {
-                        throw new Error('Ships cannot extend past the board');
-                        // break;
-                        // return false;
+                        return false;
+                        // throw new Error('Ships cannot extend past the board');
 
                     }
                     if (_.includes(_shipOccupiedCoords, `${coord[0]}${count}`)) {
@@ -45,7 +44,8 @@ export const Gameboard = () => {
                             selectedShip.occupying.pop()
                             // count--;
                         }
-                        throw new Error('Ships cannot overlap');
+                        return false;
+                        // throw new Error('Ships cannot overlap');
                     }
 
                     board[`${coord[0]}${count}`].occupiedBy = selectedShip.type;
@@ -59,7 +59,8 @@ export const Gameboard = () => {
 
                 for (let i = 0; i < selectedShip.length; i++) {
                     if (!this.board[`${letters[count]}${coord[1]}`]) {
-                        throw new Error('Ships cannot extend past the board');
+                        return false;
+                        // throw new Error('Ships cannot extend past the board');
                     }
                     if (_.includes(_shipOccupiedCoords, `${letters[count]}${coord[1]}`)) {
                         for (let j = i; j > 0; j--) {
@@ -68,7 +69,8 @@ export const Gameboard = () => {
                             selectedShip.occupying.pop()
                             // count--;
                         }
-                        throw new Error('Ships cannot overlap');
+                        return false;
+                        // throw new Error('Ships cannot overlap');
                     }
 
                     board[`${letters[count]}${coord[1]}`].occupiedBy = selectedShip.type;
@@ -79,7 +81,7 @@ export const Gameboard = () => {
 
             }
 
-            // return true;
+            return true;
 
         },
         receiveAttack(coord) {
