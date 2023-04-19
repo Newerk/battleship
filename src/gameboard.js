@@ -100,13 +100,17 @@ export const Gameboard = () => {
                         shipType.hit();
                         shipType.isSunk();//might be uneeded***
                     }
-
                 }
+                return true; //valid move
 
             }
             if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_hits, coord)) {
                 _misses.push(coord)
+                return true;//valid move
             }
+
+            return false;//move was invalid
+
         },
         allShipsSunk() {
             for (const key in ships) {

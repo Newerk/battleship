@@ -23,6 +23,9 @@ export const Player = (enemyBoard) => {
         attack(coord) {
             enemyBoard.receiveAttack(coord);
         },
+        randomAttack() {
+            enemyBoard.receiveAttack(_randomCoordinate())
+        },
         randomlyPlaceShips(start = 0) {
             while (personalBoard.shipOccupiedCoords.length < _totalSpotsToBeTaken()) {
                 for (let i = start; i < Object.keys(personalBoard.ships).length; i++) {
