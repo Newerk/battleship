@@ -1,5 +1,7 @@
+import _ from "lodash";
 import { Gameboard } from "./gameboard"
 import { Player } from "./player"
+
 
 /* 
 ---DETERMINES HOW THE CPU WILL DECIDE TO PLAY A TURN---
@@ -30,12 +32,10 @@ the cpu will check after each hit (not miss), if a ship isSunk(),
 after a ship was sunk, the cpu will now go back to attacking random locations until another ship is hit, and go through this entire process again
 */
 
-let enemy = Gameboard();
-let cpu = Player(enemy);
 
 export function cpuAttack(cpuPlayer, prev = undefined) {
     let randomAttack = cpuPlayer.randomAttack()
-    let latestMove = enemyBoard.allAttacksMade.at(-1);
+    let latestMove = cpuPlayer.attacksOnEnemyBoard.at(-1);
     let columns = 'ABCDEFGHIJ'
 
     if (randomAttack === false) {
@@ -44,18 +44,16 @@ export function cpuAttack(cpuPlayer, prev = undefined) {
         return cpuAttack(cpuPlayer, latestMove)
     }
 
-    if (_.includes(enemyBoard.hitAttacks, latestMove)) {
-        //create an array of possible next moves that are 
-        let possibleNextMoves = _.filter(enemyBoard.allAttacksMade, () => {
+        let moveset = [
+            `${latestMove[0]}${parseInt(latestMove.slice(1)) - 1}`,//up
+            `${latestMove[0]}${parseInt(latestMove.slice(1)) + 1}`,//down
+            `${columns[columns.indexOf(latestMove[0]) - 1]}${latestMove.slice(1)}`,//left
+            `${columns[columns.indexOf(latestMove[0]) + 1]}${latestMove.slice(1)}`//right
+        ]
 
-            let moveset = [
-                `${latestMove[0]}${parseInt(latestMove.slice(1)) - 1}`,//up
-                `${latestMove[0]}${parseInt(latestMove.slice(1)) + 1}`,//down
-                `${columns[columns.indexOf(latestMove[0]) - 1]}${latestMove.slice(1)}`,//left
-                `${columns[columns.indexOf(latestMove[0]) + 1]}${latestMove.slice(1)}`//right
-            ]
+        let nextPossibleMoves = _.filter(moveset, (el) => {
+            return (!_.includes(cpuPlayer.attacksOnEnemyBoard, el) /*&& also has to remove the undefined coords (coords outside of hte board) */)
         })
 
-    }
-
+        return nextPossibleMoves;
 }
