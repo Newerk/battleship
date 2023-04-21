@@ -24,18 +24,14 @@ export const Gameboard = () => {
 
     let _hits = [];
     let _misses = [];
+    let _allAttacksMade = [];
     let _shipOccupiedCoords = [];
 
     return {
         placeShip(selectedShip, coord, axis) {
-            let count;
             if (axis === "Y") {
-                if (coord.length === 3) {
-                    count = parseInt(`${coord[1]}${coord[2]}`);
+                let count = parseInt(coord.slice(1));
 
-                } else {
-                    count = parseInt(coord[1]);
-                }
 
                 for (let i = 0; i < selectedShip.length; i++) {
                     // Ships cannot extend past the board
@@ -64,13 +60,7 @@ export const Gameboard = () => {
             }
             if (axis === "X") {
                 let count = letters.indexOf(coord[0]);
-                let digits;
-                    if (coord.length === 3) {
-                        digits = parseInt(`${coord[1]}${coord[2]}`);
-    
-                    } else {
-                        digits = parseInt(coord[1]);
-                    }
+                let digits = parseInt(coord.slice(1));
 
                 for (let i = 0; i < selectedShip.length; i++) {
                     // Ships cannot extend past the board
@@ -105,6 +95,7 @@ export const Gameboard = () => {
         receiveAttack(coord) {
             if (_.includes(_shipOccupiedCoords, coord) && !_.includes(_hits, coord) && !_.includes(_misses, coord)) {
                 _hits.push(coord);
+                _allAttacksMade.push(coord);
 
                 for (const key in ships) {
                     const shipType = ships[key];
@@ -118,7 +109,9 @@ export const Gameboard = () => {
 
             } else
                 if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_hits, coord)) {
-                    _misses.push(coord)
+                    _misses.push(coord);
+                    _allAttacksMade.push(coord);
+
                     return true;//valid move
                 } else {
 
@@ -146,6 +139,9 @@ export const Gameboard = () => {
         },
         get ships() {
             return ships;
+        },
+        get allAttacksMade() {
+            return _allAttacksMade;
         },
         board,
     }
