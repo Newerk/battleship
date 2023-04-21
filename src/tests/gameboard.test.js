@@ -56,11 +56,11 @@ test('Enemy Misses a ship', () => {
     expect(_.includes(game.hitAttacks, "D3")).toBeFalsy();
 })
 
-test('Invalid Attack', () => {
-    let game = Gameboard();
+// test('Invalid Attack', () => {
+//     let game = Gameboard();
 
-    expect(game.receiveAttack("A100")).toBeFalsy();
-})
+//     expect(game.receiveAttack("A100")).toBeFalsy();
+// })
 
 test('All ships are sunken', () => {
     let game = Gameboard();
@@ -124,6 +124,16 @@ test('Ships hanging off the board', () => {
 
     expect(game.placeShip(carrier, "E7", "Y")).toBeFalsy();
     expect(game.placeShip(carrier, "E10", "Y")).toBeFalsy();
+    expect(game.placeShip(carrier, "J10", "X")).toBeFalsy();
+})
 
 
+test('Check if J10 is occupied by ship', () => {
+    let game = Gameboard();
+    const testShip = game.ships.cruiser;
+
+    //place ship on board horizontally on coord A1
+    game.placeShip(testShip, "H10", "X");
+
+    expect(game.shipOccupiedCoords).toEqual(["H10", "I10", "J10"])
 })

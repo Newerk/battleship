@@ -64,10 +64,17 @@ export const Gameboard = () => {
             }
             if (axis === "X") {
                 let count = letters.indexOf(coord[0]);
+                let digits;
+                    if (coord.length === 3) {
+                        digits = parseInt(`${coord[1]}${coord[2]}`);
+    
+                    } else {
+                        digits = parseInt(coord[1]);
+                    }
 
                 for (let i = 0; i < selectedShip.length; i++) {
                     // Ships cannot extend past the board
-                    if (!this.board[`${letters[count]}${coord[1]}`]) {
+                    if (!this.board[`${letters[count]}${digits}`]) {
                         for (let j = i; j > 0; j--) {
                             _shipOccupiedCoords.pop();
                             selectedShip.occupying.pop()
@@ -75,18 +82,18 @@ export const Gameboard = () => {
                         return false;
                     }
                     //Ships cannot overlap
-                    if (_.includes(_shipOccupiedCoords, `${letters[count]}${coord[1]}`)) {
+                    if (_.includes(_shipOccupiedCoords, `${letters[count]}${digits}`)) {
                         for (let j = i; j > 0; j--) {
-                            board[`${letters[count]}${coord[1]}`].occupiedBy = 'water';
+                            board[`${letters[count]}${digits}`].occupiedBy = 'water';
                             _shipOccupiedCoords.pop();
                             selectedShip.occupying.pop()
                         }
                         return false;
                     }
 
-                    board[`${letters[count]}${coord[1]}`].occupiedBy = selectedShip.type;
-                    _shipOccupiedCoords.push(`${letters[count]}${coord[1]}`);
-                    selectedShip.occupying.push(`${letters[count]}${coord[1]}`)
+                    board[`${letters[count]}${digits}`].occupiedBy = selectedShip.type;
+                    _shipOccupiedCoords.push(`${letters[count]}${digits}`);
+                    selectedShip.occupying.push(`${letters[count]}${digits}`)
                     count++;
                 }
 
