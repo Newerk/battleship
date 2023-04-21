@@ -128,12 +128,12 @@ test('Ships hanging off the board', () => {
 })
 
 
-test('Check if J10 is occupied by ship', () => {
+test('Horizontally Add Ship on row 10', () => {
     let game = Gameboard();
     const testShip = game.ships.cruiser;
+    const testShipTwo = game.ships.battleship;
 
-    //place ship on board horizontally on coord A1
     game.placeShip(testShip, "H10", "X");
-
+    expect(game.placeShip(testShipTwo, "F10", "X")).toBeFalsy();
     expect(game.shipOccupiedCoords).toEqual(["H10", "I10", "J10"])
 })
