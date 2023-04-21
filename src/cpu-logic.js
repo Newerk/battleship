@@ -52,7 +52,7 @@ export function cpuAttack(cpuPlayer, prev = undefined) {
         ]
 
         let nextPossibleMoves = _.filter(moveset, (el) => {
-            return (!_.includes(cpuPlayer.attacksOnEnemyBoard, el) /*&& also has to remove the undefined coords (coords outside of hte board) */)
+            return (!_.includes(cpuPlayer.attacksOnEnemyBoard, el) && cpuPlayer.board[el])
         })
 
         return nextPossibleMoves;
