@@ -28,8 +28,14 @@ export const Gameboard = () => {
 
     return {
         placeShip(selectedShip, coord, axis) {
+            let count;
             if (axis === "Y") {
-                let count = parseInt(coord[1]);
+                if (coord.length === 3) {
+                    count = parseInt(`${coord[1]}${coord[2]}`);
+
+                } else {
+                    count = parseInt(coord[1]);
+                }
 
                 for (let i = 0; i < selectedShip.length; i++) {
                     // Ships cannot extend past the board
@@ -103,13 +109,14 @@ export const Gameboard = () => {
                 }
                 return true; //valid move
 
-            }
-            if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_hits, coord)) {
-                _misses.push(coord)
-                return true;//valid move
-            }
+            } else
+                if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_hits, coord)) {
+                    _misses.push(coord)
+                    return true;//valid move
+                } else {
 
-            return false;//move was invalid
+                    return false;//move was invalid
+                }
 
         },
         allShipsSunk() {

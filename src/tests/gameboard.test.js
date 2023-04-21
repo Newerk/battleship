@@ -56,6 +56,12 @@ test('Enemy Misses a ship', () => {
     expect(_.includes(game.hitAttacks, "D3")).toBeFalsy();
 })
 
+test('Invalid Attack', () => {
+    let game = Gameboard();
+
+    expect(game.receiveAttack("A100")).toBeFalsy();
+})
+
 test('All ships are sunken', () => {
     let game = Gameboard();
     game.placeShip(game.ships.carrier, "A1", "Y");
@@ -117,5 +123,7 @@ test('Ships hanging off the board', () => {
     const carrier = game.ships.carrier;
 
     expect(game.placeShip(carrier, "E7", "Y")).toBeFalsy();
+    expect(game.placeShip(carrier, "E10", "Y")).toBeFalsy();
+
 
 })

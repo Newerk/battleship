@@ -28,11 +28,12 @@ The submarine occupied coordinates B2->B3->B4
 the cpu will check after each hit (not miss), if a ship isSunk(), 
 
 after a ship was sunk, the cpu will now go back to attacking random locations until another ship is hit, and go through this entire process again
-*/ 
+*/
 
-export function cpuAttack(enemyBoard) {
+export function cpuAttack(cpuPlayer) {
+    let randomAttack = cpuPlayer.randomAttack()
 
-    if (/*enemyBoard.recieveAttack() === false, recusrsivly run the cpuAttack() again */"") {
-        return cpuAttack(enemyBoard)
+    if (randomAttack === false) {
+        return cpuAttack(cpuPlayer)
     }
 }
