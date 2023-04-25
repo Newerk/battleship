@@ -39,7 +39,7 @@ export function cpuAttack(cpuPlayer, prev = undefined) {
     let columns = 'ABCDEFGHIJ'
 
     if (randomAttack === false) {
-        prev = latestMove;//last value in array, which would be the last location attacked, whether it was a hit or miss
+        // prev = latestMove;//last value in array, which would be the last location attacked, whether it was a hit or miss
 
         return cpuAttack(cpuPlayer, latestMove)
     }
@@ -52,7 +52,7 @@ export function cpuAttack(cpuPlayer, prev = undefined) {
         ]
 
         let nextPossibleMoves = _.filter(moveset, (el) => {
-            return (!_.includes(cpuPlayer.attacksOnEnemyBoard, el) && cpuPlayer.board[el])
+            return (!_.includes(cpuPlayer.attacksOnEnemyBoard, el) && cpuPlayer.board[el]) 
         })
 
         return nextPossibleMoves;

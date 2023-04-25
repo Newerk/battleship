@@ -21,10 +21,10 @@ export const Player = (enemyBoard) => {
 
     return {
         attack(coord) {
-            enemyBoard.receiveAttack(coord);
+            return enemyBoard.receiveAttack(coord);
         },
         randomAttack() {
-            enemyBoard.receiveAttack(_randomCoordinate())
+            return enemyBoard.receiveAttack(_randomCoordinate())
         },
         randomlyPlaceShips(start = 0) {
             while (personalBoard.shipOccupiedCoords.length < _totalSpotsToBeTaken()) {
