@@ -15,7 +15,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         clean: true,
     },
-    
+
     optimization: {
         runtimeChunk: 'single',
     },
@@ -39,6 +39,9 @@ module.exports = {
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
+                use: {
+                    loader: 'url-loader',
+                },
             },
 
         ],
