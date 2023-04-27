@@ -10,6 +10,10 @@
   src: url('./assets/fonts/Tactical\ Espionage\ Action.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'Digital';
+  src: url('./assets/fonts/Digital7-rg1mL.woff') format('woff');
+}
 
 /*
   1. Use a more-intuitive box-sizing model.
@@ -107,6 +111,7 @@ h6 {
 #sub-title {
   font-family: 'Tactical';
   font-size: 1.5rem;
+  margin-bottom: -1.5rem;
 }
 
 #title {
@@ -129,7 +134,7 @@ h6 {
 /*--------------------------------------------------------------------*/
 .in-game-screen {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
+  /* grid-template-columns: 1fr 1.5fr 1fr; */
   grid-template-rows: 1fr 1.5fr;
 }
 
@@ -137,6 +142,27 @@ h6 {
   grid-column: span 3;
   grid-row: 2;
   background-color: black;
+}
+
+#codec-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-column: span 3;
+  grid-row: 1;
+}
+
+#player-pic {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: green;
+  height: 100%;
+  width: 100%;
+}
+
+#enemy-pic {
+  grid-column: 3;
+  grid-row: 1;
+  background-color: green;
 }
 
 /*--------------------------------------------------------------------*/

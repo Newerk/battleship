@@ -39,11 +39,22 @@ export const DOM = () => {
 
             const codecContainer = document.createElement('div');
             codecContainer.id = 'codec-container';
+
+            const playerPicture = document.createElement('div');
+            playerPicture.id = 'player-pic';
+            const enemyPicture = document.createElement('div');
+            enemyPicture.id = 'enemy-pic';
+
+            codecContainer.append(playerPicture, enemyPicture);
+
+
             const subtitlesBox = document.createElement('div');
             subtitlesBox.id = 'subtitles-box';
 
             const gameboardsContainer = document.createElement('div');
             gameboardsContainer.id = 'gameboard-container';
+
+            
 
             content.append(codecContainer, subtitlesBox, gameboardsContainer)
 
