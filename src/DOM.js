@@ -9,11 +9,28 @@ export const DOM = () => {
             content.classList.remove(...content.classList);
             content.className = 'title-screen';
 
+            const topText = document.createElement('div');
+            topText.id = 'top-text';
+
+            const subtitle = document.createElement('h3');
+            subtitle.id = 'sub-title';
+            subtitle.textContent = 'open water warfare';
+
             const title = document.createElement('h1');
             title.id = 'title';
             title.textContent = '$BATTLESHIP';
-            // content.appendChild(title);
-            document.body.appendChild(content.appendChild(title))
+            topText.append(subtitle, title)
+
+            const middleSpace = document.createElement('div');
+            middleSpace.id = 'space';
+
+
+            const message = document.createElement('h3');
+            message.id = 'message';
+            message.textContent = 'PRESS ENTER BUTTON';
+
+            content.append(topText, middleSpace, message);
+            document.body.appendChild(content)
 
         },
         loadInGameScreen() {

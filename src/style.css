@@ -1,7 +1,15 @@
 @font-face {
-    font-family: 'METAG';
-    src: url('./assets/fonts/METAG.ttf');
+  font-family: 'MGS';
+  src: url('./assets/fonts/METAG___.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
 }
+
+@font-face {
+  font-family: 'Tactical';
+  src: url('./assets/fonts/Tactical\ Espionage\ Action.woff') format('woff');
+}
+
 
 /*
   1. Use a more-intuitive box-sizing model.
@@ -9,14 +17,14 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /*
     2. Remove default margin
   */
 * {
-    margin: 0;
+  margin: 0;
 }
 
 /*
@@ -24,8 +32,8 @@
   */
 html,
 body {
-    height: 100%;
-    /* background-color: black; */
+  height: 100%;
+  /* background-color: black; */
 
 }
 
@@ -35,8 +43,8 @@ body {
     5. Improve text rendering
   */
 body {
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 /*
@@ -47,8 +55,8 @@ picture,
 video,
 canvas,
 svg {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
 /*
@@ -58,7 +66,7 @@ input,
 button,
 textarea,
 select {
-    font: inherit;
+  font: inherit;
 }
 
 /*
@@ -71,7 +79,7 @@ h3,
 h4,
 h5,
 h6 {
-    overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /*
@@ -79,18 +87,45 @@ h6 {
   */
 #root,
 #__next {
-    isolation: isolate;
+  isolation: isolate;
 }
 
 /*--------------------------------------------------------------------*/
 .title-screen {
+  display: grid;
+  grid-template-rows: 10rem, 1fr, 2rem;
+  justify-items: center;
+
+}
+
+#top-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#sub-title {
+  font-family: 'Tactical';
+  font-size: 1.5rem;
 }
 
 #title {
-    font-family: 'METAG';
-    color: black;
+  font-family: 'MGS';
+  font-size: 6rem;
+}
+
+#space {
+  height: 70vh;
+}
+
+#message {
+  margin-top: -8rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.8rem;
+  grid-row: 3;
+
 }
 
 .in-game-screen {
-    display: grid;
+  display: grid;
 }
