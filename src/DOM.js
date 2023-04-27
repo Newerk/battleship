@@ -37,6 +37,19 @@ export const DOM = () => {
             content.classList.remove(...content.classList);
             content.className = 'in-game-screen';
 
+            const codecContainer = document.createElement('div');
+            codecContainer.id = 'codec-container';
+            const subtitlesBox = document.createElement('div');
+            subtitlesBox.id = 'subtitles-box';
+
+            const gameboardsContainer = document.createElement('div');
+            gameboardsContainer.id = 'gameboard-container';
+
+            content.append(codecContainer, subtitlesBox, gameboardsContainer)
+
+
+            document.body.appendChild(content);
+
         },
     }
 }
