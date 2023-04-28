@@ -161,13 +161,13 @@ h6 {
 #player-pic {
   grid-column: 1;
   grid-row: 1;
-  background-color: green;
+  background-color: black;
 }
 
 #enemy-pic {
   grid-column: 3;
   grid-row: 1;
-  background-color: green;
+  background-color: black;
 }
 
 #frequency-container {
@@ -215,8 +215,19 @@ h6 {
 #fq-mid-container {
   grid-column: 2;
   margin: 1.5rem 0 1.5rem 0;
-  background-color: red;
+  border-top: 3px #1F3029 solid;
+  border-bottom: 3px #1F3029 solid;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+#freq-screen {
+  background-color: #0F1818;
+  height: 90%;
+  width: 90%;
 }
 
 #fq-left-container,
@@ -236,7 +247,8 @@ h6 {
 
 }
 
-#fq-left-arrow, #fq-right-arrow {
+#fq-left-arrow,
+#fq-right-arrow {
   font-size: 2rem;
   line-height: 2.5rem;
   width: 6rem;

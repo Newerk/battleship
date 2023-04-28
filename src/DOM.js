@@ -68,6 +68,10 @@ export const DOM = () => {
             const freqMiddleContainer = document.createElement('div');
             freqMiddleContainer.id = 'fq-mid-container';
 
+            const freqScreen = document.createElement('div');
+            freqScreen.id = 'freq-screen';
+            freqMiddleContainer.appendChild(freqScreen)
+
             const freqLeftContainer = document.createElement('div');
             freqLeftContainer.id = 'fq-left-container';
             const freqLeftArrow = document.createElement('p');
@@ -83,7 +87,7 @@ export const DOM = () => {
             freqRightContainer.appendChild(freqRightArrow)
 
 
-            freqMiddle.append(freqLeftContainer, freqMiddleContainer,freqRightContainer);
+            freqMiddle.append(freqLeftContainer, freqMiddleContainer, freqRightContainer);
 
             const freqFooter = document.createElement('div');
             freqFooter.id = 'freq-footer';
