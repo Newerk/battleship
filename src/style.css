@@ -219,6 +219,34 @@ h6 {
 
 }
 
+#fq-left-container,
+#fq-right-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#fq-left-container {
+  grid-column: 1;
+
+}
+
+#fq-right-container {
+  grid-column: 3;
+
+}
+
+#fq-left-arrow, #fq-right-arrow {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  width: 6rem;
+  height: 2.3rem;
+  text-align: center;
+
+  color: #284038;
+  background-color: #101818;
+}
+
 
 #freq-footer {
   grid-row: 3;
