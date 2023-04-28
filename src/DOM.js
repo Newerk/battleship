@@ -32,9 +32,18 @@ export const DOM = () => {
             content.append(topText, middleSpace, message);
             document.body.appendChild(content)
 
+            const enterEvent = (e) => {
+                if (e.key === "Enter") {
+                    this.loadInGameScreen();
+                    document.removeEventListener('keypress', enterEvent);
+                }
+            }
+            document.addEventListener('keypress', enterEvent);
+
         },
         loadInGameScreen() {
-            content.classList.remove(...content.classList);
+            content.innerHTML = "";
+            // content.classList.remove(...content.classList);
             content.className = 'in-game-screen';
 
             const codecContainer = document.createElement('div');
@@ -56,6 +65,9 @@ export const DOM = () => {
 
             const freqMiddle = document.createElement('div');
             freqMiddle.id = 'freq-middle';
+            const freqMiddleContainer = document.createElement('div');
+            freqMiddleContainer.id = 'fq-mid-container';
+            freqMiddle.append(freqMiddleContainer);
 
             const freqFooter = document.createElement('div');
             freqFooter.id = 'freq-footer';
