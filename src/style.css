@@ -15,6 +15,11 @@
   src: url('./assets/fonts/Digital7-rg1mL.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'Codec';
+  src: url('./assets/fonts/codec.woff') format('woff');
+}
+
 /*
   1. Use a more-intuitive box-sizing model.
 */
@@ -155,8 +160,6 @@ h6 {
   grid-column: 1;
   grid-row: 1;
   background-color: green;
-  height: 100%;
-  width: 100%;
 }
 
 #enemy-pic {
@@ -164,5 +167,44 @@ h6 {
   grid-row: 1;
   background-color: green;
 }
+
+#frequency-container {
+  background-color: black;
+  display: grid;
+  grid-template-rows: 2rem 1fr 2rem;
+  grid-template-columns: 1fr;
+}
+
+#freq-header,
+#freq-footer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  font-family: 'Codec';
+  font-size: 3.5rem;
+  color: #88F0C0;
+  border-top: 3px #101818 solid;
+  border-bottom: 3px #101818 solid;
+
+}
+
+#freq-header {
+  grid-row: 1;
+}
+
+#freq-header-text,
+#freq-footer-text {
+  padding-left: .5rem;
+  background-color: #101818;
+  width: 10rem;
+  line-height: 1rem;
+  text-align: center;
+}
+
+#freq-footer {
+  grid-row: 3;
+  color: #284038;
+}
+
 
 /*--------------------------------------------------------------------*/

@@ -42,11 +42,35 @@ export const DOM = () => {
 
             const playerPicture = document.createElement('div');
             playerPicture.id = 'player-pic';
+
+            // {
+            const freqContainter = document.createElement('div');
+            freqContainter.id = 'frequency-container'
+
+            const freqHeader = document.createElement('div');
+            freqHeader.id = 'freq-header';
+            const freqHeaderText = document.createElement('p')
+            freqHeaderText.id = 'freq-header-text';
+            freqHeaderText.textContent = 'PTT'
+            freqHeader.appendChild(freqHeaderText)
+
+            const freqMiddle = document.createElement('div');
+            freqMiddle.id = 'freq-middle';
+
+            const freqFooter = document.createElement('div')
+            freqFooter.id = 'freq-footer';
+            const freqFooterText = document.createElement('p')
+            freqFooterText.id = 'freq-footer-text'
+            freqFooterText.textContent = 'MEMORY';
+            freqFooter.appendChild(freqFooterText);
+
+            freqContainter.append(freqHeader, freqMiddle, freqFooter)
+            // }
+
             const enemyPicture = document.createElement('div');
             enemyPicture.id = 'enemy-pic';
 
-            codecContainer.append(playerPicture, enemyPicture);
-
+            codecContainer.append(playerPicture, freqContainter, enemyPicture);
 
             const subtitlesBox = document.createElement('div');
             subtitlesBox.id = 'subtitles-box';
@@ -54,7 +78,7 @@ export const DOM = () => {
             const gameboardsContainer = document.createElement('div');
             gameboardsContainer.id = 'gameboard-container';
 
-            
+
 
             content.append(codecContainer, subtitlesBox, gameboardsContainer)
 
