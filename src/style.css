@@ -17,7 +17,9 @@
 
 @font-face {
   font-family: 'Codec';
-  src: url('./assets/fonts/codec.woff') format('woff');
+  font-stretch: ultra-expanded;
+
+  src: url('./assets/fonts/codec2.woff') format('woff');
 }
 
 /*
@@ -181,7 +183,7 @@ h6 {
   justify-content: center;
   height: 100%;
   font-family: 'Codec';
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   color: #88F0C0;
   border-top: 3px #101818 solid;
   border-bottom: 3px #101818 solid;
@@ -194,10 +196,14 @@ h6 {
 
 #freq-header-text,
 #freq-footer-text {
-  padding-left: .5rem;
+  /* padding-left: .5rem; */
+  transform: scaleY(0.5);
+  transform-origin: 0 0;
+  margin-bottom: -2rem;
+
   background-color: #101818;
-  width: 10rem;
-  line-height: 1rem;
+  width: 12rem;
+  line-height: 3.5rem;
   text-align: center;
 }
 

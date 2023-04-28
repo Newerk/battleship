@@ -45,26 +45,26 @@ export const DOM = () => {
 
             // {
             const freqContainter = document.createElement('div');
-            freqContainter.id = 'frequency-container'
+            freqContainter.id = 'frequency-container';
 
             const freqHeader = document.createElement('div');
             freqHeader.id = 'freq-header';
-            const freqHeaderText = document.createElement('p')
+            const freqHeaderText = document.createElement('p');
             freqHeaderText.id = 'freq-header-text';
-            freqHeaderText.textContent = 'PTT'
-            freqHeader.appendChild(freqHeaderText)
+            freqHeaderText.textContent = 'PTT';
+            freqHeader.appendChild(freqHeaderText);
 
             const freqMiddle = document.createElement('div');
             freqMiddle.id = 'freq-middle';
 
-            const freqFooter = document.createElement('div')
+            const freqFooter = document.createElement('div');
             freqFooter.id = 'freq-footer';
-            const freqFooterText = document.createElement('p')
-            freqFooterText.id = 'freq-footer-text'
+            const freqFooterText = document.createElement('p');
+            freqFooterText.id = 'freq-footer-text';
             freqFooterText.textContent = 'MEMORY';
             freqFooter.appendChild(freqFooterText);
 
-            freqContainter.append(freqHeader, freqMiddle, freqFooter)
+            freqContainter.append(freqHeader, freqMiddle, freqFooter);
             // }
 
             const enemyPicture = document.createElement('div');
