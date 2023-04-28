@@ -19,7 +19,7 @@
   font-family: 'Codec';
   font-stretch: ultra-expanded;
 
-  src: url('./assets/fonts/codec2.woff') format('woff');
+  src: url('./assets/fonts/codec.woff') format('woff');
 }
 
 /*
@@ -135,6 +135,7 @@ h6 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
   grid-row: 3;
+  color: #E70013;
 
 }
 
