@@ -130,9 +130,21 @@ export const DOM = () => {
             const gameboardsContainer = document.createElement('div');
             gameboardsContainer.id = 'gameboard-container';
 
-            const renderGameBoard = () => {
+            const renderGameBoard = (user) => {
+                const board = document.createElement('div');
+                board.className = 'board';
+                board.classList.add(user);
 
+                for (let i = 0; i < 100; i++) {
+                    let pixel = document.createElement('div');
+                    pixel.className = 'pixel';
+                    board.appendChild(pixel);
+                }
+
+                return board;
             }
+
+            gameboardsContainer.append(renderGameBoard('player'), renderGameBoard('computer'))
 
 
 

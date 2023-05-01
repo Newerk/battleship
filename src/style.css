@@ -150,6 +150,10 @@ h6 {
   grid-column: span 3;
   grid-row: 2;
   background-color: black;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
 }
 
 #codec-container {
@@ -157,13 +161,15 @@ h6 {
   grid-template-columns: 1fr 1.5fr 1fr;
   grid-column: span 3;
   grid-row: 1;
+  cursor: default;
 }
 
 #player-pic {
   grid-column: 1;
   grid-row: 1;
-  background-color:black;
-  background-image: url('./assets/characters/Solid\ Snake_1.png');/*temp img. will be controlled by JS*/
+  background-color: black;
+  background-image: url('./assets/characters/Solid\ Snake_1.png');
+  /*temp img. will be controlled by JS*/
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
@@ -173,7 +179,8 @@ h6 {
   grid-column: 3;
   grid-row: 1;
   background-color: black;
-  background-image: url('./assets/characters/Mei\ Ling.png');/*temp img. will be controlled by JS*/
+  background-image: url('./assets/characters/Mei\ Ling.png');
+  /*temp img. will be controlled by JS*/
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left;
@@ -290,7 +297,6 @@ h6 {
 
 #fq-left-container {
   grid-column: 1;
-
 }
 
 #fq-right-container {
@@ -310,12 +316,49 @@ h6 {
   background-color: #101818;
 }
 
+#fq-left-arrow {
+  /*temp, this will be controlled by JS*/
+  color: #88F0C0;
+
+}
+
 
 #freq-footer {
   grid-row: 3;
   color: #284038;
 }
 
+
+.board {
+  height: 20rem;
+  width: 20rem;
+  background-color: #1F3029;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  margin-top: 3rem;
+  border: 2px solid #1F3029;
+  gap: 2px;
+}
+
+.pixel {
+  background-color: #101818;
+
+}
+
+/*input of renderGameBoard()*/
+.player {
+  justify-self: right;
+  margin-right: 6.8rem;
+}
+
+/*input of renderGameBoard()*/
+.computer {
+  justify-self: left;
+  margin-left: 6.8rem;
+
+
+}
 
 /*--------------------------------------------------------------------*/
 
@@ -331,67 +374,88 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
+
 @keyframes flicker {
   0% {
     opacity: 0.27861;
   }
+
   5% {
     opacity: 0.34769;
   }
+
   10% {
     opacity: 0.23604;
   }
+
   15% {
     opacity: 0.90626;
   }
+
   20% {
     opacity: 0.18128;
   }
+
   25% {
     opacity: 0.83891;
   }
+
   30% {
     opacity: 0.65583;
   }
+
   35% {
     opacity: 0.67807;
   }
+
   40% {
     opacity: 0.84693;
   }
+
   45% {
     opacity: 0.96019;
   }
+
   50% {
     opacity: 0.08594;
   }
+
   55% {
     opacity: 0.20313;
   }
+
   60% {
     opacity: 0.71988;
   }
+
   65% {
     opacity: 0.53455;
   }
+
   70% {
     opacity: 0.37288;
   }
+
   75% {
     opacity: 0.71428;
   }
+
   80% {
     opacity: 0.70419;
   }
+
   85% {
     opacity: 0.7003;
   }
+
   90% {
     opacity: 0.36108;
   }
+
   95% {
     opacity: 0.24387;
   }
+
   100% {
     opacity: 0.27861;
   }
@@ -411,6 +475,7 @@ body {
   pointer-events: none;
   animation: flicker 0.15s infinite;
 }
+
 #crt::before {
   content: " ";
   display: block;
@@ -420,14 +485,11 @@ body {
   left: 0;
   right: 0;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       rgba(255, 0, 0, 0.06),
       rgba(0, 255, 0, 0.02),
-      rgba(0, 0, 255, 0.06)
-    );
+      rgba(0, 0, 255, 0.06));
   z-index: 5;
   pointer-events: none;
   background-size: 100% 3px, 4px 100%;
 }
-
