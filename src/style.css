@@ -339,12 +339,31 @@ h6 {
   margin-top: 3rem;
   border: 2px solid #1F3029;
   gap: 2px;
+  cursor: crosshair;
 }
 
 .pixel {
   background-color: #101818;
 
 }
+
+.pixel:hover {
+  background-color: #284038;
+}
+
+.pixel:active {
+  background-color: #88F0C0;
+}
+
+/*pixels that are missed coords will be crossed out*/
+.miss {
+  background-image: url('./assets/symbols/cross.svg');
+  background-repeat: no-repeat;
+  background-size: 3.5rem;
+  background-position: center;
+  background-color: #284038;
+}
+
 
 /*input of renderGameBoard()*/
 .player {
