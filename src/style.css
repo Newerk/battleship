@@ -364,6 +364,15 @@ h6 {
   background-color: #284038;
 }
 
+.hit {
+  background-color: #88F0C0;
+
+}
+
+.hit:hover {
+  background-color: #88F0C0;
+
+}
 
 /*input of renderGameBoard()*/
 .player {
