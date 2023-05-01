@@ -130,6 +130,10 @@ export const DOM = () => {
             const gameboardsContainer = document.createElement('div');
             gameboardsContainer.id = 'gameboard-container';
 
+            const renderGameBoard = () => {
+
+            }
+
 
 
             content.append(codecContainer, subtitlesBox, gameboardsContainer)
