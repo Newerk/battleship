@@ -107,7 +107,7 @@ h6 {
   grid-template-rows: 10rem, 1fr, 2rem;
   justify-items: center;
   background-image: url('./assets/images/1.jpeg');
-  background-repeat:repeat-x;
+  background-repeat: repeat-x;
   background-size: contain;
   background-position: center;
   background-color: black;
@@ -117,8 +117,8 @@ h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #e1c4a6;
-  opacity: .8;
+  color: #ebc295;
+  opacity: .9;
 
 }
 
@@ -140,11 +140,14 @@ h6 {
 }
 
 #message {
-  margin-top: -8rem;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.8rem;
+  margin-top: -4rem;
+  font-family: 'Codec';
+  font-size: 3rem;
   grid-row: 3;
-  color: #E70013;
+  color: #ff0015;
+  transform: scaleY(0.5);
+  transform-origin: 0 0;
+
 
 }
 
