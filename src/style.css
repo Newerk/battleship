@@ -106,24 +106,33 @@ h6 {
   display: grid;
   grid-template-rows: 10rem, 1fr, 2rem;
   justify-items: center;
-
+  background-image: url('./assets/images/1.jpeg');
+  background-repeat:repeat-x;
+  background-size: contain;
+  background-position: center;
+  background-color: black;
 }
 
 #top-text {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #e1c4a6;
+  opacity: .8;
+
 }
 
 #sub-title {
   font-family: 'Tactical';
   font-size: 1.5rem;
   margin-bottom: -1.5rem;
+
 }
 
 #title {
   font-family: 'MGS';
   font-size: 6rem;
+
 }
 
 #space {
