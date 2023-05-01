@@ -70,6 +70,22 @@ export const DOM = () => {
 
             const freqScreen = document.createElement('div');
             freqScreen.id = 'freq-screen';
+
+            for (let i = 0; i < 9; i++) {
+                const freqBars = document.createElement('div');
+                freqBars.className = 'freq-bar';
+                if (i >= 3) {
+                    freqBars.classList.add('active');
+                }
+
+                freqBars.setAttribute('style', `height: 100%; width: 100%;`)
+                freqScreen.appendChild(freqBars)
+            }
+
+            // const freqCoordContainer = document.createElement('div');
+            // freqCoordContainer.id = 'freq-coord-container';
+            // freqScreen.appendChild(freqCoordContainer)
+            
             freqMiddleContainer.appendChild(freqScreen)
 
             const freqLeftContainer = document.createElement('div');

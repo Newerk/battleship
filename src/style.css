@@ -229,6 +229,26 @@ h6 {
   background-color: #0F1818;
   height: 90%;
   width: 90%;
+  display: grid;
+  grid-template-columns: 1;
+  grid-template-rows: repeat(9, 1fr);
+  gap: 4px;
+}
+
+.freq-bar {
+  background-color: #284038;
+}
+
+.active {
+  background-color: #88F0C0;
+}
+
+#freq-coord-container {
+  background-color: #E70013;
+  margin-left: 3rem;
+  grid-row: 1 / 10;
+  border-radius: 100% 0 0 0;
+  z-index: 20;
 }
 
 #fq-left-container,
@@ -251,7 +271,7 @@ h6 {
 #fq-left-arrow,
 #fq-right-arrow {
   font-size: 2rem;
-  line-height: 2.5rem;
+  line-height: 2.6rem;
   width: 6rem;
   height: 2.3rem;
   text-align: center;
