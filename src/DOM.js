@@ -74,18 +74,22 @@ export const DOM = () => {
             for (let i = 0; i < 9; i++) {
                 const freqBars = document.createElement('div');
                 freqBars.className = 'freq-bar';
+                freqBars.setAttribute('style', `height: 100%; width: 100%;`)
+
                 if (i >= 3) {
                     freqBars.classList.add('active');
                 }
-
-                freqBars.setAttribute('style', `height: 100%; width: 100%;`)
                 freqScreen.appendChild(freqBars)
             }
 
-            // const freqCoordContainer = document.createElement('div');
-            // freqCoordContainer.id = 'freq-coord-container';
-            // freqScreen.appendChild(freqCoordContainer)
-            
+            const freqCoordContainer = document.createElement('div');
+            freqCoordContainer.id = 'freq-coord-container';
+            const freqCoord = document.createElement('p');
+            freqCoord.id = 'coord';
+            freqCoord.textContent = 'A.10';
+            freqCoordContainer.appendChild(freqCoord);
+            freqScreen.appendChild(freqCoordContainer)
+
             freqMiddleContainer.appendChild(freqScreen)
 
             const freqLeftContainer = document.createElement('div');

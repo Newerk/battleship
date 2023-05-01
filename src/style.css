@@ -226,9 +226,11 @@ h6 {
 }
 
 #freq-screen {
+  position: relative;
   background-color: #0F1818;
-  height: 90%;
-  width: 90%;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
   display: grid;
   grid-template-columns: 1;
   grid-template-rows: repeat(9, 1fr);
@@ -244,11 +246,29 @@ h6 {
 }
 
 #freq-coord-container {
-  background-color: #E70013;
-  margin-left: 3rem;
-  grid-row: 1 / 10;
-  border-radius: 100% 0 0 0;
+  position: absolute;
+
+  background-color: #101818;
+  right: 1rem;
+  bottom: 1rem;
+
+  height: 73%;
+  width: 73%;
+
+  border-radius: 95% 0 0 0;
+
+  display: flex;
+  justify-content: end;
+  align-items: end;
+
   z-index: 20;
+}
+
+#coord {
+  font-family: 'Digital';
+  color: #88F0C0;
+  font-size: 12vh;
+  margin-bottom: -28px;
 }
 
 #fq-left-container,
