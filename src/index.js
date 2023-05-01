@@ -1,5 +1,10 @@
 import _ from 'lodash';
 import { DOM } from './DOM';
 
-// DOM().loadTitleScreen();
-DOM().loadInGameScreen();
+//crt effect
+const crt = document.createElement('div');
+crt.id = 'crt';
+document.body.appendChild(crt);
+
+DOM().loadTitleScreen();
+// DOM().loadInGameScreen();
