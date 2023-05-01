@@ -162,13 +162,24 @@ h6 {
 #player-pic {
   grid-column: 1;
   grid-row: 1;
-  background-color: black;
+  background-color:black;
+  background-image: url('./assets/characters/Solid\ Snake_1.png');/*temp img. will be controlled by JS*/
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
 }
 
 #enemy-pic {
   grid-column: 3;
   grid-row: 1;
   background-color: black;
+  background-image: url('./assets/characters/Mei\ Ling.png');/*temp img. will be controlled by JS*/
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+
+
+
 }
 
 #frequency-container {
