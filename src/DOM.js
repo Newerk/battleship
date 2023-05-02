@@ -132,9 +132,35 @@ export const DOM = () => {
             gameboardsContainer.id = 'gameboard-container';
 
             const renderGameBoard = (user) => {
+
+                const boardContainer = document.createElement('div');
+                boardContainer.className = 'board-container';
+                const xAxis = document.createElement('div');
+                xAxis.className = 'board-x-axis';
+
+                const yAxis = document.createElement('div');
+                yAxis.className = 'board-y-axis';
+
+                const x = 'ABCDEFGHIJ';
+                const y = [1,2,3,4,5,6,7,8,9,10]
+
+                for (let i = 0; i < 10; i++) {
+                    const value = document.createElement('div');
+                    value.textContent = x[i];
+                    xAxis.appendChild(value);
+                    
+                }
+                for (let i = 0; i < 10; i++) {
+                    const value = document.createElement('div');
+                    value.textContent = y[i];
+                    yAxis.appendChild(value);
+                    
+                }
+
+
                 const board = document.createElement('div');
                 board.className = 'board';
-                board.classList.add(user);
+                boardContainer.classList.add(user);
 
                 for (let i = 0; i < 100; i++) {
                     let pixel = document.createElement('div');
@@ -142,7 +168,9 @@ export const DOM = () => {
                     board.appendChild(pixel);
                 }
 
-                return board;
+                boardContainer.append(xAxis, yAxis, board)
+
+                return boardContainer;
             }
 
             gameboardsContainer.append(renderGameBoard('player'), renderGameBoard('computer'))

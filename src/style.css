@@ -367,6 +367,43 @@ h6 {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: default;
+}
+
+.board-container {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  grid-template-rows: 2.5rem 1fr;
+  height: max-content;
+  width: max-content;
+
+}
+
+[class *=axis] {
+  place-items: center;
+  font-family: 'Pixelated Serif';
+  font-size: 1.6rem;
+  color: #88F0C0;
+  cursor: default;
+
+}
+
+.board-x-axis {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: 1;
+
+  grid-column: 2 / 3;
+
+}
+
+.board-y-axis {
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: 1;
+
+  grid-row: 2;
+
 }
 
 .board {
@@ -376,7 +413,7 @@ h6 {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
   border: 2px solid #1F3029;
   gap: 2px;
   cursor: crosshair;
