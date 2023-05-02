@@ -126,6 +126,7 @@ export const DOM = () => {
 
             const subtitlesBox = document.createElement('div');
             subtitlesBox.id = 'subtitles-box';
+            subtitlesBox.textContent = 'Attack A10 was a miss';
 
             const gameboardsContainer = document.createElement('div');
             gameboardsContainer.id = 'gameboard-container';
