@@ -197,7 +197,6 @@ export const DOM = () => {
             descriptonsContainer.className = 'description-container';
             const playerDescription = document.createElement('div');
             playerDescription.id = 'player-description';
-            // playerDescription.textContent = SpriteCollection.DrOctacon().name;
             const computerDescription = document.createElement('div');
             computerDescription.id = 'cpu-description';
 

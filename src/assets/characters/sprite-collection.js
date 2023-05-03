@@ -12,7 +12,7 @@ import SolidSnake_1URL from '../characters/Solid\ Snake_1.png'
 import SolidSnake_2URL from '../characters/Solid\ Snake_2.png'
 import SolidSnake_3URL from '../characters/Solid\ Snake_3.png'
 
-function hoverEvent(element, /*name,*/ description) {
+function hoverEvent(element, description) {
     element.addEventListener('mouseover', () => {
         element.style.opacity = 0.8;
         element.style.cursor = 'crosshair';
@@ -43,7 +43,7 @@ export const SpriteCollection = {
         picture.id = 'octacon';
         picture.setAttribute('style', `background-image: url(${DrOctaconURL})`);
 
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, DrOctaconURL);
 
         return {
@@ -61,7 +61,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'jim-houseman';
         picture.setAttribute('style', `background-image: url(${JimHousemanURL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, JimHousemanURL);
 
 
@@ -79,7 +79,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'mei-ling';
         picture.setAttribute('style', `background-image: url(${MeiLingURL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, MeiLingURL);
 
 
@@ -95,7 +95,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'naomi-hunter';
         picture.setAttribute('style', `background-image: url(${NaomiHunterURL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, NaomiHunterURL);
 
 
@@ -111,7 +111,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'roy-campbell';
         picture.setAttribute('style', `background-image: url(${RoyCampbellURL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, RoyCampbellURL);
 
 
@@ -127,7 +127,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'sniper-wolf';
         picture.setAttribute('style', `background-image: url(${SniperWolfURL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, SniperWolfURL);
 
 
@@ -143,7 +143,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'master';
         picture.setAttribute('style', `background-image: url(${MasterURL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, MasterURL);
 
 
@@ -159,7 +159,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'liquid-snake';
         picture.setAttribute('style', `background-image: url(${LiquidSnakeURL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, LiquidSnakeURL);
 
 
@@ -175,7 +175,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'meryl-1';
         picture.setAttribute('style', `background-image: url(${Meryl_1URL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, Meryl_1URL);
 
 
@@ -191,7 +191,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'meryl-2';
         picture.setAttribute('style', `background-image: url(${Meryl_2URL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, Meryl_2URL);
 
 
@@ -207,7 +207,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'solid-snake-1';
         picture.setAttribute('style', `background-image: url(${SolidSnake_1URL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, SolidSnake_1URL);
 
 
@@ -223,7 +223,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'solid-snake-2';
         picture.setAttribute('style', `background-image: url(${SolidSnake_2URL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, SolidSnake_2URL);
 
 
@@ -239,7 +239,7 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'solid-snake-3';
         picture.setAttribute('style', `background-image: url(${SolidSnake_3URL})`);
-        hoverEvent(picture, name, description);
+        hoverEvent(picture, description);
         clickEvent(picture, name, SolidSnake_3URL);
 
 
