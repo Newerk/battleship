@@ -511,22 +511,30 @@ h6 {
 
 .char-img {
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: cover;
   background-position: center;
 
 }
 
+[class *= row] {
+  margin-bottom: 4px;
+  gap: 4px;
+}
+
 .row-1 {
   display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-template-rows: 1fr
+  grid-template-columns: repeat(5, 10vh);
+  grid-template-rows: 1fr;
+  place-content: center;
 }
 
 .row-2,
 .row-3 {
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(4, 10vh);
   grid-template-rows: 1fr;
+  place-content: center;
+
 }
 
 
