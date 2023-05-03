@@ -1,4 +1,4 @@
-import { SpriteCollectionURLS } from "./assets/characters/sprite-collection";
+import { SpriteCollection } from "./assets/characters/sprite-collection";
 import "./style.css";
 
 export const DOM = () => {
@@ -207,25 +207,25 @@ export const DOM = () => {
                     row.className = `row-${i}`;
                     switch (row.className) {
                         case 'row-1':
-                            row.appendChild(SpriteCollectionURLS.SolidSnake_1());
-                            row.appendChild(SpriteCollectionURLS.SolidSnake_2());
-                            row.appendChild(SpriteCollectionURLS.SolidSnake_3());
-                            row.appendChild(SpriteCollectionURLS.Master());
-                            row.appendChild(SpriteCollectionURLS.LiquidSnake());
+                            row.appendChild(SpriteCollection.SolidSnake_1().picture);
+                            row.appendChild(SpriteCollection.SolidSnake_2().picture);
+                            row.appendChild(SpriteCollection.SolidSnake_3().picture);
+                            row.appendChild(SpriteCollection.Master().picture);
+                            row.appendChild(SpriteCollection.LiquidSnake().picture);
                             break;
 
                         case 'row-2':
-                            row.appendChild(SpriteCollectionURLS.DrOctacon());
-                            row.appendChild(SpriteCollectionURLS.JimHouseman());
-                            row.appendChild(SpriteCollectionURLS.MeiLing());
-                            row.appendChild(SpriteCollectionURLS.NaomiHunter());
+                            row.appendChild(SpriteCollection.DrOctacon().picture);
+                            row.appendChild(SpriteCollection.JimHouseman().picture);
+                            row.appendChild(SpriteCollection.MeiLing().picture);
+                            row.appendChild(SpriteCollection.NaomiHunter().picture);
                             break;
 
                         case 'row-3':
-                            row.appendChild(SpriteCollectionURLS.Meryl_1());
-                            row.appendChild(SpriteCollectionURLS.Meryl_2());
-                            row.appendChild(SpriteCollectionURLS.SniperWolf());
-                            row.appendChild(SpriteCollectionURLS.RoyCampbell());
+                            row.appendChild(SpriteCollection.Meryl_1().picture);
+                            row.appendChild(SpriteCollection.Meryl_2().picture);
+                            row.appendChild(SpriteCollection.SniperWolf().picture);
+                            row.appendChild(SpriteCollection.RoyCampbell().picture);
                             break;
                     }
                     element.appendChild(row);
