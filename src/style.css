@@ -491,6 +491,7 @@ h6 {
   background-size: contain;
   background-position: center;
   grid-area: 1 / 2;
+
 }
 
 #descripton-container {
@@ -513,10 +514,22 @@ h6 {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  opacity: 0.5;
 
 }
 
-[class *= row] {
+.char-img:hover {
+  opacity: 0.8;
+  cursor: crosshair;
+
+}
+
+.char-img:active {
+  opacity: 1;
+
+}
+
+[class *=row] {
   margin-bottom: 4px;
   gap: 4px;
 }
@@ -526,6 +539,7 @@ h6 {
   grid-template-columns: repeat(5, 10vh);
   grid-template-rows: 1fr;
   place-content: center;
+
 }
 
 .row-2,
