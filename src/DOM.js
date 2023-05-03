@@ -1,3 +1,4 @@
+import { SpriteCollectionURLS } from "./assets/characters/sprite-collection";
 import "./style.css";
 
 export const DOM = () => {
@@ -142,19 +143,19 @@ export const DOM = () => {
                 yAxis.className = 'board-y-axis';
 
                 const x = 'ABCDEFGHIJ';
-                const y = [1,2,3,4,5,6,7,8,9,10]
+                const y = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
                 for (let i = 0; i < 10; i++) {
                     const value = document.createElement('div');
                     value.textContent = x[i];
                     xAxis.appendChild(value);
-                    
+
                 }
                 for (let i = 0; i < 10; i++) {
                     const value = document.createElement('div');
                     value.textContent = y[i];
                     yAxis.appendChild(value);
-                    
+
                 }
 
 
@@ -183,5 +184,60 @@ export const DOM = () => {
             document.body.appendChild(content);
 
         },
+        loadCharacterSelectScreen() {
+            content.innerHTML = "";
+            content.className = 'char-select-screen';
+
+            const playerPicture = document.createElement('div');
+            playerPicture.id = 'cs-player-pic';
+            const computerPicture = document.createElement('div');
+            computerPicture.id = 'cs-computer-pic';
+
+            const descriptonsContainer = document.createElement('div');
+            descriptonsContainer.id = 'descripton-container';
+
+            const playerCharGrid = document.createElement('div');
+            playerCharGrid.id = 'player-char-grid';
+            const cpuCharGrid = document.createElement('div');
+            cpuCharGrid.id = 'cpu-char-grid';
+
+            const addRowsAndImages = (element) => {
+                for (let i = 1; i <= 3; i++) {
+                    const row = document.createElement('div');
+                    row.className = `row-${i}`;
+                    switch (row.className) {
+                        case 'row-1':
+                            row.appendChild(SpriteCollectionURLS.SolidSnake_1());
+                            row.appendChild(SpriteCollectionURLS.SolidSnake_2());
+                            row.appendChild(SpriteCollectionURLS.SolidSnake_3());
+                            row.appendChild(SpriteCollectionURLS.Master());
+                            row.appendChild(SpriteCollectionURLS.LiquidSnake());
+                            break;
+
+                        case 'row-2':
+                            row.appendChild(SpriteCollectionURLS.DrOctacon());
+                            row.appendChild(SpriteCollectionURLS.JimHouseman());
+                            row.appendChild(SpriteCollectionURLS.MeiLing());
+                            row.appendChild(SpriteCollectionURLS.NaomiHunter());
+                            break;
+
+                        case 'row-3':
+                            row.appendChild(SpriteCollectionURLS.Meryl_1());
+                            row.appendChild(SpriteCollectionURLS.Meryl_2());
+                            row.appendChild(SpriteCollectionURLS.SniperWolf());
+                            row.appendChild(SpriteCollectionURLS.RoyCampbell());
+                            break;
+                    }
+                    element.appendChild(row);
+                }
+            }
+
+            addRowsAndImages(playerCharGrid);
+            addRowsAndImages(cpuCharGrid);
+
+            content.append(playerPicture, computerPicture, descriptonsContainer, playerCharGrid, cpuCharGrid)
+
+            document.body.appendChild(content)
+        }
     }
 }
