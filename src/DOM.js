@@ -194,7 +194,14 @@ export const DOM = () => {
             computerPicture.id = 'cs-computer-pic';
 
             const descriptonsContainer = document.createElement('div');
-            descriptonsContainer.id = 'descripton-container';
+            descriptonsContainer.className = 'description-container';
+            const playerDescription = document.createElement('div');
+            playerDescription.id = 'player-description';
+            // playerDescription.textContent = SpriteCollection.DrOctacon().name;
+            const computerDescription = document.createElement('div');
+            computerDescription.id = 'cpu-description';
+
+            descriptonsContainer.append(playerDescription, computerDescription)
 
             const playerCharGrid = document.createElement('div');
             playerCharGrid.id = 'player-char-grid';
