@@ -26,12 +26,23 @@ function hoverEvent(element, description) {
 function clickEvent(element, name, url) {
 
     element.addEventListener('click', () => {
-        document.querySelector('#player-description').textContent = name;
-        localStorage.setItem('player_img', url);
-        localStorage.setItem('player_name', name);
+        if (element.parentElement.parentElement.id === 'player-char-grid') {
+            document.querySelector('#player-description').textContent = name;
+            localStorage.setItem('player_img', url);
+            localStorage.setItem('player_name', name);
 
-        document.querySelector('#cs-player-pic').setAttribute('style', `
-        background-image: url(${url})`)
+            document.querySelector('#cs-player-pic').setAttribute('style', `
+            background-image: url(${url})`)
+
+        } else {
+            document.querySelector('#cpu-description').textContent = name;
+            localStorage.setItem('cpu_img', url);
+            localStorage.setItem('cpu_name', name);
+
+            document.querySelector('#cs-computer-pic').setAttribute('style', `
+            background-image: url(${url})`)
+
+        }
         element.style.opacity = 1;
     })
 
