@@ -24,8 +24,12 @@ function hoverEvent(element, description) {
 }
 
 function clickEvent(element, name, url) {
+
     element.addEventListener('click', () => {
         document.querySelector('#player-description').textContent = name;
+        localStorage.setItem('player_img', url);
+        localStorage.setItem('player_name', name);
+
         document.querySelector('#cs-player-pic').setAttribute('style', `
         background-image: url(${url})`)
         element.style.opacity = 1;
@@ -42,14 +46,14 @@ export const SpriteCollection = {
         picture.className = 'char-img';
         picture.id = 'octacon';
         picture.setAttribute('style', `background-image: url(${DrOctaconURL})`);
-
         hoverEvent(picture, description);
         clickEvent(picture, name, DrOctaconURL);
 
         return {
             picture,
             name,
-            description
+            description,
+            url: DrOctaconURL,
         };
     }
     ,
@@ -69,6 +73,7 @@ export const SpriteCollection = {
             picture,
             name,
             description,
+            url: JimHousemanURL,
         };
     },
     MeiLing: () => {
@@ -85,6 +90,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: MeiLingURL,
         };
     },
     NaomiHunter: () => {
@@ -101,6 +109,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: NaomiHunterURL,
         };
     },
     RoyCampbell: () => {
@@ -117,6 +128,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: RoyCampbellURL,
         };
     },
     SniperWolf: () => {
@@ -133,6 +147,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: SniperWolfURL,
         };
     },
     Master: () => {
@@ -149,6 +166,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: MasterURL,
         };
     },
     LiquidSnake: () => {
@@ -165,6 +185,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: LiquidSnakeURL,
         };
     },
     Meryl_1: () => {
@@ -181,6 +204,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: Meryl_1URL,
         };
     },
     Meryl_2: () => {
@@ -197,6 +223,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: Meryl_2URL,
         };
     },
     SolidSnake_1: () => {
@@ -213,6 +242,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: SolidSnake_1URL,
         };
     },
     SolidSnake_2: () => {
@@ -229,6 +261,9 @@ export const SpriteCollection = {
 
         return {
             picture,
+            name,
+            description,
+            url: SolidSnake_2URL,
         };
     },
     SolidSnake_3: () => {
@@ -246,7 +281,8 @@ export const SpriteCollection = {
         return {
             picture,
             name,
-            description
+            description,
+            url: SolidSnake_3URL,
         };
     },
 }

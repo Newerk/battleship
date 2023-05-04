@@ -187,18 +187,26 @@ export const DOM = () => {
         loadCharacterSelectScreen() {
             content.innerHTML = "";
             content.className = 'char-select-screen';
+            
 
             const playerPicture = document.createElement('div');
             playerPicture.id = 'cs-player-pic';
+            playerPicture.setAttribute('style', `background-image: url(${localStorage.getItem('player_img')});`)
+
             const computerPicture = document.createElement('div');
             computerPicture.id = 'cs-computer-pic';
+            computerPicture.setAttribute('style', `background-image: url(${localStorage.getItem('cpu_img')});`)
+
 
             const descriptonsContainer = document.createElement('div');
             descriptonsContainer.className = 'description-container';
             const playerDescription = document.createElement('div');
             playerDescription.id = 'player-description';
+            playerDescription.textContent = localStorage.getItem('player_name');
+
             const computerDescription = document.createElement('div');
             computerDescription.id = 'cpu-description';
+            computerDescription.textContent = localStorage.getItem('cpu_name');
 
             descriptonsContainer.append(playerDescription, computerDescription)
 

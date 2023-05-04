@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { DOM } from './DOM';
+import './local-storage'
 
 //crt effect
 const crt = document.createElement('div');
