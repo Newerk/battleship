@@ -21,7 +21,7 @@ export const Player = (enemyBoard) => {
 
     return {
         attack(coord) {
-            returnenemyBoard.receiveAttack(coord);
+            return enemyBoard.receiveAttack(coord);
         },
         randomAttack() {
             return enemyBoard.receiveAttack(_randomCoordinate())

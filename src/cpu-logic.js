@@ -44,16 +44,20 @@ export function cpuAttack(cpuPlayer, prev = undefined) {
         return cpuAttack(cpuPlayer, latestMove)
     }
 
-        let moveset = [
-            `${latestMove[0]}${parseInt(latestMove.slice(1)) - 1}`,//up
-            `${latestMove[0]}${parseInt(latestMove.slice(1)) + 1}`,//down
-            `${columns[columns.indexOf(latestMove[0]) - 1]}${latestMove.slice(1)}`,//left
-            `${columns[columns.indexOf(latestMove[0]) + 1]}${latestMove.slice(1)}`//right
-        ]
+    let moveset = [
+        `${latestMove[0]}${parseInt(latestMove.slice(1)) - 1}`,//up
+        `${latestMove[0]}${parseInt(latestMove.slice(1)) + 1}`,//down
+        `${columns[columns.indexOf(latestMove[0]) - 1]}${latestMove.slice(1)}`,//left
+        `${columns[columns.indexOf(latestMove[0]) + 1]}${latestMove.slice(1)}`//right
+    ]
 
-        let nextPossibleMoves = _.filter(moveset, (el) => {
-            return (!_.includes(cpuPlayer.attacksOnEnemyBoard, el) && cpuPlayer.board[el]) 
-        })
+    let nextPossibleMoves = _.filter(moveset, (el) => {
+        return (!_.includes(cpuPlayer.attacksOnEnemyBoard, el) && cpuPlayer.board[el])
+    })
 
-        return nextPossibleMoves;
+    let chosenAttack = nextPossibleMoves[Math.floor(Math.random() * nextPossibleMoves.length)];
+    cpuPlayer.attack(chosenAttack);
+
+    // return nextPossibleMoves;
+    return chosenAttack;
 }

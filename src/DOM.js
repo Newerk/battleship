@@ -165,10 +165,15 @@ export const DOM = () => {
                 board.className = 'board';
                 boardContainer.classList.add(user);
 
-                for (let i = 0; i < 100; i++) {
-                    let pixel = document.createElement('div');
-                    pixel.className = 'pixel';
-                    board.appendChild(pixel);
+                for (let i = 0; i < 10; i++) {
+                    let num = y[i]
+                    for (let j = 0; j < 10; j++) {
+                        let pixel = document.createElement('div');
+                        pixel.className = 'pixel';
+                        pixel.id = `${x[j]}${num}`;
+                        board.appendChild(pixel);
+
+                    }
                 }
 
                 boardContainer.append(xAxis, yAxis, board)
@@ -190,9 +195,21 @@ export const DOM = () => {
             content.innerHTML = "";
             content.className = 'char-select-screen';
 
+            const enterEvent = (e) => {
+                if (e.key === "Enter") {
+                    this.loadInGameScreen();
+                    document.removeEventListener('keypress', enterEvent);
+                }
+            }
+
             const startGame = document.createElement('div');
             startGame.id = 'start-game';
             startGame.textContent = 'Press Enter to Continue'
+            startGame.addEventListener('click', () => {
+                this.loadInGameScreen();
+                document.removeEventListener('click', enterEvent);
+
+            })
 
 
             const playerPicture = document.createElement('div');
@@ -259,12 +276,7 @@ export const DOM = () => {
 
             document.body.appendChild(content)
 
-            const enterEvent = (e) => {
-                if (e.key === "Enter") {
-                    this.loadInGameScreen();
-                    document.removeEventListener('keypress', enterEvent);
-                }
-            }
+
             document.addEventListener('keypress', enterEvent);
         }
     }

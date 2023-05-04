@@ -9,8 +9,8 @@ document.body.appendChild(crt);
 
 //Make a fade in and out to black when changing screens. Perhaps this can be done w/ pure CSS
 // DOM().loadTitleScreen();
-// DOM().loadInGameScreen();
-DOM().loadCharacterSelectScreen();
+DOM().loadInGameScreen();
+// DOM().loadCharacterSelectScreen();
 
 
 /*use localStorage to keep track of the characters used in the game.
