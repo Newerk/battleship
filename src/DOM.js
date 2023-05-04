@@ -52,6 +52,7 @@ export const DOM = () => {
 
             const playerPicture = document.createElement('div');
             playerPicture.id = 'player-pic';
+            playerPicture.setAttribute('style', `background-image: url(${localStorage.getItem('player_img')});`)
 
             // {
             const freqContainter = document.createElement('div');
@@ -122,6 +123,7 @@ export const DOM = () => {
 
             const enemyPicture = document.createElement('div');
             enemyPicture.id = 'enemy-pic';
+            enemyPicture.setAttribute('style', `background-image: url(${localStorage.getItem('cpu_img')});`)
 
             codecContainer.append(playerPicture, freqContainter, enemyPicture);
 

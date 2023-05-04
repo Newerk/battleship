@@ -186,8 +186,6 @@ h6 {
   grid-column: 1;
   grid-row: 1;
   background-color: black;
-  background-image: url('./assets/characters/Solid\ Snake_1.png');
-  /*temp img. will be controlled by JS*/
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
@@ -197,8 +195,6 @@ h6 {
   grid-column: 3;
   grid-row: 1;
   background-color: black;
-  /*temp img. will be controlled by JS*/
-  background-image: url('./assets/characters/Mei\ Ling.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left;
