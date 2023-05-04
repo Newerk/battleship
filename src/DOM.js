@@ -35,7 +35,7 @@ export const DOM = () => {
 
             const enterEvent = (e) => {
                 if (e.key === "Enter") {
-                    this.loadInGameScreen();
+                    this.loadCharacterSelectScreen();
                     document.removeEventListener('keypress', enterEvent);
                 }
             }
@@ -189,7 +189,11 @@ export const DOM = () => {
         loadCharacterSelectScreen() {
             content.innerHTML = "";
             content.className = 'char-select-screen';
-            
+
+            const startGame = document.createElement('div');
+            startGame.id = 'start-game';
+            startGame.textContent = 'Press Enter to Continue'
+
 
             const playerPicture = document.createElement('div');
             playerPicture.id = 'cs-player-pic';
@@ -251,9 +255,17 @@ export const DOM = () => {
             addRowsAndImages(playerCharGrid);
             addRowsAndImages(cpuCharGrid);
 
-            content.append(playerPicture, computerPicture, descriptonsContainer, playerCharGrid, cpuCharGrid)
+            content.append(playerPicture, computerPicture, descriptonsContainer, playerCharGrid, cpuCharGrid, startGame)
 
             document.body.appendChild(content)
+
+            const enterEvent = (e) => {
+                if (e.key === "Enter") {
+                    this.loadInGameScreen();
+                    document.removeEventListener('keypress', enterEvent);
+                }
+            }
+            document.addEventListener('keypress', enterEvent);
         }
     }
 }
