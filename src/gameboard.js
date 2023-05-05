@@ -54,8 +54,9 @@ export const Gameboard = () => {
 
                     board[`${coord[0]}${count}`].occupiedBy = selectedShip.type;
                     _shipOccupiedCoords.push(`${coord[0]}${count}`);
-                    selectedShip.occupying.push(`${coord[0]}${count}`)
+                    selectedShip.occupying.push(`${coord[0]}${count}`);
                     count++;
+
                 }
             }
             if (axis === "X") {
@@ -85,6 +86,7 @@ export const Gameboard = () => {
                     _shipOccupiedCoords.push(`${letters[count]}${digits}`);
                     selectedShip.occupying.push(`${letters[count]}${digits}`)
                     count++;
+
                 }
 
             }

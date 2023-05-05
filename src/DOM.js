@@ -178,10 +178,21 @@ export const DOM = () => {
                         pixel.className = 'pixel';
                         pixel.id = `${x[j]}${num}`;
 
+                        pixel.addEventListener('click', () => {
+                            game.player.gameBoard.placeShip(game.player.gameBoard.ships.battleship, pixel.id, 'Y');
+                            game.player.occupiedCoords.forEach(coord => {
+                                document.querySelector(`#${coord}`).classList.add('occupied');
+
+                            })
+
+                        })
+
                         //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
                         if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
-                            pixel.classList.add('occupied')
+                            pixel.classList.add('hit');
                         }
+
+
 
                         board.appendChild(pixel);
                     }

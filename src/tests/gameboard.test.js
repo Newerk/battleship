@@ -1,6 +1,5 @@
 import _ from "lodash";
 import { Gameboard } from "../gameboard";
-import { Ship } from "../ship";
 
 let playersBoard = Gameboard();
 let enemysBoard = Gameboard();
