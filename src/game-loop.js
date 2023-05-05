@@ -12,7 +12,7 @@ export const gameplayLoop = () => {
 
     cpu.randomlyPlaceShips();
 
-    console.log(cpu.gameboard.board)
+    console.log(cpu.gameBoard.board)
 
     // _.forOwn(player.board.ships, el => {
     //     if (playersGameBoard.shipOccupiedCoords.length < 17) {
@@ -21,8 +21,6 @@ export const gameplayLoop = () => {
     // })
 
     return {
-        cpuGameboard,
-        playersGameBoard,
         player,
         cpu
     }
