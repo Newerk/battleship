@@ -12,8 +12,6 @@ export const gameplayLoop = () => {
 
     cpu.randomlyPlaceShips();
 
-    // player.gameBoard.placeShip(player.gameBoard.ships.battleship, 'D4', 'Y')
-
     return {
         player,
         cpu
