@@ -422,7 +422,7 @@ h6 {
 
 }
 
-.pixel:hover {
+[class="pixel"]:hover {
   background-color: #284038;
 }
 
