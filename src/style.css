@@ -432,7 +432,7 @@ h6 {
 
 /*pixels that are missed coords will be crossed out*/
 .miss {
-  background-image: url('./assets/symbols/cross.svg');
+  background-image: url('./assets/symbols/miss-cross.svg');
   background-repeat: no-repeat;
   background-size: 3.5rem;
   background-position: center;
@@ -440,6 +440,21 @@ h6 {
 }
 
 .hit {
+  /*hit locations will glow with an X on it*/
+  background-image: url('./assets/symbols/hit-cross.svg');
+  background-repeat: no-repeat;
+  background-size: 3.5rem;
+  background-position: center;
+  background-color: #88F0C0;
+
+  /* background-color: #88F0C0;
+  box-shadow: 0 0 10px #88F0C0; */
+
+
+}
+
+.occupied {
+  /*player's pixels of placed ships will glow */
   background-color: #88F0C0;
   box-shadow: 0 0 10px #88F0C0;
 

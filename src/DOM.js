@@ -180,6 +180,8 @@ export const DOM = () => {
                         //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
                         if (game.cpu.occupiedCoords.includes(pixel.id)) {
                             pixel.classList.add('hit')
+                        } else {
+                            pixel.classList.add('miss')
                         }
 
                         board.appendChild(pixel);
