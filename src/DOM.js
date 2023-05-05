@@ -168,6 +168,7 @@ export const DOM = () => {
 
                 const board = document.createElement('div');
                 board.className = 'board';
+                board.classList.add(user)
                 boardContainer.classList.add(user);
 
                 for (let i = 0; i < 10; i++) {
@@ -178,10 +179,8 @@ export const DOM = () => {
                         pixel.id = `${x[j]}${num}`;
 
                         //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
-                        if (game.cpu.occupiedCoords.includes(pixel.id)) {
-                            pixel.classList.add('hit')
-                        } else {
-                            pixel.classList.add('miss')
+                        if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
+                            pixel.classList.add('occupied')
                         }
 
                         board.appendChild(pixel);

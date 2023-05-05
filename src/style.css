@@ -467,13 +467,13 @@ h6 {
 }
 
 /*input of renderGameBoard()*/
-.player {
+.board-container.player {
   justify-self: right;
   margin-right: 6.8rem;
 }
 
 /*input of renderGameBoard()*/
-.computer {
+.board-container.computer {
   justify-self: left;
   margin-left: 6.8rem;
 
