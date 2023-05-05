@@ -36,6 +36,7 @@ export const Player = (enemyBoard) => {
                 }
             }
         },
+        gameBoard: personalBoard,
         board: personalBoard.board,
         _totalSpotsToBeTaken, //this is private. will be removed later. only exposed for testing purposes
         occupiedCoords: personalBoard.shipOccupiedCoords,
