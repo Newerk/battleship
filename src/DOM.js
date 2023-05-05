@@ -1,6 +1,5 @@
 import { SpriteCollection } from "./assets/characters/sprite-collection";
-import { Gameboard } from "./gameboard";
-import { Player } from "./player";
+import { gameplayLoop } from "./game-loop";
 import "./style.css";
 
 
@@ -47,11 +46,7 @@ export const DOM = () => {
 
         },
         loadInGameScreen() {
-            let cpuGameboard = Gameboard();
-            let playersGameBoard = Gameboard();
-
-            let player = Player(cpuGameboard);
-            let cpu = Player(playersGameBoard);
+            const game = gameplayLoop();
 
             content.innerHTML = "";
             // content.classList.remove(...content.classList);
@@ -181,6 +176,11 @@ export const DOM = () => {
                         let pixel = document.createElement('div');
                         pixel.className = 'pixel';
                         pixel.id = `${x[j]}${num}`;
+
+                        //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
+                        if (game.cpu.occupiedCoords.includes(pixel.id)) {
+                            pixel.classList.add('hit')
+                        }
 
                         board.appendChild(pixel);
                     }
