@@ -1,5 +1,7 @@
+import _ from "lodash";
 import { Gameboard } from "./gameboard";
 import { Player } from "./player";
+
 
 export const gameplayLoop = () => {
     let cpuGameboard = Gameboard();
@@ -10,7 +12,13 @@ export const gameplayLoop = () => {
 
     cpu.randomlyPlaceShips();
 
-    console.log(cpuGameboard.shipOccupiedCoords)
+    console.log(cpu.gameboard.board)
+
+    // _.forOwn(player.board.ships, el => {
+    //     if (playersGameBoard.shipOccupiedCoords.length < 17) {
+
+    //     }
+    // })
 
     return {
         cpuGameboard,

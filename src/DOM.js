@@ -134,7 +134,7 @@ export const DOM = () => {
 
             const subtitlesBox = document.createElement('div');
             subtitlesBox.id = 'subtitles-box';
-            subtitlesBox.textContent = 'Place your ships';
+            subtitlesBox.textContent = 'Place your ships. Press "R" to rotate';
 
             const gameboardsContainer = document.createElement('div');
             gameboardsContainer.id = 'gameboard-container';

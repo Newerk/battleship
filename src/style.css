@@ -411,7 +411,6 @@ h6 {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  /* margin-top: 3rem; */
   border: 2px solid #1F3029;
   gap: 2px;
   cursor: crosshair;
@@ -430,7 +429,6 @@ h6 {
   background-color: #88F0C0;
 }
 
-/*pixels that are missed coords will be crossed out*/
 .miss {
   background-image: url('./assets/symbols/miss-cross.svg');
   background-repeat: no-repeat;
@@ -440,21 +438,16 @@ h6 {
 }
 
 .hit {
-  /*hit locations will glow with an X on it*/
   background-image: url('./assets/symbols/hit-cross.svg');
   background-repeat: no-repeat;
   background-size: 3.5rem;
   background-position: center;
   background-color: #88F0C0;
 
-  /* background-color: #88F0C0;
-  box-shadow: 0 0 10px #88F0C0; */
-
 
 }
 
 .occupied {
-  /*player's pixels of placed ships will glow */
   background-color: #88F0C0;
   box-shadow: 0 0 10px #88F0C0;
 
@@ -538,17 +531,6 @@ h6 {
   opacity: 0.5;
 
 }
-
-/* .char-img:hover {
-  opacity: 0.8;
-  cursor: crosshair;
-
-}
-
-.char-img:active {
-  opacity: 1;
-
-} */
 
 [class *=row] {
   margin-bottom: 4px;
