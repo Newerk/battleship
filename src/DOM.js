@@ -1,5 +1,9 @@
 import { SpriteCollection } from "./assets/characters/sprite-collection";
+import { Gameboard } from "./gameboard";
+import { Player } from "./player";
 import "./style.css";
+
+
 
 export const DOM = () => {
     let content = document.createElement('div');
@@ -43,6 +47,12 @@ export const DOM = () => {
 
         },
         loadInGameScreen() {
+            let cpuGameboard = Gameboard();
+            let playersGameBoard = Gameboard();
+
+            let player = Player(cpuGameboard);
+            let cpu = Player(playersGameBoard);
+
             content.innerHTML = "";
             // content.classList.remove(...content.classList);
             content.className = 'in-game-screen';
@@ -129,7 +139,7 @@ export const DOM = () => {
 
             const subtitlesBox = document.createElement('div');
             subtitlesBox.id = 'subtitles-box';
-            subtitlesBox.textContent = 'Attack A10 was a miss';
+            subtitlesBox.textContent = 'Place your ships';
 
             const gameboardsContainer = document.createElement('div');
             gameboardsContainer.id = 'gameboard-container';
@@ -171,8 +181,8 @@ export const DOM = () => {
                         let pixel = document.createElement('div');
                         pixel.className = 'pixel';
                         pixel.id = `${x[j]}${num}`;
-                        board.appendChild(pixel);
 
+                        board.appendChild(pixel);
                     }
                 }
 
@@ -278,6 +288,6 @@ export const DOM = () => {
 
 
             document.addEventListener('keypress', enterEvent);
-        }
+        },
     }
 }
