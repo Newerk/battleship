@@ -197,19 +197,28 @@ export const DOM = () => {
                                 document.querySelector(`#${coord}`).classList.add('occupied');
 
                             })
-
                         })
-
 
                         //shows a preview of the ships location and orientation while hovering over a pixel 
                         pixel.addEventListener('mouseover', () => {
                             if (pixel.parentElement.classList.contains('player')) {
                                 pixel.classList.add('preview');
 
+                                let ghostShip = Gameboard();
+                                ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
+                                Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
+                                    document.querySelector(`#${el}`).classList.add('preview');
+                                })
+                                // console.log(ghostShip.shipOccupiedCoords)
+
                                 //create a copy of the current ship that will be places on the board when clicked. this copy will be used to show how the ship will look before clicking
-                                let hoverShipCoords = Gameboard();
+                                
                                 pixel.addEventListener("mouseout", () => {
                                     pixel.classList.remove('preview');
+                                    Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
+                                        document.querySelector(`#${el}`).classList.remove('preview');
+                                    })
+    
 
                                 })
                             }
