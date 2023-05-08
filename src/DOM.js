@@ -1,5 +1,6 @@
 import { SpriteCollection } from "./assets/characters/sprite-collection";
 import { gameplayLoop } from "./game-loop";
+import { Gameboard } from "./gameboard";
 import "./style.css";
 
 
@@ -200,9 +201,17 @@ export const DOM = () => {
                         })
 
 
+                        //shows a preview of the ships location and orientation while hovering over a pixel 
                         pixel.addEventListener('mouseover', () => {
-                            //shows a preview of the ships location and orientation while hovering over a pixel               
+                            if (pixel.parentElement.classList.contains('player')) {
+                                pixel.classList.add('preview');
+                                let hoverShipCoords = Gameboard();
+                                pixel.addEventListener("mouseout", () => {
+                                    pixel.classList.remove('preview');
+                                })
+                            }
                         })
+
 
 
                         //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
