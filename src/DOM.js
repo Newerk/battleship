@@ -205,9 +205,12 @@ export const DOM = () => {
                         pixel.addEventListener('mouseover', () => {
                             if (pixel.parentElement.classList.contains('player')) {
                                 pixel.classList.add('preview');
+
+                                //create a copy of the current ship that will be places on the board when clicked. this copy will be used to show how the ship will look before clicking
                                 let hoverShipCoords = Gameboard();
                                 pixel.addEventListener("mouseout", () => {
                                     pixel.classList.remove('preview');
+
                                 })
                             }
                         })
