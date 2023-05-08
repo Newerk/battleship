@@ -188,9 +188,10 @@ export const DOM = () => {
                         pixel.id = `${x[j]}${num}`;
 
                         pixel.addEventListener('click', () => {
-                            game.player.gameBoard.placeShip(Object.values(game.player.gameBoard.ships)[currentShipIndex], pixel.id, orientation);
-                            currentShipIndex++;
-
+                            if (pixel.parentElement.classList.contains('player')) {
+                                game.player.gameBoard.placeShip(Object.values(game.player.gameBoard.ships)[currentShipIndex], pixel.id, orientation);
+                                currentShipIndex++;
+                            }
                             game.player.occupiedCoords.forEach(coord => {
                                 document.querySelector(`#${coord}`).classList.add('occupied');
 
