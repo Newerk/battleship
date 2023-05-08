@@ -12,6 +12,11 @@ export const gameplayLoop = () => {
 
     cpu.randomlyPlaceShips();
 
+    // while (player.gameBoard.allShipsSunk() !== true || cpu.gameBoard.allShipsSunk() !== true) {
+    //     //player attacks a coord
+    //     //cpu attacks a coord
+    // }
+
     return {
         player,
         cpu
