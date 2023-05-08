@@ -141,16 +141,18 @@ export const DOM = () => {
             gameboardsContainer.id = 'gameboard-container';
 
             const renderGameBoard = (user) => {
+                let currentShipIndex = 0;
                 let orientation = 'Y';
+                
                 document.body.addEventListener('keydown', e => {
-                    if (e.key === 'r' && orientation === 'X') {
+                    if (/r/i.test(e.key) && orientation === 'X') {
                         orientation = 'Y'
-                    } else if (e.key === 'r' && orientation === 'Y') {
+
+                    } else if (/r/i.test(e.key) && orientation === 'Y') {
                         orientation = 'X';
+
                     }
                 })
-
-                let currentShipIndex = 0;
 
                 const boardContainer = document.createElement('div');
                 boardContainer.className = 'board-container';
@@ -222,9 +224,7 @@ export const DOM = () => {
                         })
 
 
-
-
-                        //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
+                        //temp. just shows how ships are randomly placed on the board. this helps with visualizing whats going on when things are unseen
                         if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
                             pixel.classList.add('hit');
                         }
