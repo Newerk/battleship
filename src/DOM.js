@@ -189,7 +189,7 @@ export const DOM = () => {
                         pixel.id = `${x[j]}${num}`;
 
                         pixel.addEventListener('click', () => {
-                            if (pixel.parentElement.classList.contains('player') && game.player.occupiedCoords.length < 17) {
+                            if (pixel.parentElement.classList.contains('player') && !pixel.classList.contains('occupied')) {
                                 game.player.gameBoard.placeShip(Object.values(game.player.gameBoard.ships)[currentShipIndex], pixel.id, orientation);
                                 currentShipIndex++;
                             }
@@ -201,6 +201,8 @@ export const DOM = () => {
 
                         //shows a preview of the ships location and orientation while hovering over a pixel 
                         pixel.addEventListener('mouseover', () => {
+                            //create a copy of the current ship that will be places on the board when clicked. this copy will be used to show how the ship will look before clicking
+
                             if (pixel.parentElement.classList.contains('player')) {
                                 pixel.classList.add('preview');
 
@@ -209,20 +211,16 @@ export const DOM = () => {
                                 Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
                                     document.querySelector(`#${el}`).classList.add('preview');
                                 })
-                                // console.log(ghostShip.shipOccupiedCoords)
 
-                                //create a copy of the current ship that will be places on the board when clicked. this copy will be used to show how the ship will look before clicking
-                                
                                 pixel.addEventListener("mouseout", () => {
                                     pixel.classList.remove('preview');
                                     Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
                                         document.querySelector(`#${el}`).classList.remove('preview');
                                     })
-    
-
                                 })
                             }
                         })
+
 
 
 
