@@ -188,7 +188,7 @@ export const DOM = () => {
                         pixel.id = `${x[j]}${num}`;
 
                         pixel.addEventListener('click', () => {
-                            if (pixel.parentElement.classList.contains('player')) {
+                            if (pixel.parentElement.classList.contains('player') && game.player.occupiedCoords.length < 17) {
                                 game.player.gameBoard.placeShip(Object.values(game.player.gameBoard.ships)[currentShipIndex], pixel.id, orientation);
                                 currentShipIndex++;
                             }
