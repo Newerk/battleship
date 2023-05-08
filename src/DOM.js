@@ -140,7 +140,7 @@ export const DOM = () => {
             gameboardsContainer.id = 'gameboard-container';
 
             const renderGameBoard = (user) => {
-                let orientation = 'X';
+                let orientation = 'Y';
                 document.body.addEventListener('keydown', e => {
                     if (e.key === 'r' && orientation === 'X') {
                         orientation = 'Y'
@@ -148,6 +148,8 @@ export const DOM = () => {
                         orientation = 'X';
                     }
                 })
+
+                let currentShipIndex = 0;
 
                 const boardContainer = document.createElement('div');
                 boardContainer.className = 'board-container';
@@ -186,13 +188,16 @@ export const DOM = () => {
                         pixel.id = `${x[j]}${num}`;
 
                         pixel.addEventListener('click', () => {
-                            game.player.gameBoard.placeShip(game.player.gameBoard.ships.battleship, pixel.id, orientation);
+                            game.player.gameBoard.placeShip(Object.values(game.player.gameBoard.ships)[currentShipIndex], pixel.id, orientation);
+                            currentShipIndex++;
+
                             game.player.occupiedCoords.forEach(coord => {
                                 document.querySelector(`#${coord}`).classList.add('occupied');
 
                             })
 
                         })
+
 
                         pixel.addEventListener('mouseover', () => {
                             //shows a preview of the ships location and orientation while hovering over a pixel               

@@ -16,6 +16,8 @@ export const gameplayLoop = () => {
     //     //player attacks a coord
     //     //cpu attacks a coord
     // }
+    console.log(Object.values(player.gameBoard.ships)[0])
+    // console.log(player.gameBoard.ships)
 
     return {
         player,
