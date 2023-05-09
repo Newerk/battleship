@@ -141,18 +141,17 @@ export const DOM = () => {
             gameboardsContainer.id = 'gameboard-container';
 
             const renderGameBoard = (user) => {
-                let currentShipIndex = 0;
                 let orientation = 'Y';
-                
                 document.body.addEventListener('keydown', e => {
-                    if (/r/i.test(e.key) && orientation === 'X') {
-                        orientation = 'Y'
-
-                    } else if (/r/i.test(e.key) && orientation === 'Y') {
+                    if (e.key === 'r' && orientation === 'X') {
+                        orientation = 'Y';
+                    } else if (e.key === 'r' && orientation === 'Y') {
                         orientation = 'X';
-
                     }
+                    console.log(`new orientation: ${orientation}`)
                 })
+
+                let currentShipIndex = 0;
 
                 const boardContainer = document.createElement('div');
                 boardContainer.className = 'board-container';
@@ -190,14 +189,27 @@ export const DOM = () => {
                         pixel.className = 'pixel';
                         pixel.id = `${x[j]}${num}`;
 
+                        let getArrOfOccupiedIDs = () => {
+                            let arr = [];
+                            document.querySelectorAll('.occupied').forEach(el => {
+                                arr.push(el.id)
+                            })
+                            return arr;
+                        }
+
+                        let ghostShip = game.player.gameBoard;
+                        // ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
+
                         pixel.addEventListener('click', () => {
-                            if (pixel.parentElement.classList.contains('player') && !pixel.classList.contains('occupied')) {
+
+                            if (pixel.parentElement.classList.contains('player') && !pixel.classList.contains('occupied') && game.player.occupiedCoords.length < 17) {
                                 game.player.gameBoard.placeShip(Object.values(game.player.gameBoard.ships)[currentShipIndex], pixel.id, orientation);
+                                console.log(ghostShip.shipOccupiedCoords);
+                                console.log(game.player.occupiedCoords.length)
                                 currentShipIndex++;
                             }
                             game.player.occupiedCoords.forEach(coord => {
                                 document.querySelector(`#${coord}`).classList.add('occupied');
-
                             })
                         })
 
@@ -208,23 +220,13 @@ export const DOM = () => {
                             if (pixel.parentElement.classList.contains('player')) {
                                 pixel.classList.add('preview');
 
-                                let ghostShip = Gameboard();
-                                ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
-                                Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
-                                    document.querySelector(`#${el}`).classList.add('preview');
-                                })
-
                                 pixel.addEventListener("mouseout", () => {
                                     pixel.classList.remove('preview');
-                                    Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
-                                        document.querySelector(`#${el}`).classList.remove('preview');
-                                    })
                                 })
                             }
                         })
 
-
-                        //temp. just shows how ships are randomly placed on the board. this helps with visualizing whats going on when things are unseen
+                        //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
                         if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
                             pixel.classList.add('hit');
                         }
