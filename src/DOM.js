@@ -141,6 +141,7 @@ export const DOM = () => {
 
             const renderGameBoard = (user) => {
                 let orientation = 'Y';
+
                 document.body.addEventListener('keydown', e => {
                     if (e.key === 'r' && orientation === 'X') {
                         orientation = 'Y';
@@ -204,8 +205,11 @@ export const DOM = () => {
                         pixel.addEventListener('click', () => {
 
                             if (pixel.parentElement.classList.contains('player')) {
-
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
+                                
+                                if (game.player.occupiedCoords.length === 17) {
+                                    subtitlesBox.textContent = '[[[FILLER TEXT GAME CAN NOW START]]]'
+                                }
                                 if (previewShip === true && game.player.occupiedCoords.length < 17) {
                                     currentShipIndex++;
                                 }
@@ -215,6 +219,7 @@ export const DOM = () => {
                                         document.querySelector(`#${coord}`).classList.add('occupied');
                                     })
                                 }
+
                             }
                         })
 
@@ -222,7 +227,7 @@ export const DOM = () => {
 
                             let blankBoard = Gameboard();
 
-                            if (pixel.parentElement.classList.contains('player')) {
+                            if (pixel.parentElement.classList.contains('player') && game.player.occupiedCoords.length < 17) {
                                 pixel.classList.add('preview');
                                 let previewShip = blankBoard.placeShip(Object.values(blankBoard.ships)[currentShipIndex], pixel.id, orientation);
 
@@ -234,9 +239,9 @@ export const DOM = () => {
                                 pixel.addEventListener("mouseout", () => {
                                     pixel.classList.remove('preview');
 
-                                Object.values(blankBoard.ships)[currentShipIndex].occupying.forEach(coord => {
-                                    document.querySelector(`#${coord}`).classList.remove('preview');
-                                })
+                                    Object.values(blankBoard.ships)[currentShipIndex].occupying.forEach(coord => {
+                                        document.querySelector(`#${coord}`).classList.remove('preview');
+                                    })
                                 })
                             }
                         })
