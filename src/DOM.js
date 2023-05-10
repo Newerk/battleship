@@ -202,33 +202,37 @@ export const DOM = () => {
 
 
                         pixel.addEventListener('click', () => {
-                            let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
-                            if (previewShip === true && game.player.occupiedCoords.length < 17) {
-                                currentShipIndex++;
-                                console.log(game.player.occupiedCoords)
+                            if (pixel.parentElement.classList.contains('player')) {
 
+                                let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
+                                if (previewShip === true && game.player.occupiedCoords.length < 17) {
+                                    currentShipIndex++;
+                                }
+
+                                if (game.player.occupiedCoords.length <= 17) {
+                                    game.player.occupiedCoords.forEach(coord => {
+                                        document.querySelector(`#${coord}`).classList.add('occupied');
+                                    })
+                                }
                             }
-
-                            if (game.player.occupiedCoords.length <= 17) {
-
-
-                                game.player.occupiedCoords.forEach(coord => {
-                                    document.querySelector(`#${coord}`).classList.add('occupied');
-                                })
-                            }
-
                         })
 
-                        //shows a preview of the ships location and orientation while hovering over a pixel 
                         pixel.addEventListener('mouseover', () => {
-                            //create a copy of the current ship that will be places on the board when clicked. this copy will be used to show how the ship will look before clicking
-
                             if (pixel.parentElement.classList.contains('player')) {
                                 pixel.classList.add('preview');
 
 
+                                Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
+                                    document.querySelector(`#${el}`).classList.add('preview');
+                                })
+
+
                                 pixel.addEventListener("mouseout", () => {
                                     pixel.classList.remove('preview');
+
+                                    Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
+                                        document.querySelector(`#${el}`).classList.remove('preview');
+                                    })
                                 })
                             }
                         })
