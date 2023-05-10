@@ -4,7 +4,6 @@ import { Gameboard } from "./gameboard";
 import "./style.css";
 
 
-
 export const DOM = () => {
     let content = document.createElement('div');
     content.setAttribute('style', 'height: 100vh; width: 100vw')
@@ -182,6 +181,10 @@ export const DOM = () => {
                 board.classList.add(user)
                 boardContainer.classList.add(user);
 
+
+                let ghostShip = game.player.gameBoard;
+
+
                 for (let i = 0; i < 10; i++) {
                     let num = y[i]
                     for (let j = 0; j < 10; j++) {
@@ -197,20 +200,23 @@ export const DOM = () => {
                             return arr;
                         }
 
-                        let ghostShip = game.player.gameBoard;
-                        // ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
 
                         pixel.addEventListener('click', () => {
-
-                            if (pixel.parentElement.classList.contains('player') && !pixel.classList.contains('occupied') && game.player.occupiedCoords.length < 17) {
-                                game.player.gameBoard.placeShip(Object.values(game.player.gameBoard.ships)[currentShipIndex], pixel.id, orientation);
-                                console.log(ghostShip.shipOccupiedCoords);
-                                console.log(game.player.occupiedCoords.length)
+                            let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
+                            if (previewShip === true && game.player.occupiedCoords.length < 17) {
                                 currentShipIndex++;
+                                console.log(game.player.occupiedCoords)
+
                             }
-                            game.player.occupiedCoords.forEach(coord => {
-                                document.querySelector(`#${coord}`).classList.add('occupied');
-                            })
+
+                            if (game.player.occupiedCoords.length <= 17) {
+
+
+                                game.player.occupiedCoords.forEach(coord => {
+                                    document.querySelector(`#${coord}`).classList.add('occupied');
+                                })
+                            }
+
                         })
 
                         //shows a preview of the ships location and orientation while hovering over a pixel 
@@ -219,6 +225,7 @@ export const DOM = () => {
 
                             if (pixel.parentElement.classList.contains('player')) {
                                 pixel.classList.add('preview');
+
 
                                 pixel.addEventListener("mouseout", () => {
                                     pixel.classList.remove('preview');
