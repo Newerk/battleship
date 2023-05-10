@@ -202,6 +202,7 @@ export const DOM = () => {
 
 
                         pixel.addEventListener('click', () => {
+
                             if (pixel.parentElement.classList.contains('player')) {
 
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
@@ -218,21 +219,24 @@ export const DOM = () => {
                         })
 
                         pixel.addEventListener('mouseover', () => {
+
+                            let blankBoard = Gameboard();
+
                             if (pixel.parentElement.classList.contains('player')) {
                                 pixel.classList.add('preview');
+                                let previewShip = blankBoard.placeShip(Object.values(blankBoard.ships)[currentShipIndex], pixel.id, orientation);
 
-
-                                Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
-                                    document.querySelector(`#${el}`).classList.add('preview');
+                                Object.values(blankBoard.ships)[currentShipIndex].occupying.forEach(coord => {
+                                    document.querySelector(`#${coord}`).classList.add('preview');
                                 })
 
 
                                 pixel.addEventListener("mouseout", () => {
                                     pixel.classList.remove('preview');
 
-                                    Object.values(ghostShip.ships)[currentShipIndex].occupying.forEach(el => {
-                                        document.querySelector(`#${el}`).classList.remove('preview');
-                                    })
+                                Object.values(blankBoard.ships)[currentShipIndex].occupying.forEach(coord => {
+                                    document.querySelector(`#${coord}`).classList.remove('preview');
+                                })
                                 })
                             }
                         })
@@ -241,8 +245,6 @@ export const DOM = () => {
                         if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
                             pixel.classList.add('hit');
                         }
-
-
 
                         board.appendChild(pixel);
                     }
