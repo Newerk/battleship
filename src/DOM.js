@@ -202,9 +202,7 @@ export const DOM = () => {
                             return arr;
                         }
 
-
-                        pixel.addEventListener('click', () => {
-
+                        const clickToAddShip = () => {
                             if (pixel.parentElement.classList.contains('player')) {
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
 
@@ -223,10 +221,11 @@ export const DOM = () => {
                                 }
 
                             }
-                        })
 
-                        pixel.addEventListener('mouseover', () => {
+                            document.removeEventListener('click', clickToAddShip)
+                        }
 
+                        const previewShipWithHover = () => {
                             let blankBoard = Gameboard();
 
                             if (pixel.parentElement.classList.contains('player') && game.player.occupiedCoords.length < 17) {
@@ -238,15 +237,21 @@ export const DOM = () => {
                                 })
 
 
-                                pixel.addEventListener("mouseout", () => {
+                                const removePreview = () => {
                                     pixel.classList.remove('preview');
 
                                     Object.values(blankBoard.ships)[currentShipIndex].occupying.forEach(coord => {
                                         document.querySelector(`#${coord}`).classList.remove('preview');
                                     })
-                                })
+                                    document.removeEventListener('mouseout', removePreview);
+                                }
+                                pixel.addEventListener("mouseout", removePreview)
                             }
-                        })
+                            document.removeEventListener('mouseover', previewShipWithHover);
+                        }
+
+                        pixel.addEventListener('click', clickToAddShip);
+                        pixel.addEventListener('mouseover', previewShipWithHover)
 
                         //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
                         if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
