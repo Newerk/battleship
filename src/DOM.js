@@ -1,5 +1,5 @@
 import { SpriteCollection } from "./assets/characters/sprite-collection";
-import { gameplayLoop } from "./game-loop";
+import { gameplayLoop, setupGame } from "./game-loop";
 import { Gameboard } from "./gameboard";
 import "./style.css";
 
@@ -46,7 +46,7 @@ export const DOM = () => {
 
         },
         loadInGameScreen() {
-            const game = gameplayLoop();
+            const game = setupGame();
 
             content.innerHTML = "";
             // content.classList.remove(...content.classList);
@@ -206,9 +206,10 @@ export const DOM = () => {
 
                             if (pixel.parentElement.classList.contains('player')) {
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
-                                
+
                                 if (game.player.occupiedCoords.length === 17) {
-                                    subtitlesBox.textContent = '[[[FILLER TEXT GAME CAN NOW START]]]'
+                                    // subtitlesBox.textContent = '[[[FILLER TEXT. GAME CAN NOW START]]]'
+                                    gameplayLoop();
                                 }
                                 if (previewShip === true && game.player.occupiedCoords.length < 17) {
                                     currentShipIndex++;
