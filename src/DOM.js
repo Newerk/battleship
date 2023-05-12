@@ -142,14 +142,15 @@ export const DOM = () => {
             const renderGameBoard = (user) => {
                 let orientation = 'Y';
 
-                document.body.addEventListener('keydown', e => {
+                const changeOrientation = (e) => {
                     if (e.key === 'r' && orientation === 'X') {
                         orientation = 'Y';
                     } else if (e.key === 'r' && orientation === 'Y') {
                         orientation = 'X';
                     }
-                    console.log(`new orientation: ${orientation}`)
-                })
+                }
+
+                document.body.addEventListener('keydown', changeOrientation);
 
                 let currentShipIndex = 0;
 
@@ -208,7 +209,7 @@ export const DOM = () => {
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
 
                                 if (game.player.occupiedCoords.length === 17) {
-                                    // subtitlesBox.textContent = '[[[FILLER TEXT. GAME CAN NOW START]]]'
+                                    document.removeEventListener('keydown', changeOrientation)
                                     gameplayLoop();
                                 }
                                 if (previewShip === true && game.player.occupiedCoords.length < 17) {
