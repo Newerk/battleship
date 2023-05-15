@@ -92,8 +92,7 @@ export const DOM = () => {
             const freqCoordContainer = document.createElement('div');
             freqCoordContainer.id = 'freq-coord-container';
             const freqCoord = document.createElement('p');
-            freqCoord.id = 'coord';
-            freqCoord.textContent = 'A.10';
+            freqCoord.id = 'freq-coord';
             freqCoordContainer.appendChild(freqCoord);
             freqScreen.appendChild(freqCoordContainer)
 
@@ -230,12 +229,12 @@ export const DOM = () => {
 
                             if (pixel.parentElement.classList.contains('player') && game.player.occupiedCoords.length < 17) {
                                 pixel.classList.add('preview');
-                                let previewShip = blankBoard.placeShip(Object.values(blankBoard.ships)[currentShipIndex], pixel.id, orientation);
+                                blankBoard.placeShip(Object.values(blankBoard.ships)[currentShipIndex], pixel.id, orientation);
+                                document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
                                 Object.values(blankBoard.ships)[currentShipIndex].occupying.forEach(coord => {
                                     document.querySelector(`#${coord}`).classList.add('preview');
                                 })
-
 
                                 const removePreview = () => {
                                     pixel.classList.remove('preview');
