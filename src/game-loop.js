@@ -19,15 +19,10 @@ export const setupGame = () => {
 }
 
 export const gameplayLoop = (currentGame) => {
-    document.querySelector('#subtitles-box').textContent = "Make your first attack";
-    document.querySelector('#freq-coord').innerHTML = "";
-    document.querySelector('.board.computer').classList.add('active')
+    if (currentGame.player.gameBoard.allShipsSunk() !== true || currentGame.cpu.gameBoard.allShipsSunk() !== true) {
 
-
-    // while (currentGame.player.gameBoard.allShipsSunk() !== true || currentGame.cpu.gameBoard.allShipsSunk() !== true) {
-    //     //player attacks a coord
-    //     //cpu attacks a coord
-    // }
-    // console.log(player.gameBoard.ships)
+    } else {
+        //end game
+    }
 
 }

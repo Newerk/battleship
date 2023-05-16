@@ -202,16 +202,23 @@ export const DOM = () => {
                         }
 
                         const clickToAttack = () => {
+                            gameplayLoop(game);
                             if (pixel.parentElement.classList.contains('active')) {
                                 const attack = game.player.attack(pixel.id);
 
                                 if (game.cpu.occupiedCoords.includes(pixel.id)) {
-                                    pixel.classList.add('hit')
+                                    pixel.classList.add('hit');
 
                                 } else {
-                                    pixel.classList.add('miss')
+                                    pixel.classList.add('miss');
 
                                 }
+                                game.cpu.gameBoard.board[pixel.id].hit = true;
+                                game.cpu.randomAttack();
+                                console.log('random attack!')
+                                console.log(`PLAYER BOARD`)
+                                console.log(game.player.board)
+
                             }
                         }
 
@@ -221,7 +228,11 @@ export const DOM = () => {
 
                                 if (game.player.occupiedCoords.length === 17) {
                                     document.removeEventListener('keydown', changeOrientation)
-                                    gameplayLoop(game);
+                                    document.querySelector('#subtitles-box').textContent = "Make your first attack";
+                                    document.querySelector('#freq-coord').innerHTML = "";
+                                    document.querySelector('.board.computer').classList.add('active');
+                                
+                                    // gameplayLoop(game);
                                 }
                                 if (previewShip === true && game.player.occupiedCoords.length < 17) {
                                     currentShipIndex++;
