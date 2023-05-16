@@ -201,8 +201,7 @@ export const DOM = () => {
                             return arr;
                         }
 
-                        const clickToAttack = () => {
-                            gameplayLoop(game);
+                        const clickToAttack = (e) => {
                             if (pixel.parentElement.classList.contains('active')) {
                                 const attack = game.player.attack(pixel.id);
 
@@ -213,12 +212,9 @@ export const DOM = () => {
                                     pixel.classList.add('miss');
 
                                 }
-                                game.cpu.gameBoard.board[pixel.id].hit = true;
-                                game.cpu.randomAttack();
-                                console.log('random attack!')
-                                console.log(`PLAYER BOARD`)
-                                console.log(game.player.board)
-
+                                // game.cpu.gameBoard.board[pixel.id].hit = true;
+                                gameplayLoop(game);
+                                console.log(game.player.board);
                             }
                         }
 

@@ -24,6 +24,7 @@ export const Player = (enemyBoard) => {
             return enemyBoard.receiveAttack(coord);
         },
         randomAttack() {
+            console.log('random attack used')
             return enemyBoard.receiveAttack(_randomCoordinate())
         },
         randomlyPlaceShips(start = 0) {
