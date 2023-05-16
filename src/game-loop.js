@@ -21,6 +21,7 @@ export const setupGame = () => {
 export const gameplayLoop = (currentGame) => {
     document.querySelector('#subtitles-box').textContent = "Make your first attack";
     document.querySelector('#freq-coord').innerHTML = "";
+    document.querySelector('.board.computer').classList.add('active')
 
 
     // while (currentGame.player.gameBoard.allShipsSunk() !== true || currentGame.cpu.gameBoard.allShipsSunk() !== true) {

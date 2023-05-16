@@ -202,7 +202,7 @@ export const DOM = () => {
                         }
 
                         const clickToAttack = () => {
-                            if (pixel.parentElement.classList.contains('computer')) {
+                            if (pixel.parentElement.classList.contains('active')) {
                                 const attack = game.player.attack(pixel.id);
 
                                 if (game.cpu.occupiedCoords.includes(pixel.id)) {
