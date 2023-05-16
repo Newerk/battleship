@@ -201,7 +201,7 @@ export const DOM = () => {
                             return arr;
                         }
 
-                        const clickToAttack = (e) => {
+                        const clickToAttack = () => {
                             if (pixel.parentElement.classList.contains('active')) {
                                 const attack = game.player.attack(pixel.id);
 
@@ -212,7 +212,6 @@ export const DOM = () => {
                                     pixel.classList.add('miss');
 
                                 }
-                                // game.cpu.gameBoard.board[pixel.id].hit = true;
                                 gameplayLoop(game);
                                 console.log(game.player.board);
                             }
@@ -228,7 +227,6 @@ export const DOM = () => {
                                     document.querySelector('#freq-coord').innerHTML = "";
                                     document.querySelector('.board.computer').classList.add('active');
                                 
-                                    // gameplayLoop(game);
                                 }
                                 if (previewShip === true && game.player.occupiedCoords.length < 17) {
                                     currentShipIndex++;
