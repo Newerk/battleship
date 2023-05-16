@@ -201,13 +201,27 @@ export const DOM = () => {
                             return arr;
                         }
 
+                        const clickToAttack = () => {
+                            if (pixel.parentElement.classList.contains('computer')) {
+                                const attack = game.player.attack(pixel.id);
+
+                                if (game.cpu.occupiedCoords.includes(pixel.id)) {
+                                    pixel.classList.add('hit')
+
+                                } else {
+                                    pixel.classList.add('miss')
+
+                                }
+                            }
+                        }
+
                         const clickToAddShip = () => {
                             if (pixel.parentElement.classList.contains('player')) {
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
 
                                 if (game.player.occupiedCoords.length === 17) {
                                     document.removeEventListener('keydown', changeOrientation)
-                                    gameplayLoop();
+                                    gameplayLoop(game);
                                 }
                                 if (previewShip === true && game.player.occupiedCoords.length < 17) {
                                     currentShipIndex++;
@@ -250,12 +264,13 @@ export const DOM = () => {
                         }
 
                         pixel.addEventListener('click', clickToAddShip);
+                        pixel.addEventListener('click', clickToAttack)
                         pixel.addEventListener('mouseover', previewShipWithHover)
 
                         //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
-                        if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
-                            pixel.classList.add('hit');
-                        }
+                        // if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
+                        //     pixel.classList.add('occupied');
+                        // }
 
                         board.appendChild(pixel);
                     }
