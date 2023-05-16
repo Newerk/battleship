@@ -103,8 +103,8 @@ export const Gameboard = () => {
 
                     if (_.includes(shipType.occupying, coord)) {
                         shipType.hit();
-                        shipType.isSunk();//might be uneeded***
-                        board[`${coord}`].hit = true;
+                        shipType.isSunk();
+                        board[`${coord}`].hit = true; //not working???
                     }
                 }
                 return true; //valid move
@@ -113,7 +113,7 @@ export const Gameboard = () => {
                 if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_misses, coord) && !_.includes(_hits, coord)) {
                     _misses.push(coord);
                     _allAttacksMade.push(coord);
-                    board[`${coord}`].hit = true;
+                    board[`${coord}`].hit = true; //not working???
 
 
                     return true;//valid move
