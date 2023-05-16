@@ -18,10 +18,12 @@ export const setupGame = () => {
     }
 }
 
-export const gameplayLoop = () => {
-    document.querySelector('#subtitles-box').textContent = "gameplayLoop() Called";
+export const gameplayLoop = (currentGame) => {
+    document.querySelector('#subtitles-box').textContent = "Make your first attack";
+    document.querySelector('#freq-coord').innerHTML = "";
 
-    // while (player.gameBoard.allShipsSunk() !== true || cpu.gameBoard.allShipsSunk() !== true) {
+
+    // while (currentGame.player.gameBoard.allShipsSunk() !== true || currentGame.cpu.gameBoard.allShipsSunk() !== true) {
     //     //player attacks a coord
     //     //cpu attacks a coord
     // }
