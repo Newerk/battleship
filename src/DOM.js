@@ -207,11 +207,11 @@ export const DOM = () => {
 
                                 if (game.cpu.occupiedCoords.includes(pixel.id)) {
                                     pixel.classList.add('hit');
-                                    game.player.attack(game.cpu.gameBoard, pixel.id)
+                                    game.player.attack(game.cpu, pixel.id)
 
                                 } else {
                                     pixel.classList.add('miss');
-                                    game.player.attack(game.cpu.gameBoard, pixel.id)
+                                    game.player.attack(game.cpu, pixel.id)
 
                                 }
                                 gameplayLoop(game);

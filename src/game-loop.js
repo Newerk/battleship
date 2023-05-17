@@ -17,7 +17,7 @@ export const setupGame = () => {
 
 export const gameplayLoop = (currentGame) => {
     if (currentGame.player.gameBoard.allShipsSunk() !== true || currentGame.cpu.gameBoard.allShipsSunk() !== true) {
-        currentGame.cpu.randomAttack(currentGame.player.gameBoard);
+        currentGame.cpu.randomAttack(currentGame.player);
     } else {
         alert('game over!')
     }

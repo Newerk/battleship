@@ -20,12 +20,12 @@ export const Player = () => {
     }
 
     return {
-        attack(enemyBoard, coord) {//not working 
-            return enemyBoard.receiveAttack(coord);
+        attack(enemy, coord) {//not working 
+            return enemy.gameBoard.receiveAttack(coord);
         },
-        randomAttack(enemyBoard) {//not working
+        randomAttack(enemy) {//not working
             console.log('random attack used')
-            return enemyBoard.receiveAttack(_randomCoordinate());
+            return enemy.gameBoard.receiveAttack(_randomCoordinate());
         },
         randomlyPlaceShips(start = 0) {
             while (personalBoard.shipOccupiedCoords.length < _totalSpotsToBeTaken()) {
@@ -44,9 +44,6 @@ export const Player = () => {
         hitsOnPersonalBoard: personalBoard.hitAttacks,
         missesOnPersonalBoard: personalBoard.missedAttacks,
         allAttackedLocationsPersonalBoard: personalBoard.allAttacksMade,
-        // attacksOnEnemyBoard: enemyBoard.allAttacksMade,
-        // hitsOnEnemyBoard: enemyBoard.hitAttacks,
-        // missesOnEnemyBoard: enemyBoard.missedAttacks,
     }
 }
 
