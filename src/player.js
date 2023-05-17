@@ -20,10 +20,10 @@ export const Player = () => {
     }
 
     return {
-        attack(enemy, coord) {//not working 
+        attack(enemy, coord) {
             return enemy.gameBoard.receiveAttack(coord);
         },
-        randomAttack(enemy) {//not working
+        randomAttack(enemy) {
             console.log('random attack used')
             return enemy.gameBoard.receiveAttack(_randomCoordinate());
         },

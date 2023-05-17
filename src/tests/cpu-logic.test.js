@@ -20,7 +20,7 @@ let cpu = Player();
 // })
 
 test("Random Valid Attack From CPU", ()=> {
-    cpu.randomAttack(player.gameBoard);
+    cpu.randomAttack(player);
     
     expect(player.allAttackedLocationsPersonalBoard.length).toBe(1);
 })
