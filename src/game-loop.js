@@ -4,11 +4,8 @@ import { Player } from "./player";
 
 
 export const setupGame = () => {
-    let cpuGameboard = Gameboard();
-    let playersGameBoard = Gameboard();
-
-    let player = Player(cpuGameboard);
-    let cpu = Player(playersGameBoard);
+    let player = Player();
+    let cpu = Player();
 
     cpu.randomlyPlaceShips();
 
@@ -20,8 +17,7 @@ export const setupGame = () => {
 
 export const gameplayLoop = (currentGame) => {
     if (currentGame.player.gameBoard.allShipsSunk() !== true || currentGame.cpu.gameBoard.allShipsSunk() !== true) {
-        currentGame.cpu.randomAttack();
-
+        currentGame.cpu.randomAttack(currentGame.player.gameBoard);
     } else {
         alert('game over!')
     }

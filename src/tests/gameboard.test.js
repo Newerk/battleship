@@ -34,11 +34,16 @@ test('Enemy Hits a ship', () => {
     const game = Gameboard();
     const testShip = game.ships.cruiser;
     game.placeShip(testShip, "D1", "Y");
-    game.receiveAttack("D3")
+    game.receiveAttack("D3");//hit
+    game.receiveAttack("F1")//miss
+
 
     expect(_.includes(game.hitAttacks, "D3")).toBeTruthy();
     expect(_.includes(game.missedAttacks, "D3")).toBeFalsy();
     expect(testShip.hits).toEqual(1);
+
+    //see every attack made against the enemyboard, miss or not
+    expect(game.allAttacksMade.length).toBe(2);
 
 })
 

@@ -201,20 +201,26 @@ export const DOM = () => {
                             return arr;
                         }
 
+
                         const clickToAttack = () => {
                             if (pixel.parentElement.classList.contains('active')) {
-                                const attack = game.player.attack(pixel.id);
 
                                 if (game.cpu.occupiedCoords.includes(pixel.id)) {
                                     pixel.classList.add('hit');
+                                    game.player.attack(game.cpu.gameBoard, pixel.id)
 
                                 } else {
                                     pixel.classList.add('miss');
+                                    game.player.attack(game.cpu.gameBoard, pixel.id)
 
                                 }
                                 gameplayLoop(game);
-                                console.log(game.player.board);
+
+                                console.log(`hits: ${game.cpu.hitsOnPersonalBoard}`)
+                                console.log(`misses: ${game.cpu.missesOnPersonalBoard}`)
+
                             }
+
                         }
 
                         const clickToAddShip = () => {
@@ -226,7 +232,7 @@ export const DOM = () => {
                                     document.querySelector('#subtitles-box').textContent = "Make your first attack";
                                     document.querySelector('#freq-coord').innerHTML = "";
                                     document.querySelector('.board.computer').classList.add('active');
-                                
+
                                 }
                                 if (previewShip === true && game.player.occupiedCoords.length < 17) {
                                     currentShipIndex++;

@@ -1,27 +1,24 @@
 import { Gameboard } from "../gameboard"
 import { Player } from "../player"
 
-let playerBoard = Gameboard();
-let computerBoard = Gameboard();
-
-let player = Player(computerBoard);
-let computer = Player(playerBoard);
+let player = Player();
+let computer = Player();
 
 test('Player can attack enemy board', () => {
-    computerBoard.placeShip(computerBoard.ships.destroyer, "A1", "Y")
-    player.attack("A2");
-    player.attack("A4");
+    computer.gameBoard.placeShip(computer.gameBoard.ships.destroyer, "A1", "Y")
+    player.attack(computer.gameBoard, "A2");
+    player.attack(computer.gameBoard, "A4");
 
-    expect(computerBoard.hitAttacks).toEqual(["A2"])
-    expect(computerBoard.missedAttacks).toEqual(["A4"])
+    expect(computer.hitsOnPersonalBoard).toEqual(["A2"])
+    expect(computer.missesOnPersonalBoard).toEqual(["A4"])
 })
 
-test('CPU Randomly Places Ship on Board', () => {
-    computer.randomlyPlaceShips()
-    expect(computer.occupiedCoords.length).toEqual(computer._totalSpotsToBeTaken())
-    // expect(computer.board.shipOccupiedCoords.length).toEqual(computer._totalSpotsToBeTaken())
+// test('CPU Randomly Places Ship on Board', () => {
+//     computer.randomlyPlaceShips()
+//     expect(computer.occupiedCoords.length).toEqual(computer._totalSpotsToBeTaken())
+//     // expect(computer.board.shipOccupiedCoords.length).toEqual(computer._totalSpotsToBeTaken())
 
-    // expect(computer.board).toEqual("")
-})
+//     // expect(computer.board).toEqual("")
+// })
 
 

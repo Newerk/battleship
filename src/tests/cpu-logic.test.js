@@ -2,11 +2,9 @@ import { cpuAttack } from "../cpu-logic";
 import { Gameboard } from "../gameboard";
 import { Player } from "../player";
 
-let cpuGameboard = Gameboard();
-let playersGameBoard = Gameboard();
 
-let player = Player(cpuGameboard);
-let cpu = Player(playersGameBoard);
+let player = Player();
+let cpu = Player();
 
 // test("CPU randomly Attacks Non-Same Locations Until All 100 Coords are hit", () => {
 //     for (let i = 0; i < 100; i++) {
@@ -22,9 +20,9 @@ let cpu = Player(playersGameBoard);
 // })
 
 test("Random Valid Attack From CPU", ()=> {
-    cpu.randomAttack();
+    cpu.randomAttack(player.gameBoard);
     
-    expect(playersGameBoard.allAttacksMade.length).toBe(1);
+    expect(player.allAttackedLocationsPersonalBoard.length).toBe(1);
 })
 
 

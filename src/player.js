@@ -1,6 +1,6 @@
 import { Gameboard } from "./gameboard"
 
-export const Player = (enemyBoard) => {
+export const Player = () => {
     let personalBoard = Gameboard();
 
     function _totalSpotsToBeTaken() {
@@ -20,12 +20,12 @@ export const Player = (enemyBoard) => {
     }
 
     return {
-        attack(coord) {
+        attack(enemyBoard, coord) {//not working 
             return enemyBoard.receiveAttack(coord);
         },
-        randomAttack() {
+        randomAttack(enemyBoard) {//not working
             console.log('random attack used')
-            return enemyBoard.receiveAttack(_randomCoordinate())
+            return enemyBoard.receiveAttack(_randomCoordinate());
         },
         randomlyPlaceShips(start = 0) {
             while (personalBoard.shipOccupiedCoords.length < _totalSpotsToBeTaken()) {
@@ -41,9 +41,12 @@ export const Player = (enemyBoard) => {
         board: personalBoard.board,
         _totalSpotsToBeTaken, //this is private. will be removed later. only exposed for testing purposes
         occupiedCoords: personalBoard.shipOccupiedCoords,
-        attacksOnEnemyBoard: enemyBoard.allAttacksMade,
-        hitsOnEnemyBoard: enemyBoard.hitAttacks,
-        missesOnEnemyBoard: enemyBoard.missedAttacks,
+        hitsOnPersonalBoard: personalBoard.hitAttacks,
+        missesOnPersonalBoard: personalBoard.missedAttacks,
+        allAttackedLocationsPersonalBoard: personalBoard.allAttacksMade,
+        // attacksOnEnemyBoard: enemyBoard.allAttacksMade,
+        // hitsOnEnemyBoard: enemyBoard.hitAttacks,
+        // missesOnEnemyBoard: enemyBoard.missedAttacks,
     }
 }
 
