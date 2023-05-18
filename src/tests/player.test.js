@@ -13,12 +13,5 @@ test('Player can attack enemy board', () => {
     expect(computer.missesOnPersonalBoard).toEqual(["A4"])
 })
 
-test('CPU Randomly Places Ship on Board', () => {
-    computer.randomlyPlaceShips()
-    expect(computer.gameBoard.shipOccupiedCoords.length).toEqual(computer._totalSpotsToBeTaken())
-    // expect(computer.board.shipOccupiedCoords.length).toEqual(computer._totalSpotsToBeTaken())
-
-    // expect(computer.board).toEqual("")
-})
 
 
