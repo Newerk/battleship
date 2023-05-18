@@ -215,10 +215,18 @@ export const DOM = () => {
 
                                 }
                                 gameplayLoop(game);
+                                // console.log(game.player.allAttackedLocationsPersonalBoard);
+                                document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
+                                    if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
+                                        el.classList.add('hit')
 
-                                console.log(`hits: ${game.cpu.hitsOnPersonalBoard}`)
-                                console.log(`misses: ${game.cpu.missesOnPersonalBoard}`)
+                                    }
+                                    if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
+                                        el.classList.add('miss')
 
+                                    }
+
+                                })
                             }
 
                         }
@@ -279,9 +287,9 @@ export const DOM = () => {
                         pixel.addEventListener('mouseover', previewShipWithHover)
 
                         //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
-                        if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
-                            pixel.classList.add('occupied');
-                        }
+                        // if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
+                        //     pixel.classList.add('occupied');
+                        // }
 
                         board.appendChild(pixel);
                     }
