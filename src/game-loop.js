@@ -8,6 +8,7 @@ export const setupGame = () => {
     let cpu = Player();
 
     cpu.randomlyPlaceShips();
+    console.log(cpu.occupiedCoords)
 
     return {
         player,

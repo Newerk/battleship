@@ -279,9 +279,9 @@ export const DOM = () => {
                         pixel.addEventListener('mouseover', previewShipWithHover)
 
                         //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
-                        // if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
-                        //     pixel.classList.add('occupied');
-                        // }
+                        if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
+                            pixel.classList.add('occupied');
+                        }
 
                         board.appendChild(pixel);
                     }
