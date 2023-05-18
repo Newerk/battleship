@@ -24,8 +24,12 @@ export const Player = () => {
             return enemy.gameBoard.receiveAttack(coord);
         },
         randomAttack(enemy) {
-            console.log('random attack used')
-            return enemy.gameBoard.receiveAttack(_randomCoordinate());
+            const randomCoord = _randomCoordinate();
+            if (_.includes(enemy.allAttackedLocationsPersonalBoard, randomCoord)) {
+                console.log('repeat coord. running random attack again')
+                return this.randomAttack(enemy);
+            }
+            return enemy.gameBoard.receiveAttack(randomCoord);
         },
         randomlyPlaceShips(start = 0) {
             while (personalBoard.shipOccupiedCoords.length < _totalSpotsToBeTaken()) {
