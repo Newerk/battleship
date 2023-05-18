@@ -1,4 +1,6 @@
+import _ from "lodash";
 import { Gameboard } from "./gameboard"
+
 
 export const Player = () => {
     let personalBoard = Gameboard();
@@ -43,7 +45,6 @@ export const Player = () => {
         },
         gameBoard: personalBoard,
         board: personalBoard.board,
-        _totalSpotsToBeTaken, //this is private. will be removed later. only exposed for testing purposes
         occupiedCoords: personalBoard.shipOccupiedCoords,
         hitsOnPersonalBoard: personalBoard.hitAttacks,
         missesOnPersonalBoard: personalBoard.missedAttacks,
