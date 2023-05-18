@@ -1,5 +1,4 @@
 import _ from "lodash";
-import { Gameboard } from "./gameboard";
 import { Player } from "./player";
 
 
@@ -16,10 +15,10 @@ export const setupGame = () => {
 }
 
 export const gameplayLoop = (currentGame) => {
-    if (currentGame.player.gameBoard.allShipsSunk() !== true || currentGame.cpu.gameBoard.allShipsSunk() !== true) {
+    if (currentGame.cpu.gameBoard.allShipsSunk() !== true || currentGame.player.gameBoard.allShipsSunk() !== true) {
         currentGame.cpu.randomAttack(currentGame.player);
     } else {
-        alert('game over!')
+        alert('game over!')//not appearting if the cpu loses first. Only shows after player loses to CPU
     }
 
 }
