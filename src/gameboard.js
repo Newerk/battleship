@@ -103,7 +103,7 @@ export const Gameboard = () => {
 
                     if (_.includes(shipType.occupying, coord)) {
                         shipType.hit();
-                        shipType.isSunk();
+                        // shipType.isSunk();
 
                     }
                 }
@@ -123,13 +123,20 @@ export const Gameboard = () => {
 
         },
         allShipsSunk() {
+            let sunkStatuses = [];
+
             for (const key in ships) {
                 const sunkenValue = ships[key].isSunk();
-                if (sunkenValue === false) {
-                    return false;
+                if (sunkenValue === true) {
+                    sunkStatuses.push(sunkenValue);
                 }
             }
-            return true;
+            if (sunkStatuses.length === Object.keys(ships).length) {
+                return true;
+
+            } else {
+                return false;
+            }
         },
         get missedAttacks() {
             return _misses;

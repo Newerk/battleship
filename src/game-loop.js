@@ -15,9 +15,11 @@ export const setupGame = () => {
 }
 
 export const gameplayLoop = (currentGame) => {
-    if (currentGame.cpu.gameBoard.allShipsSunk() !== true || currentGame.player.gameBoard.allShipsSunk() !== true) {
-        currentGame.cpu.randomAttack(currentGame.player);
-    } else {
+    // console.log(`All CPU hips are sunk: ${currentGame.cpu.gameBoard.allShipsSunk()}`)
+    // console.log(`All Player ships are sunk: ${currentGame.player.gameBoard.allShipsSunk()}`)
+    currentGame.cpu.randomAttack(currentGame.player);
+
+    if (currentGame.cpu.gameBoard.allShipsSunk() === true || currentGame.player.gameBoard.allShipsSunk() === true) {
         alert('game over!')//not appearting if the cpu loses first. Only shows after player loses to CPU
     }
 

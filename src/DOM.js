@@ -215,7 +215,6 @@ export const DOM = () => {
 
                                 }
                                 gameplayLoop(game);
-                                // console.log(game.player.allAttackedLocationsPersonalBoard);
                                 document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
                                     if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
                                         el.classList.add('hit')
@@ -225,7 +224,6 @@ export const DOM = () => {
                                         el.classList.add('miss')
 
                                     }
-
                                 })
                             }
 
