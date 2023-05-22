@@ -57,7 +57,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
     if (currentDirection === undefined) {
         //run a random attack to jumpstart the logic if the cpu logic is currently not being applied
-        cpu.randomAttack();
+        cpu.randomAttack(enemy);
 
 
         //check if attack was a hit or miss
@@ -124,7 +124,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
             default:
                 currentDirection = undefined;
-                cpu.randomAttack();
+                cpu.randomAttack(enemy);
                 break;
 
         }
