@@ -62,9 +62,11 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         //check if attack was a hit or miss
 
-        const latestMove = enemy.hitsOnPersonalBoard.at(-1);//update latest move
+        const latestMove = enemy.allAttackedLocationsPersonalBoard.at(-1);//update latest move
 
-        const nextPossibleMoves = _.filter(populateMoveset(latestMove), (el) => {
+        const moveset = populateMoveset(latestMove);
+
+        const nextPossibleMoves = _.filter(moveset, (el) => {
             return (!_.includes(enemy.hitsOnPersonalBoard, el) && enemy.board[el])
         })
 
@@ -99,26 +101,29 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
         //     return (!_.includes(enemy.hitsOnPersonalBoard, el) && enemy.board[el])
         // })
 
-        const latestMove = enemy.hitsOnPersonalBoard.at(-1);//update latest move
+        const latestMove = enemy.allAttackedLocationsPersonalBoard.at(-1);//update latest move
+
+        const moveset = populateMoveset(latestMove);
+
 
         switch (currentDirection) {
-            case 'up' && cpu.board[populateMoveset(latestMove)[0]]:
-                cpu.attack(populateMoveset(latestMove)[0]);
+            case 'up':
+                cpu.attack(enemy, moveset[0]);
 
                 break;
 
-            case 'down' && cpu.board[populateMoveset(latestMove)[1]]:
-                cpu.attack(populateMoveset(latestMove)[1]);
+            case 'down':
+                cpu.attack(enemy, moveset[1]);
 
                 break;
 
-            case 'left' && cpu.board[populateMoveset(latestMove)[2]]:
-                cpu.attack(populateMoveset(latestMove)[2]);
+            case 'left':
+                cpu.attack(enemy, moveset[2]);
 
                 break;
 
-            case 'right' && cpu.board[populateMoveset(latestMove)[3]]:
-                cpu.attack(populateMoveset(latestMove)[3]);
+            case 'right':
+                cpu.attack(enemy, moveset[3]);
 
                 break;
 
@@ -136,4 +141,5 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
     }
     // return nextPossibleMoves;
     // return chosenAttack;
+    console.log(currentDirection)
 }
