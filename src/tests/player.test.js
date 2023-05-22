@@ -1,4 +1,3 @@
-import { Gameboard } from "../gameboard"
 import { Player } from "../player"
 
 let player = Player();
@@ -11,6 +10,12 @@ test('Player can attack enemy board', () => {
 
     expect(computer.hitsOnPersonalBoard).toEqual(["A2"])
     expect(computer.missesOnPersonalBoard).toEqual(["A4"])
+})
+
+test("Random Valid Attack From CPU", ()=> {
+    computer.randomAttack(player);
+    
+    expect(player.allAttackedLocationsPersonalBoard.length).toBe(1);
 })
 
 

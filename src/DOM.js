@@ -10,7 +10,9 @@ export const DOM = () => {
     content.id = 'content';
     return {
         loadTitleScreen() {
-            content.classList.remove(...content.classList);
+            // content.classList.remove(...content.classList);
+            content.innerHTML = "";
+
             content.className = 'title-screen';
 
             const topText = document.createElement('div');

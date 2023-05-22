@@ -32,32 +32,108 @@ the cpu will check after each hit (not miss), if a ship isSunk(),
 after a ship was sunk, the cpu will now go back to attacking random locations until another ship is hit, and go through this entire process again
 */
 
+let currentDirection = undefined;
 
-export function cpuAttack(cpuPlayer, prev = undefined) {
-    let randomAttack = cpuPlayer.randomAttack()
-    let latestMove = cpuPlayer.attacksOnEnemyBoard.at(-1);
-    let columns = 'ABCDEFGHIJ'
+export function cpuAttack(cpu, enemy, direction = currentDirection) {
+    const enemyBoardHits = enemy.hitsOnPersonalBoard.length;
+    let columns = 'ABCDEFGHIJ';
+    // let prevMove = enemy.hitsOnPersonalBoard.at(-1);
 
-    if (randomAttack === false) {
-        // prev = latestMove;//last value in array, which would be the last location attacked, whether it was a hit or miss
-
-        return cpuAttack(cpuPlayer, latestMove)
+    const populateMoveset = (prev) => {
+        return [
+            `${prev[0]}${parseInt(prev.slice(1)) - 1}`,//up
+            `${prev[0]}${parseInt(prev.slice(1)) + 1}`,//down
+            `${columns[columns.indexOf(prev[0]) - 1]}${prev.slice(1)}`,//left
+            `${columns[columns.indexOf(prev[0]) + 1]}${prev.slice(1)}`//right
+        ]
     }
 
-    let moveset = [
-        `${latestMove[0]}${parseInt(latestMove.slice(1)) - 1}`,//up
-        `${latestMove[0]}${parseInt(latestMove.slice(1)) + 1}`,//down
-        `${columns[columns.indexOf(latestMove[0]) - 1]}${latestMove.slice(1)}`,//left
-        `${columns[columns.indexOf(latestMove[0]) + 1]}${latestMove.slice(1)}`//right
-    ]
+    // let moveset = [
+    //     `${prevMove[0]}${parseInt(prevMove.slice(1)) - 1}`,//up
+    //     `${prevMove[0]}${parseInt(prevMove.slice(1)) + 1}`,//down
+    //     `${columns[columns.indexOf(prevMove[0]) - 1]}${prevMove.slice(1)}`,//left
+    //     `${columns[columns.indexOf(prevMove[0]) + 1]}${prevMove.slice(1)}`//right
+    // ]
 
-    let nextPossibleMoves = _.filter(moveset, (el) => {
-        return (!_.includes(cpuPlayer.attacksOnEnemyBoard, el) && cpuPlayer.board[el])
-    })
+    if (currentDirection === undefined) {
+        //run a random attack to jumpstart the logic if the cpu logic is currently not being applied
+        cpu.randomAttack();
 
-    let chosenAttack = nextPossibleMoves[Math.floor(Math.random() * nextPossibleMoves.length)];
-    cpuPlayer.attack(chosenAttack);
 
+        //check if attack was a hit or miss
+
+        const latestMove = enemy.hitsOnPersonalBoard.at(-1);//update latest move
+
+        const nextPossibleMoves = _.filter(populateMoveset(latestMove), (el) => {
+            return (!_.includes(enemy.hitsOnPersonalBoard, el) && enemy.board[el])
+        })
+
+        const chosenAttack = nextPossibleMoves[Math.floor(Math.random() * nextPossibleMoves.length)];
+
+        if (enemy.hitsOnPersonalBoard.length !== enemyBoardHits) { //attack was hit
+            switch (chosenAttack) {
+                case moveset[0]:
+                    currentDirection = 'up';
+                    break;
+
+                case moveset[1]:
+                    currentDirection = 'down';
+                    break;
+
+                case moveset[2]:
+                    currentDirection = 'left';
+                    break;
+
+                case moveset[3]:
+                    currentDirection = 'right';
+                    break;
+            }
+
+        } else {//attack was a miss
+            currentDirection = undefined;
+        }
+
+    } else {
+        //get the next possible moves based on current location
+        // let nextPossibleMoves = _.filter(moveset, (el) => {
+        //     return (!_.includes(enemy.hitsOnPersonalBoard, el) && enemy.board[el])
+        // })
+
+        const latestMove = enemy.hitsOnPersonalBoard.at(-1);//update latest move
+
+        switch (currentDirection) {
+            case 'up' && cpu.board[populateMoveset(latestMove)[0]]:
+                cpu.attack(populateMoveset(latestMove)[0]);
+
+                break;
+
+            case 'down' && cpu.board[populateMoveset(latestMove)[1]]:
+                cpu.attack(populateMoveset(latestMove)[1]);
+
+                break;
+
+            case 'left' && cpu.board[populateMoveset(latestMove)[2]]:
+                cpu.attack(populateMoveset(latestMove)[2]);
+
+                break;
+
+            case 'right' && cpu.board[populateMoveset(latestMove)[3]]:
+                cpu.attack(populateMoveset(latestMove)[3]);
+
+                break;
+
+            default:
+                currentDirection = undefined;
+                cpu.randomAttack();
+                break;
+
+        }
+        //randomly choose a direction from the next possible moves
+        // let chosenAttack = nextPossibleMoves[Math.floor(Math.random() * nextPossibleMoves.length)];
+
+        // cpu.attack(chosenAttack);
+
+    }
     // return nextPossibleMoves;
-    return chosenAttack;
+    // return chosenAttack;
 }
