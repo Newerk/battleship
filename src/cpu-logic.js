@@ -105,26 +105,23 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         const moveset = populateMoveset(latestMove);
 
+        const enemyBoardMisses = enemy.missesOnPersonalBoard.length;
 
         switch (currentDirection) {
             case 'up':
                 cpu.attack(enemy, moveset[0]);
-
                 break;
 
             case 'down':
                 cpu.attack(enemy, moveset[1]);
-
                 break;
 
             case 'left':
                 cpu.attack(enemy, moveset[2]);
-
                 break;
 
             case 'right':
                 cpu.attack(enemy, moveset[3]);
-
                 break;
 
             default:
@@ -132,6 +129,10 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 cpu.randomAttack(enemy);
                 break;
 
+        }
+
+        if (enemy.missesOnPersonalBoard.length !== enemyBoardMisses) {//the next attack made was a miss. set current direction to undefined( want to later instead set current direction to opposite)
+            currentDirection = undefined
         }
         //randomly choose a direction from the next possible moves
         // let chosenAttack = nextPossibleMoves[Math.floor(Math.random() * nextPossibleMoves.length)];
