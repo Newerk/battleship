@@ -135,13 +135,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     cpu.randomAttack(enemy);
                 }
                 break;
-
-            // default:
-            //     currentDirection = undefined;
-            //     cpu.randomAttack(enemy);
-
-            //     break;
-
         }
 
         const oppositeDirection = (direction) => {
