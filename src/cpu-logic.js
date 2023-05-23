@@ -47,6 +47,26 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
             `${columns[columns.indexOf(prev[0]) + 1]}${prev.slice(1)}`//right
         ]
     }
+    const oppositeDirection = (direction) => {
+        switch (direction) {
+            case 'up':
+                currentDirection = 'down'
+                break;
+
+            case 'down':
+                currentDirection = 'up'
+                break;
+
+            case 'left':
+                currentDirection = 'right'
+                break;
+
+            case 'right':
+                currentDirection = 'left'
+                break;
+        }
+    }
+
 
     // let moveset = [
     //     `${prevMove[0]}${parseInt(prevMove.slice(1)) - 1}`,//up
@@ -55,6 +75,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
     //     `${columns[columns.indexOf(prevMove[0]) + 1]}${prevMove.slice(1)}`//right
     // ]
     const latestMove = () => enemy.allAttackedLocationsPersonalBoard.at(-1);//update latest move
+    const lastHit = () => enemy.hitsOnPersonalBoard.at(-1);
 
 
     if (currentDirection === undefined) {
@@ -101,7 +122,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         switch (currentDirection) {
             case 'up':
-                if (!_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[0])) {
+                if (_.includes(Object.keys(enemy.board), moveset[0]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[0])) {
                     cpu.attack(enemy, moveset[0]);
                 } else {
                     currentDirection = undefined;
@@ -110,7 +131,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 break;
 
             case 'down':
-                if (!_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[1])) {
+                if (_.includes(Object.keys(enemy.board), moveset[1]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[1])) {
                     cpu.attack(enemy, moveset[1]);
                 } else {
                     currentDirection = undefined;
@@ -119,7 +140,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 break;
 
             case 'left':
-                if (!_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[2])) {
+                if (_.includes(Object.keys(enemy.board), moveset[2]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[2])) {
                     cpu.attack(enemy, moveset[2]);
                 } else {
                     currentDirection = undefined;
@@ -128,7 +149,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 break;
 
             case 'right':
-                if (!_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[3])) {
+                if (_.includes(Object.keys(enemy.board), moveset[3]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[3])) {
                     cpu.attack(enemy, moveset[3]);
                 } else {
                     currentDirection = undefined;
@@ -137,25 +158,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 break;
         }
 
-        const oppositeDirection = (direction) => {
-            switch (direction) {
-                case 'up':
-                    currentDirection = 'down'
-                    break;
-
-                case 'down':
-                    currentDirection = 'up'
-                    break;
-
-                case 'left':
-                    currentDirection = 'right'
-                    break;
-
-                case 'right':
-                    currentDirection = 'left'
-                    break;
-            }
-        }
 
         /*IMPORTANT: Currently running into an issue where if you a going a certain direction, and the next move 
         is on a location already hit, the program just stops making new attacks. currentDirection should become undefined once it hits an already hit location */
