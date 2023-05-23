@@ -54,6 +54,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
     //     `${columns[columns.indexOf(prevMove[0]) - 1]}${prevMove.slice(1)}`,//left
     //     `${columns[columns.indexOf(prevMove[0]) + 1]}${prevMove.slice(1)}`//right
     // ]
+    const latestMove = () => enemy.allAttackedLocationsPersonalBoard.at(-1);//update latest move
+
 
     if (currentDirection === undefined) {
         //run a random attack to jumpstart the logic if the cpu logic is currently not being applied
@@ -61,10 +63,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
 
         //check if attack was a hit or miss
-
-        const latestMove = enemy.allAttackedLocationsPersonalBoard.at(-1);//update latest move
-
-        const moveset = populateMoveset(latestMove);
+        const moveset = populateMoveset(latestMove());
 
         const nextPossibleMoves = _.filter(moveset, (el) => {
             return (!_.includes(enemy.hitsOnPersonalBoard, el) && enemy.board[el])
@@ -96,51 +95,81 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
         }
 
     } else {
-        //get the next possible moves based on current location
-        // let nextPossibleMoves = _.filter(moveset, (el) => {
-        //     return (!_.includes(enemy.hitsOnPersonalBoard, el) && enemy.board[el])
-        // })
 
-        const latestMove = enemy.allAttackedLocationsPersonalBoard.at(-1);//update latest move
-
-        const moveset = populateMoveset(latestMove);
-
+        const moveset = populateMoveset(latestMove());
         const enemyBoardMisses = enemy.missesOnPersonalBoard.length;
 
         switch (currentDirection) {
             case 'up':
-                cpu.attack(enemy, moveset[0]);
+                if (!_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[0])) {
+                    cpu.attack(enemy, moveset[0]);
+                } else {
+                    currentDirection = undefined;
+                    cpu.randomAttack(enemy);
+                }
                 break;
 
             case 'down':
-                cpu.attack(enemy, moveset[1]);
+                if (!_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[1])) {
+                    cpu.attack(enemy, moveset[1]);
+                } else {
+                    currentDirection = undefined;
+                    cpu.randomAttack(enemy);
+                }
                 break;
 
             case 'left':
-                cpu.attack(enemy, moveset[2]);
+                if (!_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[2])) {
+                    cpu.attack(enemy, moveset[2]);
+                } else {
+                    currentDirection = undefined;
+                    cpu.randomAttack(enemy);
+                }
                 break;
 
             case 'right':
-                cpu.attack(enemy, moveset[3]);
+                if (!_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[3])) {
+                    cpu.attack(enemy, moveset[3]);
+                } else {
+                    currentDirection = undefined;
+                    cpu.randomAttack(enemy);
+                }
                 break;
 
-            default:
-                currentDirection = undefined;
-                cpu.randomAttack(enemy);
-                break;
+            // default:
+            //     currentDirection = undefined;
+            //     cpu.randomAttack(enemy);
+
+            //     break;
 
         }
 
+        const oppositeDirection = (direction) => {
+            switch (direction) {
+                case 'up':
+                    currentDirection = 'down'
+                    break;
+
+                case 'down':
+                    currentDirection = 'up'
+                    break;
+
+                case 'left':
+                    currentDirection = 'right'
+                    break;
+
+                case 'right':
+                    currentDirection = 'left'
+                    break;
+            }
+        }
+
+        /*IMPORTANT: Currently running into an issue where if you a going a certain direction, and the next move 
+        is on a location already hit, the program just stops making new attacks. currentDirection should become undefined once it hits an already hit location */
         if (enemy.missesOnPersonalBoard.length !== enemyBoardMisses) {//the next attack made was a miss. set current direction to undefined( want to later instead set current direction to opposite)
-            currentDirection = undefined
+            // oppositeDirection(currentDirection);
+            currentDirection = undefined;
         }
-        //randomly choose a direction from the next possible moves
-        // let chosenAttack = nextPossibleMoves[Math.floor(Math.random() * nextPossibleMoves.length)];
-
-        // cpu.attack(chosenAttack);
-
     }
-    // return nextPossibleMoves;
-    // return chosenAttack;
     console.log(currentDirection)
 }
