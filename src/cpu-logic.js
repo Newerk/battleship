@@ -47,33 +47,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
             `${columns[columns.indexOf(prev[0]) + 1]}${prev.slice(1)}`//right
         ]
     }
-    const oppositeDirection = (direction) => {
-        switch (direction) {
-            case 'up':
-                currentDirection = 'down'
-                break;
 
-            case 'down':
-                currentDirection = 'up'
-                break;
-
-            case 'left':
-                currentDirection = 'right'
-                break;
-
-            case 'right':
-                currentDirection = 'left'
-                break;
-        }
-    }
-
-
-    // let moveset = [
-    //     `${prevMove[0]}${parseInt(prevMove.slice(1)) - 1}`,//up
-    //     `${prevMove[0]}${parseInt(prevMove.slice(1)) + 1}`,//down
-    //     `${columns[columns.indexOf(prevMove[0]) - 1]}${prevMove.slice(1)}`,//left
-    //     `${columns[columns.indexOf(prevMove[0]) + 1]}${prevMove.slice(1)}`//right
-    // ]
     const latestMove = () => enemy.allAttackedLocationsPersonalBoard.at(-1);//update latest move
     const lastHit = () => enemy.hitsOnPersonalBoard.at(-1);
 
@@ -81,7 +55,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
     if (currentDirection === undefined) {
         //run a random attack to jumpstart the logic if the cpu logic is currently not being applied
         cpu.randomAttack(enemy);
-
 
         //check if attack was a hit or miss
         const moveset = populateMoveset(latestMove());
@@ -111,9 +84,11 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     break;
             }
 
-        } else {//attack was a miss
+        }
+        else {//attack was a miss
             currentDirection = undefined;
         }
+
 
     } else {
 
@@ -125,8 +100,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 if (_.includes(Object.keys(enemy.board), moveset[0]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[0])) {
                     cpu.attack(enemy, moveset[0]);
                 } else {
-                    currentDirection = undefined;
                     cpu.randomAttack(enemy);
+
                 }
                 break;
 
@@ -134,8 +109,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 if (_.includes(Object.keys(enemy.board), moveset[1]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[1])) {
                     cpu.attack(enemy, moveset[1]);
                 } else {
-                    currentDirection = undefined;
                     cpu.randomAttack(enemy);
+
                 }
                 break;
 
@@ -143,8 +118,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 if (_.includes(Object.keys(enemy.board), moveset[2]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[2])) {
                     cpu.attack(enemy, moveset[2]);
                 } else {
-                    currentDirection = undefined;
                     cpu.randomAttack(enemy);
+
                 }
                 break;
 
@@ -152,17 +127,37 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 if (_.includes(Object.keys(enemy.board), moveset[3]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[3])) {
                     cpu.attack(enemy, moveset[3]);
                 } else {
-                    currentDirection = undefined;
                     cpu.randomAttack(enemy);
+
                 }
                 break;
         }
 
+        if (enemy.missesOnPersonalBoard.length !== enemyBoardMisses) {
+            let backTracker = lastHit();
 
-        /*IMPORTANT: Currently running into an issue where if you a going a certain direction, and the next move 
-        is on a location already hit, the program just stops making new attacks. currentDirection should become undefined once it hits an already hit location */
-        if (enemy.missesOnPersonalBoard.length !== enemyBoardMisses) {//the next attack made was a miss. set current direction to undefined( want to later instead set current direction to opposite)
-            // oppositeDirection(currentDirection);
+            switch (backTracker) {
+                case populateMoveset(latestMove())[0]://is above missed attack
+                    console.log(`previous attack was ${backTracker}`)
+
+                    break;
+
+                case populateMoveset(latestMove())[1]://is below missed attack
+                    console.log(`previous attack was ${backTracker}`)
+
+                    break;
+
+                case populateMoveset(latestMove())[2]://is left of missed attack
+                    console.log(`previous attack was ${backTracker}`)
+
+                    break;
+
+                case populateMoveset(latestMove())[3]://is right of missed attack
+                    console.log(`previous attack was ${backTracker}`)
+
+                    break;
+            }
+
             currentDirection = undefined;
         }
     }
