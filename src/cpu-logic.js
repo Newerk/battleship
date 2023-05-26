@@ -1,7 +1,4 @@
 import _ from "lodash";
-import { Gameboard } from "./gameboard"
-import { Player } from "./player"
-
 
 /* 
 ---DETERMINES HOW THE CPU WILL DECIDE TO PLAY A TURN---
@@ -34,10 +31,10 @@ after a ship was sunk, the cpu will now go back to attacking random locations un
 
 let currentDirection = undefined;
 
+
 export function cpuAttack(cpu, enemy, direction = currentDirection) {
     const enemyBoardHits = enemy.hitsOnPersonalBoard.length;
     let columns = 'ABCDEFGHIJ';
-    // let prevMove = enemy.hitsOnPersonalBoard.at(-1);
 
     const populateMoveset = (prev) => {
         return [
@@ -50,7 +47,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
     const latestMove = () => enemy.allAttackedLocationsPersonalBoard.at(-1);//update latest move
     const lastHit = () => enemy.hitsOnPersonalBoard.at(-1);
-
 
     if (currentDirection === undefined) {
         //run a random attack to jumpstart the logic if the cpu logic is currently not being applied
@@ -92,55 +88,93 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
     } else {
 
-        const moveset = populateMoveset(latestMove());
+        const moveset = populateMoveset(lastHit());
         const enemyBoardMisses = enemy.missesOnPersonalBoard.length;
+
+        let backTracker = lastHit();
+
 
         switch (currentDirection) {
             case 'up':
-                if (_.includes(Object.keys(enemy.board), moveset[0]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[0])) {
-                    cpu.attack(enemy, moveset[0]);
-                    if (enemy.board[moveset[0]].occupiedBy === 'water') {
-                        console.log('attack was a miss. prev attack was a hit')
+                if (!_.includes(Object.keys(enemy.board), moveset[0]) || enemy.board[moveset[0]].occupiedBy === 'water') {
+                    console.log('attack was a miss. prev attack was a hit')
+                    currentDirection = 'down';
+                    console.log(`switching direction to ${currentDirection}`)
+
+                    while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
+                        let store = backTracker
+                        backTracker = populateMoveset(store)[1];
                     }
+
+                    cpu.attack(enemy, backTracker);
+
+                } else if (_.includes(Object.keys(enemy.board), moveset[0]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[0])) {
+                    cpu.attack(enemy, moveset[0]);
+
                 } else {
                     cpu.randomAttack(enemy);
-
                 }
                 break;
 
             case 'down':
-                if (_.includes(Object.keys(enemy.board), moveset[1]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[1])) {
-                    cpu.attack(enemy, moveset[1]);
-                    if (enemy.board[moveset[1]].occupiedBy === 'water') {
-                        console.log('attack was a miss. prev attack was a hit')
+                if (!_.includes(Object.keys(enemy.board), moveset[1]) || enemy.board[moveset[1]].occupiedBy === 'water') {
+                    console.log('attack was a miss. prev attack was a hit')
+                    currentDirection = 'up';
+                    console.log(`switching direction to ${currentDirection}`)
+
+                    while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
+                        let store = backTracker
+                        backTracker = populateMoveset(store)[0];
                     }
+
+                    cpu.attack(enemy, backTracker);
+
+                } else if (_.includes(Object.keys(enemy.board), moveset[1]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[1])) {
+                    cpu.attack(enemy, moveset[1]);
+
                 } else {
                     cpu.randomAttack(enemy);
-
                 }
                 break;
 
             case 'left':
-                if (_.includes(Object.keys(enemy.board), moveset[2]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[2])) {
-                    cpu.attack(enemy, moveset[2]);
-                    if (enemy.board[moveset[2]].occupiedBy === 'water') {
-                        console.log('attack was a miss. prev attack was a hit')
+                if (!_.includes(Object.keys(enemy.board), moveset[2]) || enemy.board[moveset[2]].occupiedBy === 'water') {
+                    console.log('attack was a miss. prev attack was a hit')
+                    currentDirection = 'right';
+                    console.log(`switching direction to ${currentDirection}`)
+                    while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
+                        let store = backTracker
+                        backTracker = populateMoveset(store)[3];
                     }
+
+                    cpu.attack(enemy, backTracker);
+
+                } else if (_.includes(Object.keys(enemy.board), moveset[2]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[2])) {
+                    cpu.attack(enemy, moveset[2]);
+
                 } else {
                     cpu.randomAttack(enemy);
-
                 }
                 break;
 
             case 'right':
-                if (_.includes(Object.keys(enemy.board), moveset[3]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[3])) {
-                    cpu.attack(enemy, moveset[3]);
-                    if (enemy.board[moveset[3]].occupiedBy === 'water') {
-                        console.log('attack was a miss. prev attack was a hit')
+                if (!_.includes(Object.keys(enemy.board), moveset[3]) || enemy.board[moveset[3]].occupiedBy === 'water') {
+                    console.log('attack was a miss. prev attack was a hit')
+                    currentDirection = 'left';
+                    console.log(`switching direction to ${currentDirection}`)
+
+                    while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
+                        let store = backTracker
+                        backTracker = populateMoveset(store)[2];
                     }
+
+                    cpu.attack(enemy, backTracker);
+
+                } else if (_.includes(Object.keys(enemy.board), moveset[3]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[3])) {
+                    cpu.attack(enemy, moveset[3]);
+
                 } else {
                     cpu.randomAttack(enemy);
-
                 }
                 break;
 
