@@ -100,135 +100,123 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
             let backTracker = lastHit();
 
+            const makeChoice = () => {
+                let coord;
+
+                switch (currentDirection) {
+                    case 'up':
+                        coord = moveset[0];
+                        break;
+
+                    case 'down':
+                        coord = moveset[1];
+                        break;
+
+                    case 'left':
+                        coord = moveset[2];
+                        break;
+
+                    case 'right':
+                        coord = moveset[3];
+                        break;
+                }
+
+
+                if (_.includes(Object.keys(enemy.board), coord) && !_.includes(enemy.allAttackedLocationsPersonalBoard, coord)) {
+                    cpu.attack(enemy, coord);
+
+                    if (enemy.board[coord].occupiedBy === 'water') {
+                        console.log('attack was a miss. prev attack was a hit')
+
+                        while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
+                            let store = backTracker
+                            console.log('loop')
+
+                            switch (currentDirection) {
+                                case 'up':
+                                    backTracker = populateMoveset(store)[1]
+                                    break;
+
+                                case 'down':
+                                    backTracker = populateMoveset(store)[0]
+                                    break;
+
+                                case 'left':
+                                    backTracker = populateMoveset(store)[3]
+                                    break;
+
+                                case 'right':
+                                    backTracker = populateMoveset(store)[2]
+                                    break;
+                            }
+
+                        }
+                        if (!enemy.board[backTracker] || !_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
+                            oppositeDirection();
+                            console.log(`switching direction to ${currentDirection}`)
+                            backTrackerIsActive = true;
+                            console.log(`backtracker is now ${backTrackerIsActive}`)
+                            attackBacktracker = backTracker;
+                        }
+                    }
+                }
+                else {
+                    backTrackerIsActive = false;
+                    currentDirection = undefined;
+
+                    cpu.randomAttack(enemy);
+                }
+            }
+
 
             switch (currentDirection) {
                 case 'up':
-                    if (_.includes(Object.keys(enemy.board), moveset[0]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[0])) {
-                        cpu.attack(enemy, moveset[0]);
+                    makeChoice();
 
-
-
-                        if (enemy.board[moveset[0]].occupiedBy === 'water') {
-                            console.log('attack was a miss. prev attack was a hit')
-
-                            while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
-                                let store = backTracker
-                                backTracker = populateMoveset(store)[1];
-                            }
-                            if (!enemy.board[backTracker] || !_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
-                                currentDirection = 'down';
-                                console.log(`switching direction to ${currentDirection}`)
-                                backTrackerIsActive = true;
-                                console.log(`backtracker is now ${backTrackerIsActive}`)
-                                attackBacktracker = backTracker;
-                            }
-
-                            // cpu.attack(enemy, backTracker);
-                        }
-                    }
-                    else {
-                        backTrackerIsActive = false;
-                        currentDirection = undefined;
-
-                        cpu.randomAttack(enemy);
-                    }
                     break;
 
                 case 'down':
-                    if (_.includes(Object.keys(enemy.board), moveset[1]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[1])) {
-                        cpu.attack(enemy, moveset[1]);
+                    makeChoice();
 
-
-
-                        if (enemy.board[moveset[1]].occupiedBy === 'water') {
-                            console.log('attack was a miss. prev attack was a hit')
-
-                            while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
-                                let store = backTracker
-                                backTracker = populateMoveset(store)[0];
-                            }
-                            if (!enemy.board[backTracker] || !_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
-                                currentDirection = 'up';
-                                console.log(`switching direction to ${currentDirection}`)
-                                backTrackerIsActive = true;
-                                console.log(`backtracker is now ${backTrackerIsActive}`)
-                                attackBacktracker = backTracker;
-                            }
-                        }
-                    }
-                    else {
-                        cpu.randomAttack(enemy);
-                    }
-                    backTrackerIsActive = false;
-                    currentDirection = undefined;
 
                     break;
 
                 case 'left':
-                    if (_.includes(Object.keys(enemy.board), moveset[2]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[2])) {
-                        cpu.attack(enemy, moveset[2]);
+                    makeChoice();
 
-
-
-                        if (enemy.board[moveset[2]].occupiedBy === 'water') {
-                            console.log('attack was a miss. prev attack was a hit')
-
-                            while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
-                                let store = backTracker
-                                backTracker = populateMoveset(store)[3];
-                            }
-                            if (!enemy.board[backTracker] || !_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
-                                currentDirection = 'right';
-                                console.log(`switching direction to ${currentDirection}`)
-                                backTrackerIsActive = true;
-                                console.log(`backtracker is now ${backTrackerIsActive}`)
-                                attackBacktracker = backTracker;
-                            }
-
-                        }
-                    }
-                    else {
-                        cpu.randomAttack(enemy);
-                        backTrackerIsActive = false;
-                        currentDirection = undefined;
-
-                    }
                     break;
 
                 case 'right':
-                    if (_.includes(Object.keys(enemy.board), moveset[3]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[3])) {
-                        cpu.attack(enemy, moveset[3]);
+                    makeChoice();
 
-
-
-                        if (enemy.board[moveset[3]].occupiedBy === 'water') {
-                            console.log('attack was a miss. prev attack was a hit')
-
-                            while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
-                                let store = backTracker
-                                backTracker = populateMoveset(store)[2];
-                            }
-                            if (!enemy.board[backTracker] || !_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
-                                currentDirection = 'left';
-                                console.log(`switching direction to ${currentDirection}`)
-                                backTrackerIsActive = true;
-                                console.log(`backtracker is now ${backTrackerIsActive}`)
-                                attackBacktracker = backTracker;
-                            }
-
-                        }
-                    }
-                    else {
-                        cpu.randomAttack(enemy);
-                        backTrackerIsActive = false;
-                        currentDirection = undefined;
-
-                    }
                     break;
-
             }
         }
 
     }
     console.log(currentDirection)
+}
+
+function oppositeDirection() {
+    switch (currentDirection) {
+        case 'up':
+            currentDirection = 'down';
+
+            break;
+
+        case 'down':
+            currentDirection = 'up';
+
+            break;
+
+        case 'left':
+            currentDirection = 'right';
+
+            break;
+
+        case 'right':
+            currentDirection = 'left';
+
+            break;
+    }
 }
