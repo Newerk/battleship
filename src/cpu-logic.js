@@ -90,9 +90,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
     } else {
 
         if (backTrackerIsActive === true) {
-            console.log('attacking UM!!!!!')
             cpu.attack(enemy, attackBacktracker);
-
             backTrackerIsActive = false;
 
         } else {
@@ -107,6 +105,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 case 'up':
                     if (_.includes(Object.keys(enemy.board), moveset[0]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[0])) {
                         cpu.attack(enemy, moveset[0]);
+
+
 
                         if (enemy.board[moveset[0]].occupiedBy === 'water') {
                             console.log('attack was a miss. prev attack was a hit')
@@ -127,6 +127,9 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                         }
                     }
                     else {
+                        backTrackerIsActive = false;
+                        currentDirection = undefined;
+
                         cpu.randomAttack(enemy);
                     }
                     break;
@@ -134,6 +137,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 case 'down':
                     if (_.includes(Object.keys(enemy.board), moveset[1]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[1])) {
                         cpu.attack(enemy, moveset[1]);
+
+
 
                         if (enemy.board[moveset[1]].occupiedBy === 'water') {
                             console.log('attack was a miss. prev attack was a hit')
@@ -154,11 +159,16 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     else {
                         cpu.randomAttack(enemy);
                     }
+                    backTrackerIsActive = false;
+                    currentDirection = undefined;
+
                     break;
 
                 case 'left':
                     if (_.includes(Object.keys(enemy.board), moveset[2]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[2])) {
                         cpu.attack(enemy, moveset[2]);
+
+
 
                         if (enemy.board[moveset[2]].occupiedBy === 'water') {
                             console.log('attack was a miss. prev attack was a hit')
@@ -179,12 +189,17 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     }
                     else {
                         cpu.randomAttack(enemy);
+                        backTrackerIsActive = false;
+                        currentDirection = undefined;
+
                     }
                     break;
 
                 case 'right':
                     if (_.includes(Object.keys(enemy.board), moveset[3]) && !_.includes(enemy.allAttackedLocationsPersonalBoard, moveset[3])) {
                         cpu.attack(enemy, moveset[3]);
+
+
 
                         if (enemy.board[moveset[3]].occupiedBy === 'water') {
                             console.log('attack was a miss. prev attack was a hit')
@@ -205,6 +220,9 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     }
                     else {
                         cpu.randomAttack(enemy);
+                        backTrackerIsActive = false;
+                        currentDirection = undefined;
+
                     }
                     break;
 
