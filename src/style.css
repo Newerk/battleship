@@ -421,7 +421,7 @@ h6 {
 
 }
 
-[class *= "preview"] {
+[class *="preview"] {
   background-color: #284038;
 }
 
@@ -566,6 +566,63 @@ h6 {
   padding: 2rem 2rem 2rem;
   cursor: pointer;
 
+}
+
+/*--------------------------------------------------------------------*/
+
+
+.game-over-screen {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+#return-title-btn {
+  font-family: 'Tactical';
+  height: auto;
+  width: auto;
+
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  justify-self: end;
+
+  cursor: pointer;
+}
+
+#game-over-message {
+  font-family: 'MGS';
+  color: #FFF;
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 10rem;
+  justify-self: center;
+
+}
+
+#options {
+  position: relative;
+  top: -3.3rem;
+
+  font-family: 'Tactical';
+  font-size: 2rem;
+  color: black;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 15rem;
+  z-index: 2;
+}
+
+#play-again {
+  grid-column: 1;
+  justify-self: end;
+  margin-right: 6rem;
+}
+
+#change-character {
+  grid-column: 2;
 }
 
 /*------------------------------CRT EFFECT-----------------------------*/

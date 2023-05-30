@@ -10,9 +10,7 @@ export const DOM = () => {
     content.id = 'content';
     return {
         loadTitleScreen() {
-            // content.classList.remove(...content.classList);
             content.innerHTML = "";
-
             content.className = 'title-screen';
 
             const topText = document.createElement('div');
@@ -25,7 +23,7 @@ export const DOM = () => {
             const title = document.createElement('h1');
             title.id = 'title';
             title.textContent = '$BATTLESHIP';
-            topText.append(subtitle, title)
+            topText.append(subtitle, title);
 
             const middleSpace = document.createElement('div');
             middleSpace.id = 'space';
@@ -36,7 +34,7 @@ export const DOM = () => {
             message.textContent = 'PRESS ENTER BUTTON';
 
             content.append(topText, middleSpace, message);
-            document.body.appendChild(content)
+            document.body.appendChild(content);
 
             const enterEvent = (e) => {
                 if (e.key === "Enter") {
@@ -51,7 +49,6 @@ export const DOM = () => {
             const game = setupGame();
 
             content.innerHTML = "";
-            // content.classList.remove(...content.classList);
             content.className = 'in-game-screen';
 
             const codecContainer = document.createElement('div');
@@ -59,9 +56,8 @@ export const DOM = () => {
 
             const playerPicture = document.createElement('div');
             playerPicture.id = 'player-pic';
-            playerPicture.setAttribute('style', `background-image: url(${localStorage.getItem('player_img')});`)
+            playerPicture.setAttribute('style', `background-image: url(${localStorage.getItem('player_img')})`)
 
-            // {
             const freqContainter = document.createElement('div');
             freqContainter.id = 'frequency-container';
 
@@ -83,12 +79,12 @@ export const DOM = () => {
             for (let i = 0; i < 9; i++) {
                 const freqBars = document.createElement('div');
                 freqBars.className = 'freq-bar';
-                freqBars.setAttribute('style', `height: 100%; width: 100%;`)
+                freqBars.setAttribute('style', `height: 100%; width: 100%;`);
 
                 if (i >= 3) {
                     freqBars.classList.add('active');
                 }
-                freqScreen.appendChild(freqBars)
+                freqScreen.appendChild(freqBars);
             }
 
             const freqCoordContainer = document.createElement('div');
@@ -96,16 +92,16 @@ export const DOM = () => {
             const freqCoord = document.createElement('p');
             freqCoord.id = 'freq-coord';
             freqCoordContainer.appendChild(freqCoord);
-            freqScreen.appendChild(freqCoordContainer)
+            freqScreen.appendChild(freqCoordContainer);
 
-            freqMiddleContainer.appendChild(freqScreen)
+            freqMiddleContainer.appendChild(freqScreen);
 
             const freqLeftContainer = document.createElement('div');
             freqLeftContainer.id = 'fq-left-container';
             const freqLeftArrow = document.createElement('p');
             freqLeftArrow.id = 'fq-left-arrow';
             freqLeftArrow.textContent = '◀︎';
-            freqLeftContainer.appendChild(freqLeftArrow)
+            freqLeftContainer.appendChild(freqLeftArrow);
 
             const freqRightContainer = document.createElement('div');
             freqRightContainer.id = 'fq-right-container';
@@ -125,11 +121,10 @@ export const DOM = () => {
             freqFooter.appendChild(freqFooterText);
 
             freqContainter.append(freqHeader, freqMiddle, freqFooter);
-            // }
 
             const enemyPicture = document.createElement('div');
             enemyPicture.id = 'enemy-pic';
-            enemyPicture.setAttribute('style', `background-image: url(${localStorage.getItem('cpu_img')});`)
+            enemyPicture.setAttribute('style', `background-image: url(${localStorage.getItem('cpu_img')})`)
 
             codecContainer.append(playerPicture, freqContainter, enemyPicture);
 
@@ -181,7 +176,7 @@ export const DOM = () => {
 
                 const board = document.createElement('div');
                 board.className = 'board';
-                board.classList.add(user)
+                board.classList.add(user);
                 boardContainer.classList.add(user);
 
 
@@ -189,7 +184,7 @@ export const DOM = () => {
 
 
                 for (let i = 0; i < 10; i++) {
-                    let num = y[i]
+                    let num = y[i];
                     for (let j = 0; j < 10; j++) {
                         let pixel = document.createElement('div');
                         pixel.className = 'pixel';
@@ -198,7 +193,7 @@ export const DOM = () => {
                         let getArrOfOccupiedIDs = () => {
                             let arr = [];
                             document.querySelectorAll('.occupied').forEach(el => {
-                                arr.push(el.id)
+                                arr.push(el.id);
                             })
                             return arr;
                         }
@@ -209,30 +204,29 @@ export const DOM = () => {
 
                                 if (game.cpu.occupiedCoords.includes(pixel.id)) {
                                     pixel.classList.add('hit');
-                                    game.player.attack(game.cpu, pixel.id)
+                                    game.player.attack(game.cpu, pixel.id);
 
                                 } else {
                                     pixel.classList.add('miss');
-                                    game.player.attack(game.cpu, pixel.id)
+                                    game.player.attack(game.cpu, pixel.id);
 
                                 }
-                                gameplayLoop(game);//code breaks once the game is over beacuse the rest of the code doesnt get to run
+                                gameplayLoop(game);
                                 document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
                                     if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
-                                        el.classList.add('hit')
+                                        el.classList.add('hit');
 
                                     }
+
                                     if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
-                                        el.classList.add('miss')
+                                        el.classList.add('miss');
 
                                     }
-
-                                    if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
-                                        // alert('game over!');
-                                        this.loadGameOverScreen();
-                                    }
-
                                 })
+                            }
+
+                            if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
+                                this.loadGameOverScreen();
                             }
 
                         }
@@ -248,6 +242,7 @@ export const DOM = () => {
                                     document.querySelector('.board.computer').classList.add('active');
 
                                 }
+
                                 if (previewShip === true && game.player.occupiedCoords.length < 17) {
                                     currentShipIndex++;
                                 }
@@ -257,7 +252,6 @@ export const DOM = () => {
                                         document.querySelector(`#${coord}`).classList.add('occupied');
                                     })
                                 }
-
                             }
 
                             document.removeEventListener('click', clickToAddShip)
@@ -283,14 +277,14 @@ export const DOM = () => {
                                     })
                                     document.removeEventListener('mouseout', removePreview);
                                 }
-                                pixel.addEventListener("mouseout", removePreview)
+                                pixel.addEventListener("mouseout", removePreview);
                             }
                             document.removeEventListener('mouseover', previewShipWithHover);
                         }
 
                         pixel.addEventListener('click', clickToAddShip);
-                        pixel.addEventListener('click', clickToAttack)
-                        pixel.addEventListener('mouseover', previewShipWithHover)
+                        pixel.addEventListener('click', clickToAttack);
+                        pixel.addEventListener('mouseover', previewShipWithHover);
 
                         board.appendChild(pixel);
                     }
@@ -303,13 +297,9 @@ export const DOM = () => {
 
             gameboardsContainer.append(renderGameBoard('player'), renderGameBoard('computer'))
 
-
-
             content.append(codecContainer, subtitlesBox, gameboardsContainer)
 
-
             document.body.appendChild(content);
-
         },
         loadCharacterSelectScreen() {
             content.innerHTML = "";
@@ -338,8 +328,7 @@ export const DOM = () => {
 
             const computerPicture = document.createElement('div');
             computerPicture.id = 'cs-computer-pic';
-            computerPicture.setAttribute('style', `background-image: url(${localStorage.getItem('cpu_img')});`)
-
+            computerPicture.setAttribute('style', `background-image: url(${localStorage.getItem('cpu_img')})`)
 
             const descriptonsContainer = document.createElement('div');
             descriptonsContainer.className = 'description-container';
@@ -392,10 +381,9 @@ export const DOM = () => {
             addRowsAndImages(playerCharGrid);
             addRowsAndImages(cpuCharGrid);
 
-            content.append(playerPicture, computerPicture, descriptonsContainer, playerCharGrid, cpuCharGrid, startGame)
+            content.append(playerPicture, computerPicture, descriptonsContainer, playerCharGrid, cpuCharGrid, startGame);
 
-            document.body.appendChild(content)
-
+            document.body.appendChild(content);
 
             document.addEventListener('keypress', enterEvent);
         },
@@ -403,6 +391,30 @@ export const DOM = () => {
             content.innerHTML = "";
             content.className = 'game-over-screen';
 
+            const returnToMenu = document.createElement('button');
+            returnToMenu.id = 'return-title-btn';
+            returnToMenu.textContent = 'Return to title screen';
+
+            const gameOverMsg = document.createElement('div');
+            gameOverMsg.id = 'game-over-message';
+            gameOverMsg.textContent = '$GAME OVER';
+
+            const options = document.createElement('div');
+            options.id = 'options';
+
+            const playAgain = document.createElement('div');
+            playAgain.id = 'play-again';
+            playAgain.textContent = 'Play Again';
+
+            const changeCharacter = document.createElement('div');
+            changeCharacter.id = 'change-character';
+            changeCharacter.textContent = 'Change Character';
+
+            gameOverMsg.appendChild(options)
+
+            options.append(playAgain, changeCharacter);
+
+            content.append(returnToMenu, gameOverMsg);
 
             document.body.appendChild(content);
         },
