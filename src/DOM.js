@@ -216,7 +216,7 @@ export const DOM = () => {
                                     game.player.attack(game.cpu, pixel.id)
 
                                 }
-                                gameplayLoop(game);
+                                gameplayLoop(game);//code breaks once the game is over beacuse the rest of the code doesnt get to run
                                 document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
                                     if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
                                         el.classList.add('hit')
@@ -226,6 +226,12 @@ export const DOM = () => {
                                         el.classList.add('miss')
 
                                     }
+
+                                    if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
+                                        // alert('game over!');
+                                        this.loadGameOverScreen();
+                                    }
+
                                 })
                             }
 
@@ -285,11 +291,6 @@ export const DOM = () => {
                         pixel.addEventListener('click', clickToAddShip);
                         pixel.addEventListener('click', clickToAttack)
                         pixel.addEventListener('mouseover', previewShipWithHover)
-
-                        //temp. just hows how ships are randomly placed on the board. this helps with visualizing whats going on
-                        // if (game.cpu.occupiedCoords.includes(pixel.id) && board.classList.contains('computer')) {
-                        //     pixel.classList.add('occupied');
-                        // }
 
                         board.appendChild(pixel);
                     }
@@ -397,6 +398,13 @@ export const DOM = () => {
 
 
             document.addEventListener('keypress', enterEvent);
+        },
+        loadGameOverScreen() {
+            content.innerHTML = "";
+            content.className = 'game-over-screen';
+
+
+            document.body.appendChild(content);
         },
     }
 }

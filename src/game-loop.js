@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { Player } from "./player";
 import { cpuAttack } from "./cpu-logic";
+import { DOM } from "./DOM";
 
 
 export const setupGame = () => {
@@ -9,7 +10,6 @@ export const setupGame = () => {
 
     cpu.randomlyPlaceShips();
     
-
     return {
         player,
         cpu
@@ -17,11 +17,5 @@ export const setupGame = () => {
 }
 
 export const gameplayLoop = (currentGame) => {
-    // currentGame.cpu.randomAttack(currentGame.player);
-
     cpuAttack(currentGame.cpu, currentGame.player)
-
-    if (currentGame.cpu.gameBoard.allShipsSunk() === true || currentGame.player.gameBoard.allShipsSunk() === true) {
-        alert('game over!');
-    }
 } 

@@ -172,23 +172,18 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
             switch (currentDirection) {
                 case 'up':
                     makeChoice();
-
                     break;
 
                 case 'down':
                     makeChoice();
-
-
                     break;
 
                 case 'left':
                     makeChoice();
-
                     break;
 
                 case 'right':
                     makeChoice();
-
                     break;
             }
         }

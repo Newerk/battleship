@@ -11,3 +11,5 @@ document.body.appendChild(crt);
 // DOM().loadTitleScreen();
 // DOM().loadCharacterSelectScreen();
 DOM().loadInGameScreen();
+// DOM().loadGameOverScreen();
+
