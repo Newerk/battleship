@@ -597,7 +597,6 @@ h6 {
   grid-row: 2;
   font-size: 10rem;
   justify-self: center;
-
 }
 
 #options {
@@ -624,6 +623,14 @@ h6 {
 #change-character {
   grid-column: 2;
 }
+
+#play-again:hover,
+#change-character:hover {
+  color: #88F0C0;
+  cursor: pointer;
+
+}
+
 
 /*------------------------------CRT EFFECT-----------------------------*/
 

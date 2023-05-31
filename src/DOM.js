@@ -391,9 +391,9 @@ export const DOM = () => {
             content.innerHTML = "";
             content.className = 'game-over-screen';
 
-            const returnToMenu = document.createElement('button');
-            returnToMenu.id = 'return-title-btn';
-            returnToMenu.textContent = 'Return to title screen';
+            const returnToTitle = document.createElement('button');
+            returnToTitle.id = 'return-title-btn';
+            returnToTitle.textContent = 'Return to title screen';
 
             const gameOverMsg = document.createElement('div');
             gameOverMsg.id = 'game-over-message';
@@ -410,11 +410,32 @@ export const DOM = () => {
             changeCharacter.id = 'change-character';
             changeCharacter.textContent = 'Change Character';
 
+            const goToTitleScreen = () => {
+                this.loadTitleScreen();
+                document.removeEventListener('click', goToTitleScreen)
+
+            }
+            const goToCharSelect = () => {
+                this.loadCharacterSelectScreen();
+                document.removeEventListener('click', goToCharSelect)
+
+            }
+
+            const startNewGame = () => {
+                this.loadInGameScreen();
+                document.removeEventListener('click', startNewGame)
+            }
+
+            returnToTitle.addEventListener('click', goToTitleScreen);
+            playAgain.addEventListener('click', startNewGame);
+            changeCharacter.addEventListener('click', goToCharSelect);
+
+
             gameOverMsg.appendChild(options)
 
             options.append(playAgain, changeCharacter);
 
-            content.append(returnToMenu, gameOverMsg);
+            content.append(returnToTitle, gameOverMsg);
 
             document.body.appendChild(content);
         },
