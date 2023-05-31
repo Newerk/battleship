@@ -200,15 +200,28 @@ export const DOM = () => {
 
 
                         const clickToAttack = () => {
+                            let string = ""; /* type your text here */
+
                             if (pixel.parentElement.classList.contains('active')) {
 
                                 if (game.cpu.occupiedCoords.includes(pixel.id)) {
                                     pixel.classList.add('hit');
                                     game.player.attack(game.cpu, pixel.id);
+                                    // document.querySelector('#subtitles-box').textContent = `${pixel.id} was a hit`;
+                                    document.querySelector('#subtitles-box').textContent = '';
+                                    document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
+
+                                    string = `${pixel.id} was a hit`; /* type your text here */
 
                                 } else {
                                     pixel.classList.add('miss');
                                     game.player.attack(game.cpu, pixel.id);
+                                    // document.querySelector('#subtitles-box').textContent = `${pixel.id} was a miss`;
+                                    document.querySelector('#subtitles-box').textContent = '';
+
+                                    document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
+
+                                    string = `${pixel.id} was a miss`; /* type your text here */
 
                                 }
                                 gameplayLoop(game);
@@ -224,6 +237,19 @@ export const DOM = () => {
                                     }
                                 })
                             }
+
+                            let array = string.split("");
+                            function frameLooper() {
+                                if (array.length > 0) {
+                                    document.querySelector('#subtitles-box').textContent += array.shift();
+                                } else {
+                                    clearTimeout(70);
+                                }
+                                setTimeout(() => frameLooper(), 50);
+
+                            }
+                            frameLooper();
+
 
                             if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
                                 this.loadGameOverScreen();
