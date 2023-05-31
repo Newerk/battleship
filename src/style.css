@@ -588,15 +588,19 @@ h6 {
   justify-self: end;
 
   cursor: pointer;
+  color: #FFF;
+  background-color: transparent;
+  border: none;
 }
 
 #game-over-message {
   font-family: 'MGS';
-  color: #FFF;
+  color: #284038;
   grid-column: 1;
   grid-row: 2;
   font-size: 10rem;
   justify-self: center;
+  cursor: default;
 }
 
 #options {
@@ -618,16 +622,22 @@ h6 {
   grid-column: 1;
   justify-self: end;
   margin-right: 6rem;
+  transition: .2s ease-out;
+
 }
 
 #change-character {
   grid-column: 2;
+  transition: .2s ease-out;
+
 }
 
 #play-again:hover,
 #change-character:hover {
   color: #88F0C0;
+  text-shadow: 0 0 10px #88F0C0;
   cursor: pointer;
+  transition: .1s ease-in;
 
 }
 
