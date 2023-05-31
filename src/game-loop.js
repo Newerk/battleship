@@ -9,7 +9,7 @@ export const setupGame = () => {
     let cpu = Player();
 
     cpu.randomlyPlaceShips();
-    
+
     return {
         player,
         cpu
@@ -17,5 +17,5 @@ export const setupGame = () => {
 }
 
 export const gameplayLoop = (currentGame) => {
-    cpuAttack(currentGame.cpu, currentGame.player)
+    cpuAttack(currentGame.cpu, currentGame.player);
 } 

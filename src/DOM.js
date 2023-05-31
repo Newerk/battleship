@@ -211,7 +211,7 @@ export const DOM = () => {
                                     document.querySelector('#subtitles-box').textContent = '';
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
-                                    string = `${pixel.id} was a hit`; /* type your text here */
+                                    string = `${pixel.id} was a hit`;
 
                                 } else {
                                     pixel.classList.add('miss');
@@ -221,34 +221,40 @@ export const DOM = () => {
 
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
-                                    string = `${pixel.id} was a miss`; /* type your text here */
+                                    string = `${pixel.id} was a miss`;
 
                                 }
-                                gameplayLoop(game);
-                                document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
-                                    if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
-                                        el.classList.add('hit');
 
+                                let array = string.split("");
+                                function frameLooper() {
+                                    if (array.length > 0) {
+                                        document.querySelector('#subtitles-box').textContent += array.shift();
+                                    } else {
+                                        clearTimeout(70);
                                     }
+                                    setTimeout(() => frameLooper(), 50);
 
-                                    if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
-                                        el.classList.add('miss');
-
-                                    }
-                                })
-                            }
-
-                            let array = string.split("");
-                            function frameLooper() {
-                                if (array.length > 0) {
-                                    document.querySelector('#subtitles-box').textContent += array.shift();
-                                } else {
-                                    clearTimeout(70);
                                 }
-                                setTimeout(() => frameLooper(), 50);
+                                frameLooper();
 
+                                setTimeout(() => {
+                                    gameplayLoop(game);
+                                    document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
+                                        if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
+                                            el.classList.add('hit');
+
+                                        }
+
+                                        if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
+                                            el.classList.add('miss');
+
+                                        }
+                                    })
+
+                                }, 1500);
                             }
-                            frameLooper();
+
+
 
 
                             if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
