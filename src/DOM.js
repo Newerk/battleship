@@ -227,38 +227,35 @@ export const DOM = () => {
                                 }
 
                                 let array = string.split("");
-                                function frameLooper() {
+                                function typeWriter() {
                                     if (array.length > 0) {
                                         document.querySelector('#subtitles-box').textContent += array.shift();
                                     } else {
                                         clearTimeout(70);
                                     }
-                                    setTimeout(() => frameLooper(), 50);
+                                    setTimeout(() => typeWriter(), 50);
 
                                 }
-                                frameLooper();
+                                typeWriter();
                                 document.querySelector('#fq-left-arrow').classList.remove('glow');
                                 document.querySelector('#fq-right-arrow').classList.add('glow');
-
 
                                 setTimeout(() => {
                                     gameplayLoop(game);
                                     document.querySelector('#fq-left-arrow').classList.add('glow');
                                     document.querySelector('#fq-right-arrow').classList.remove('glow');
 
-
                                     document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
                                         if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
                                             el.classList.add('hit');
-
                                         }
 
                                         if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
                                             el.classList.add('miss');
 
                                         }
-                                    })
 
+                                    })
                                 }, 1300);
                             }
 

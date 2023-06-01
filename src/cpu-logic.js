@@ -63,6 +63,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         //check if attack was a hit or miss
         if (enemy.hitsOnPersonalBoard.length !== enemyBoardHits) { //attack was hit
+            document.querySelector('#subtitles-box').textContent =  `CPU was a hit`
+
             switch (chosenAttack) {
                 case moveset[0]:
                     currentDirection = 'up';
@@ -84,10 +86,13 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
         } else {//attack was a miss
             console.log('attack was a miss')
             currentDirection = undefined;
+            document.querySelector('#subtitles-box').textContent =  `CPU was a miss`
+
         }
 
 
     } else {
+        document.querySelector('#subtitles-box').textContent =  `CPU was a hit`
 
         if (backTrackerIsActive === true) {
             cpu.attack(enemy, attackBacktracker);
@@ -126,6 +131,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     cpu.attack(enemy, coord);
 
                     if (enemy.board[coord].occupiedBy === 'water') {
+                        document.querySelector('#subtitles-box').textContent =  `CPU was a miss`
+
                         console.log('attack was a miss. prev attack was a hit')
 
                         while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
