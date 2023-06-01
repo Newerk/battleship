@@ -101,6 +101,7 @@ export const DOM = () => {
             const freqLeftArrow = document.createElement('p');
             freqLeftArrow.id = 'fq-left-arrow';
             freqLeftArrow.textContent = '◀︎';
+            freqLeftArrow.className = 'glow';
             freqLeftContainer.appendChild(freqLeftArrow);
 
             const freqRightContainer = document.createElement('div');
@@ -200,7 +201,7 @@ export const DOM = () => {
 
 
                         const clickToAttack = () => {
-                            let string = ""; /* type your text here */
+                            let string = "";
 
                             if (pixel.parentElement.classList.contains('active')) {
 
@@ -236,9 +237,16 @@ export const DOM = () => {
 
                                 }
                                 frameLooper();
+                                document.querySelector('#fq-left-arrow').classList.remove('glow');
+                                document.querySelector('#fq-right-arrow').classList.add('glow');
+
 
                                 setTimeout(() => {
                                     gameplayLoop(game);
+                                    document.querySelector('#fq-left-arrow').classList.add('glow');
+                                    document.querySelector('#fq-right-arrow').classList.remove('glow');
+
+
                                     document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
                                         if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
                                             el.classList.add('hit');
@@ -251,7 +259,7 @@ export const DOM = () => {
                                         }
                                     })
 
-                                }, 1500);
+                                }, 1300);
                             }
 
 

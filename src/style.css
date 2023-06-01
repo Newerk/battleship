@@ -333,11 +333,10 @@ h6 {
   background-color: #101818;
 }
 
-#fq-left-arrow {
-  /*temp, this will be controlled by JS*/
-  color: #88F0C0;
-  text-shadow: 0 0 10px #88F0C0;
 
+.glow {
+  color: #88F0C0 !important;
+  text-shadow: 0 0 10px #88F0C0;
 
 }
 
