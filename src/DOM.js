@@ -231,9 +231,9 @@ export const DOM = () => {
                                     if (array.length > 0) {
                                         document.querySelector('#subtitles-box').textContent += array.shift();
                                     } else {
-                                        clearTimeout(70);
+                                        clearTimeout(0);
                                     }
-                                    setTimeout(() => typeWriter(), 50);
+                                    setTimeout(typeWriter, 50);
 
                                 }
                                 typeWriter();

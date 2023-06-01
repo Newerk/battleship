@@ -37,6 +37,19 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
     const enemyBoardHits = enemy.hitsOnPersonalBoard.length;
     let columns = 'ABCDEFGHIJ';
 
+    let string = "";
+    let array = string.split("");
+    function typeWriter() {
+        if (array.length > 0) {
+            document.querySelector('#subtitles-box').textContent += array.shift();
+        } else {
+            clearTimeout(0);
+        }
+        setTimeout(typeWriter, 50);
+
+    }
+
+
     const populateMoveset = (prev) => {
         return [
             `${prev[0]}${parseInt(prev.slice(1)) - 1}`,//up
@@ -63,7 +76,10 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         //check if attack was a hit or miss
         if (enemy.hitsOnPersonalBoard.length !== enemyBoardHits) { //attack was hit
-            document.querySelector('#subtitles-box').textContent =  `CPU was a hit`
+            document.querySelector('#subtitles-box').textContent = '';
+            string = `CPU was a hit`;
+            array = string.split("");
+            typeWriter();
 
             switch (chosenAttack) {
                 case moveset[0]:
@@ -86,13 +102,19 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
         } else {//attack was a miss
             console.log('attack was a miss')
             currentDirection = undefined;
-            document.querySelector('#subtitles-box').textContent =  `CPU was a miss`
+            document.querySelector('#subtitles-box').textContent = '';
+            string = `CPU was a miss`;
+            array = string.split("");
+            typeWriter();
 
         }
 
 
     } else {
-        document.querySelector('#subtitles-box').textContent =  `CPU was a hit`
+        document.querySelector('#subtitles-box').textContent = '';
+        string = `CPU was a hit`;
+        array = string.split("");
+        typeWriter();
 
         if (backTrackerIsActive === true) {
             cpu.attack(enemy, attackBacktracker);
@@ -131,7 +153,10 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     cpu.attack(enemy, coord);
 
                     if (enemy.board[coord].occupiedBy === 'water') {
-                        document.querySelector('#subtitles-box').textContent =  `CPU was a miss`
+                        document.querySelector('#subtitles-box').textContent = '';
+                        string = `CPU was a miss`;
+                        array = string.split("");
+                        typeWriter();
 
                         console.log('attack was a miss. prev attack was a hit')
 
@@ -172,7 +197,10 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     currentDirection = undefined;
 
                     cpu.randomAttack(enemy);
-                    document.querySelector('#subtitles-box').textContent =  `CPU was a miss`
+                    document.querySelector('#subtitles-box').textContent = '';
+                    string = `CPU was a miss`;
+                    array = string.split("");
+                    typeWriter();
 
                 }
             }
