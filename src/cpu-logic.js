@@ -172,6 +172,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     currentDirection = undefined;
 
                     cpu.randomAttack(enemy);
+                    document.querySelector('#subtitles-box').textContent =  `CPU was a miss`
+
                 }
             }
 
