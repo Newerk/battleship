@@ -260,9 +260,7 @@ export const DOM = () => {
                             }
 
 
-
-
-                            if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
+                            if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {                                
                                 this.loadGameOverScreen();
                             }
 
