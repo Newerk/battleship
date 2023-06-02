@@ -37,19 +37,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
     const enemyBoardHits = enemy.hitsOnPersonalBoard.length;
     let columns = 'ABCDEFGHIJ';
 
-    let string = "";
-    let array = string.split("");
-    function typeWriter() {
-        if (array.length > 0) {
-            document.querySelector('#subtitles-box').textContent += array.shift();
-        } else {
-            clearTimeout(0);
-        }
-        setTimeout(typeWriter, 50);
-
-    }
-
-
     const populateMoveset = (prev) => {
         return [
             `${prev[0]}${parseInt(prev.slice(1)) - 1}`,//up
@@ -76,10 +63,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         //check if attack was a hit or miss
         if (enemy.hitsOnPersonalBoard.length !== enemyBoardHits) { //attack was hit
-            document.querySelector('#subtitles-box').textContent = '';
-            string = `CPU was a hit`;
-            array = string.split("");
-            typeWriter();
+            document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
 
             switch (chosenAttack) {
                 case moveset[0]:
@@ -102,23 +86,26 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
         } else {//attack was a miss
             console.log('attack was a miss')
             currentDirection = undefined;
-            document.querySelector('#subtitles-box').textContent = '';
-            string = `CPU was a miss`;
-            array = string.split("");
-            typeWriter();
-
+            document.querySelector('#subtitles-box').textContent = `${latestMove()} was a miss. `;
         }
 
 
     } else {
-        document.querySelector('#subtitles-box').textContent = '';
-        string = `CPU was a hit`;
-        array = string.split("");
-        typeWriter();
+        const enemyBoardHits = enemy.hitsOnPersonalBoard.length;
+
 
         if (backTrackerIsActive === true) {
             cpu.attack(enemy, attackBacktracker);
             backTrackerIsActive = false;
+
+            if (enemy.board[attackBacktracker].occupiedBy !== 'water' && currentDirection !== undefined) {
+                document.querySelector('#subtitles-box').textContent = `${attackBacktracker} was a hit.  `;
+
+            } else {
+                document.querySelector('#subtitles-box').textContent = `${attackBacktracker} was a miss.  `;
+
+            }
+
 
         } else {
 
@@ -151,18 +138,17 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
                 if (_.includes(Object.keys(enemy.board), coord) && !_.includes(enemy.allAttackedLocationsPersonalBoard, coord)) {
                     cpu.attack(enemy, coord);
+                    document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
+
 
                     if (enemy.board[coord].occupiedBy === 'water') {
-                        document.querySelector('#subtitles-box').textContent = '';
-                        string = `CPU was a miss`;
-                        array = string.split("");
-                        typeWriter();
+                        document.querySelector('#subtitles-box').textContent = `${coord} was a miss. `;
+
 
                         console.log('attack was a miss. prev attack was a hit')
 
                         while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
                             let store = backTracker
-                            console.log('loop')
 
                             switch (currentDirection) {
                                 case 'up':
@@ -189,19 +175,27 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                             backTrackerIsActive = true;
                             console.log(`backtracker is now ${backTrackerIsActive}`)
                             attackBacktracker = backTracker;
+
                         }
                     }
+
+
                 }
                 else {
                     backTrackerIsActive = false;
                     currentDirection = undefined;
 
                     cpu.randomAttack(enemy);
-                    document.querySelector('#subtitles-box').textContent = '';
-                    string = `CPU was a miss`;
-                    array = string.split("");
-                    typeWriter();
 
+                    if (enemy.board[latestMove()].occupiedBy !== 'water') {
+                        document.querySelector('#subtitles-box').textContent = `${latestMove()} was a hit.  `;
+        
+                    } else {
+                        document.querySelector('#subtitles-box').textContent = `${latestMove()} was a miss.  `;
+        
+                    }
+        
+        
                 }
             }
 
@@ -223,8 +217,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     makeChoice();
                     break;
             }
-        }
 
+        }
     }
     console.log(currentDirection)
 }

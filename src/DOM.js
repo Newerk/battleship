@@ -3,7 +3,6 @@ import { gameplayLoop, setupGame } from "./game-loop";
 import { Gameboard } from "./gameboard";
 import "./style.css";
 
-
 export const DOM = () => {
     let content = document.createElement('div');
     content.setAttribute('style', 'height: 100vh; width: 100vw')
@@ -201,68 +200,74 @@ export const DOM = () => {
 
 
                         const clickToAttack = () => {
-                            let string = "";
 
                             if (pixel.parentElement.classList.contains('active')) {
 
                                 if (game.cpu.occupiedCoords.includes(pixel.id)) {
                                     pixel.classList.add('hit');
                                     game.player.attack(game.cpu, pixel.id);
-                                    // document.querySelector('#subtitles-box').textContent = `${pixel.id} was a hit`;
-                                    document.querySelector('#subtitles-box').textContent = '';
+                                    document.querySelector('#subtitles-box').textContent = `${pixel.id} was a hit. `;
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
-                                    string = `${pixel.id} was a hit`;
+                                    let getShip = game.cpu.gameBoard.board[pixel.id].occupiedBy;
+                                    if (game.cpu.gameBoard.ships[getShip].isSunk() === true) {
+                                        document.querySelector('#subtitles-box').textContent += `You destroyed ${getShip} 💥💥💥`;                                        
+                                    }
 
                                 } else {
                                     pixel.classList.add('miss');
                                     game.player.attack(game.cpu, pixel.id);
-                                    // document.querySelector('#subtitles-box').textContent = `${pixel.id} was a miss`;
-                                    document.querySelector('#subtitles-box').textContent = '';
-
+                                    document.querySelector('#subtitles-box').textContent = `${pixel.id} was a miss. `;
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
-                                    string = `${pixel.id} was a miss`;
-
                                 }
 
-                                let array = string.split("");
-                                function typeWriter() {
-                                    if (array.length > 0) {
-                                        document.querySelector('#subtitles-box').textContent += array.shift();
-                                    } else {
-                                        clearTimeout(0);
-                                    }
-                                    setTimeout(typeWriter, 50);
 
-                                }
-                                typeWriter();
                                 document.querySelector('#fq-left-arrow').classList.remove('glow');
                                 document.querySelector('#fq-right-arrow').classList.add('glow');
 
-                                setTimeout(() => {
-                                    gameplayLoop(game);
-                                    document.querySelector('#fq-left-arrow').classList.add('glow');
-                                    document.querySelector('#fq-right-arrow').classList.remove('glow');
+                                // setTimeout(() => {
+                                gameplayLoop(game);
+                                document.querySelector('#fq-left-arrow').classList.add('glow');
+                                document.querySelector('#fq-right-arrow').classList.remove('glow');
 
-                                    document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
-                                        if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
-                                            el.classList.add('hit');
-                                        }
+                                document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
+                                    if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
+                                        el.classList.add('hit');    
+    
+                                    }
 
-                                        if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
-                                            el.classList.add('miss');
+                                    if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
+                                        el.classList.add('miss');
 
-                                        }
+                                    }
 
-                                    })
-                                }, 1300);
+                                })
+                                // }, 1300);
+
+                                if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
+                                    switch (true) {
+                                        case game.cpu.gameBoard.allShipsSunk():
+                                            document.querySelector('#subtitles-box').textContent = `You Win!`;
+
+                                            break;
+
+                                        case game.player.gameBoard.allShipsSunk():
+                                            document.querySelector('#subtitles-box').textContent = `You Lost`;
+
+                                            break;
+                                    }
+                                    setTimeout(() => {
+                                        this.loadGameOverScreen();
+                                    }, 1300);
+
+                                }
                             }
 
 
-                            if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {                                
-                                this.loadGameOverScreen();
-                            }
+                            // if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
+                            //     this.loadGameOverScreen();
+                            // }
 
                         }
 
