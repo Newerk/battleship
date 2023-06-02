@@ -53,6 +53,7 @@ export const Gameboard = () => {
                     }
 
                     this.board[`${coord[0]}${count}`].occupiedBy = selectedShip.type;
+                    this.board[`${coord[0]}${count}`].hit = true;
                     _shipOccupiedCoords.push(`${coord[0]}${count}`);
                     selectedShip.occupying.push(`${coord[0]}${count}`);
                     count++;
@@ -83,6 +84,7 @@ export const Gameboard = () => {
                     }
 
                     this.board[`${letters[count]}${digits}`].occupiedBy = selectedShip.type;
+                    this.board[`${letters[count]}${digits}`].hit = true;
                     _shipOccupiedCoords.push(`${letters[count]}${digits}`);
                     selectedShip.occupying.push(`${letters[count]}${digits}`)
                     count++;
