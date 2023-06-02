@@ -108,22 +108,22 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
             cpu.attack(enemy, attackBacktracker);
             backTrackerIsActive = false;
 
-            // if (enemy.gameBoard.board[attackBacktracker].occupiedBy !== 'water' && currentDirection !== undefined) {//this is breaking my game. fix it
-            //     document.querySelector('#subtitles-box').textContent = ``;
-            //     text = `${attackBacktracker} was a hit.  `;
+            if (enemyBoardHits !== enemy.hitsOnPersonalBoard.length) {
+                document.querySelector('#subtitles-box').textContent = ``;
+                text = `${attackBacktracker} was a hit.  `;
 
-            //     let getShip = enemy.gameBoard.board[attackBacktracker].occupiedBy;
-            //     if (enemy.gameBoard.ships[getShip].isSunk() === true) {
-            //         document.querySelector('#subtitles-box').textContent += ``;
-            //         text = `Your ${getShip} was sunk`;
-            //     }
+                let getShip = enemy.gameBoard.board[attackBacktracker].occupiedBy;
+                if (enemy.gameBoard.ships[getShip].isSunk() === true) {
+                    document.querySelector('#subtitles-box').textContent += ``;
+                    text = `Your ${getShip} was sunk`;
+                }
 
 
-            // } else {
-            //     document.querySelector('#subtitles-box').textContent = ``;
-            //     text = `${attackBacktracker} was a miss.  `;
+            } else {
+                document.querySelector('#subtitles-box').textContent = ``;
+                text = `${attackBacktracker} was a miss.  `;
 
-            // }
+            }
 
 
         } else {
