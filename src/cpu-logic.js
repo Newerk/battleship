@@ -65,6 +65,12 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
         if (enemy.hitsOnPersonalBoard.length !== enemyBoardHits) { //attack was hit
             document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
 
+            let getShip = enemy.gameBoard.board[lastHit()].occupiedBy;
+            if (enemy.gameBoard.ships[getShip].isSunk() === true) {
+                document.querySelector('#subtitles-box').textContent += `Your ${getShip} was sunk`;
+            }
+
+
             switch (chosenAttack) {
                 case moveset[0]:
                     currentDirection = 'up';
@@ -100,6 +106,12 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
             if (enemy.board[attackBacktracker].occupiedBy !== 'water' && currentDirection !== undefined) {
                 document.querySelector('#subtitles-box').textContent = `${attackBacktracker} was a hit.  `;
+
+                let getShip = enemy.gameBoard.board[attackBacktracker].occupiedBy;
+                if (enemy.gameBoard.ships[getShip].isSunk() === true) {
+                    document.querySelector('#subtitles-box').textContent += `Your ${getShip} was sunk`;
+                }
+
 
             } else {
                 document.querySelector('#subtitles-box').textContent = `${attackBacktracker} was a miss.  `;
@@ -139,6 +151,11 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 if (_.includes(Object.keys(enemy.board), coord) && !_.includes(enemy.allAttackedLocationsPersonalBoard, coord)) {
                     cpu.attack(enemy, coord);
                     document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
+                    let getShip = enemy.gameBoard.board[lastHit()].occupiedBy;
+                    if (enemy.gameBoard.ships[getShip].isSunk() === true) {
+                        document.querySelector('#subtitles-box').textContent += `Your ${getShip} was sunk`;
+                    }
+
 
 
                     if (enemy.board[coord].occupiedBy === 'water') {
@@ -189,13 +206,19 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
                     if (enemy.board[latestMove()].occupiedBy !== 'water') {
                         document.querySelector('#subtitles-box').textContent = `${latestMove()} was a hit.  `;
-        
+
+                        let getShip = enemy.gameBoard.board[latestMove()].occupiedBy;
+                        if (enemy.gameBoard.ships[getShip].isSunk() === true) {
+                            document.querySelector('#subtitles-box').textContent += `Your ${getShip} was sunk`;
+                        }
+
+
                     } else {
                         document.querySelector('#subtitles-box').textContent = `${latestMove()} was a miss.  `;
-        
+
                     }
-        
-        
+
+
                 }
             }
 

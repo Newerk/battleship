@@ -259,7 +259,7 @@ export const DOM = () => {
                                     }
                                     setTimeout(() => {
                                         this.loadGameOverScreen();
-                                    }, 1300);
+                                    }, 2000);
 
                                 }
                             }
