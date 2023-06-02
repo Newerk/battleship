@@ -130,7 +130,21 @@ export const DOM = () => {
 
             const subtitlesBox = document.createElement('div');
             subtitlesBox.id = 'subtitles-box';
-            subtitlesBox.textContent = 'Place your ships. Press "R" to rotate';
+            // subtitlesBox.textContent = 'Place your ships. Press "R" to rotate';
+            let i = 0;
+            let text = "";
+            let speed = 20;
+
+            function typeWriter() {
+                if (i < text.length) {
+                    subtitlesBox.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+
+            text = 'Place your ships. Press "R" to rotate';
+            typeWriter();
 
             const gameboardsContainer = document.createElement('div');
             gameboardsContainer.id = 'gameboard-container';
@@ -201,23 +215,37 @@ export const DOM = () => {
 
                         const clickToAttack = () => {
 
-                            if (pixel.parentElement.classList.contains('active')) {
+                            let i = 0;
+                            let text = "";
+                            let speed = 20;
 
+                            function typeWriter() {
+                                if (i < text.length) {
+                                    document.getElementById("subtitles-box").innerHTML += text.charAt(i);
+                                    i++;
+                                    setTimeout(typeWriter, speed);
+                                }
+                            }
+
+                            if (pixel.parentElement.classList.contains('active')) {
                                 if (game.cpu.occupiedCoords.includes(pixel.id)) {
                                     pixel.classList.add('hit');
                                     game.player.attack(game.cpu, pixel.id);
-                                    document.querySelector('#subtitles-box').textContent = `${pixel.id} was a hit. `;
+                                    document.querySelector('#subtitles-box').textContent = ``;
+                                    text = `${pixel.id} was a hit. `
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
                                     let getShip = game.cpu.gameBoard.board[pixel.id].occupiedBy;
                                     if (game.cpu.gameBoard.ships[getShip].isSunk() === true) {
-                                        document.querySelector('#subtitles-box').textContent += `You destroyed their ${getShip} 💥💥💥`;                                        
+                                        document.querySelector('#subtitles-box').textContent += ``;
+                                        text = `You destroyed their ${getShip} 💥💥💥`
                                     }
 
                                 } else {
                                     pixel.classList.add('miss');
                                     game.player.attack(game.cpu, pixel.id);
-                                    document.querySelector('#subtitles-box').textContent = `${pixel.id} was a miss. `;
+                                    document.querySelector('#subtitles-box').textContent = ``;
+                                    text = `${pixel.id} was a miss. `
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
                                 }
@@ -230,15 +258,15 @@ export const DOM = () => {
                                 document.querySelector('#fq-left-arrow').classList.remove('glow');
                                 document.querySelector('#fq-right-arrow').classList.add('glow');
 
-                                // setTimeout(() => {
+                                setTimeout(() => {
                                 gameplayLoop(game);
                                 document.querySelector('#fq-left-arrow').classList.add('glow');
                                 document.querySelector('#fq-right-arrow').classList.remove('glow');
 
                                 document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
                                     if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
-                                        el.classList.add('hit');    
-    
+                                        el.classList.add('hit');
+
                                     }
 
                                     if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
@@ -247,23 +275,28 @@ export const DOM = () => {
                                     }
 
                                 })
-                                // }, 1300);
+                                }, 1300);
+
+                                typeWriter();
+
 
                                 if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
                                     switch (true) {
                                         case game.cpu.gameBoard.allShipsSunk():
-                                            document.querySelector('#subtitles-box').textContent = `You Win!`;
+                                            document.querySelector('#subtitles-box').textContent = ``;
+                                            text = `You Win!`
 
                                             break;
 
                                         case game.player.gameBoard.allShipsSunk():
-                                            document.querySelector('#subtitles-box').textContent = `You Lost`;
+                                            document.querySelector('#subtitles-box').textContent = ``;
+                                            text = `You Lose!`
 
                                             break;
                                     }
                                     setTimeout(() => {
                                         this.loadGameOverScreen();
-                                    }, 2000);
+                                    }, 1300);
 
                                 }
                             }
@@ -276,14 +309,29 @@ export const DOM = () => {
                         }
 
                         const clickToAddShip = () => {
+                            let i = 0;
+                            let text = "";
+                            let speed = 20;
+                
+                            function typeWriter() {
+                                if (i < text.length) {
+                                    document.querySelector('#subtitles-box').innerHTML += text.charAt(i);
+                                    i++;
+                                    setTimeout(typeWriter, speed);
+                                }
+                            }
+
                             if (pixel.parentElement.classList.contains('player')) {
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
 
                                 if (game.player.occupiedCoords.length === 17) {
                                     document.removeEventListener('keydown', changeOrientation)
-                                    document.querySelector('#subtitles-box').textContent = "Make your first attack";
+                                    document.querySelector('#subtitles-box').textContent = '';
+                                    text = "Make your first attack";
                                     document.querySelector('#freq-coord').innerHTML = "";
                                     document.querySelector('.board.computer').classList.add('active');
+
+                                    typeWriter();
 
                                 }
 
