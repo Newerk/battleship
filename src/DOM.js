@@ -211,7 +211,7 @@ export const DOM = () => {
 
                                     let getShip = game.cpu.gameBoard.board[pixel.id].occupiedBy;
                                     if (game.cpu.gameBoard.ships[getShip].isSunk() === true) {
-                                        document.querySelector('#subtitles-box').textContent += `You destroyed ${getShip} 💥💥💥`;                                        
+                                        document.querySelector('#subtitles-box').textContent += `You destroyed their ${getShip} 💥💥💥`;                                        
                                     }
 
                                 } else {
@@ -221,6 +221,10 @@ export const DOM = () => {
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
                                 }
+
+                                // if (pixel.classList.length > 1) {//make pixel unable to be clicked more than once**********!!!!!!IMPORTANT, DONT FORGET TO UNCOMMENT
+                                //     pixel.removeEventListener('click', clickToAttack);
+                                // }
 
 
                                 document.querySelector('#fq-left-arrow').classList.remove('glow');
