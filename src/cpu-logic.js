@@ -50,6 +50,18 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
     const lastHit = () => enemy.hitsOnPersonalBoard.at(-1);
 
     if (currentDirection === undefined) {
+        let i = 0;
+        let text = "";
+        let speed = 20;
+
+        function typeWriter() {
+            if (i < text.length) {
+                document.querySelector('#subtitles-box').innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
         //run a random attack to jumpstart the logic if the cpu logic is currently not being applied
         cpu.randomAttack(enemy);
 
@@ -63,13 +75,16 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         //check if attack was a hit or miss
         if (enemy.hitsOnPersonalBoard.length !== enemyBoardHits) { //attack was hit
-            document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
+            document.querySelector('#subtitles-box').textContent = ``;
+            text = `${lastHit()} was a hit.  `;
+
 
             let getShip = enemy.gameBoard.board[lastHit()].occupiedBy;
             if (enemy.gameBoard.ships[getShip].isSunk() === true) {
-                document.querySelector('#subtitles-box').textContent += `Your ${getShip} was sunk`;
-            }
+                document.querySelector('#subtitles-box').textContent += ``;
+                text += `Your ${getShip} was sunk`;
 
+            }
 
             switch (chosenAttack) {
                 case moveset[0]:
@@ -92,11 +107,25 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
         } else {//attack was a miss
             console.log('attack was a miss')
             currentDirection = undefined;
-            document.querySelector('#subtitles-box').textContent = `${latestMove()} was a miss. `;
+            document.querySelector('#subtitles-box').textContent = ``;
+            text = `${latestMove()} was a hit. `
         }
 
+        typeWriter();
 
     } else {
+        let i = 0;
+        let text = "";
+        let speed = 20;
+
+        function typeWriter() {
+            if (i < text.length) {
+                document.querySelector('#subtitles-box').innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
         const enemyBoardHits = enemy.hitsOnPersonalBoard.length;
 
 
@@ -104,17 +133,20 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
             cpu.attack(enemy, attackBacktracker);
             backTrackerIsActive = false;
 
-            if (enemy.board[attackBacktracker].occupiedBy !== 'water' && currentDirection !== undefined) {
-                document.querySelector('#subtitles-box').textContent = `${attackBacktracker} was a hit.  `;
+            if (enemy.gameBoard.board[attackBacktracker].occupiedBy !== 'water' && currentDirection !== undefined) {//this is breaking my game. fix it
+                document.querySelector('#subtitles-box').textContent = ``;
+                text = `${attackBacktracker} was a hit.  `;
 
                 let getShip = enemy.gameBoard.board[attackBacktracker].occupiedBy;
                 if (enemy.gameBoard.ships[getShip].isSunk() === true) {
-                    document.querySelector('#subtitles-box').textContent += `Your ${getShip} was sunk`;
+                    document.querySelector('#subtitles-box').textContent += ``;
+                    text = `Your ${getShip} was sunk`;
                 }
 
 
             } else {
-                document.querySelector('#subtitles-box').textContent = `${attackBacktracker} was a miss.  `;
+                document.querySelector('#subtitles-box').textContent = ``;
+                text = `${attackBacktracker} was a miss.  `;
 
             }
 
@@ -150,16 +182,20 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
                 if (_.includes(Object.keys(enemy.board), coord) && !_.includes(enemy.allAttackedLocationsPersonalBoard, coord)) {
                     cpu.attack(enemy, coord);
-                    document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
+                    document.querySelector('#subtitles-box').textContent = ``;
+                    text = `${lastHit()} was a hit.  `;
+
                     let getShip = enemy.gameBoard.board[lastHit()].occupiedBy;
                     if (enemy.gameBoard.ships[getShip].isSunk() === true) {
-                        document.querySelector('#subtitles-box').textContent += `Your ${getShip} was sunk`;
+                        document.querySelector('#subtitles-box').textContent += ``;
+                        text = `Your ${getShip} was sunk`;
                     }
 
 
 
                     if (enemy.board[coord].occupiedBy === 'water') {
-                        document.querySelector('#subtitles-box').textContent = `${coord} was a miss. `;
+                        document.querySelector('#subtitles-box').textContent = ``;
+                        text = `${coord} was a miss. `;
 
 
                         console.log('attack was a miss. prev attack was a hit')
@@ -205,16 +241,19 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     cpu.randomAttack(enemy);
 
                     if (enemy.board[latestMove()].occupiedBy !== 'water') {
-                        document.querySelector('#subtitles-box').textContent = `${latestMove()} was a hit.  `;
+                        document.querySelector('#subtitles-box').textContent = ``;
+                        text = `${latestMove()} was a hit.  `;
 
                         let getShip = enemy.gameBoard.board[latestMove()].occupiedBy;
                         if (enemy.gameBoard.ships[getShip].isSunk() === true) {
-                            document.querySelector('#subtitles-box').textContent += `Your ${getShip} was sunk`;
+                            document.querySelector('#subtitles-box').textContent += ``;
+                            text = `Your ${getShip} was sunk`;
                         }
 
 
                     } else {
-                        document.querySelector('#subtitles-box').textContent = `${latestMove()} was a miss.  `;
+                        document.querySelector('#subtitles-box').textContent = ``;
+                        text = `${latestMove()} was a miss.  `;
 
                     }
 
@@ -242,6 +281,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
             }
 
         }
+        typeWriter();
     }
     console.log(currentDirection)
 }
