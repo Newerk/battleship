@@ -45,10 +45,10 @@ export const DOM = () => {
 
         },
         loadInGameScreen() {
-            const game = setupGame();
-
             content.innerHTML = "";
             content.className = 'in-game-screen';
+
+            const game = setupGame();
 
             const codecContainer = document.createElement('div');
             codecContainer.id = 'codec-container';
@@ -230,12 +230,17 @@ export const DOM = () => {
 
                                 document.querySelector('#fq-left-arrow').classList.remove('glow');
                                 document.querySelector('#fq-right-arrow').classList.add('glow');
+                                document.querySelector('.board.computer').classList.remove('active');
 
-                                // setTimeout(() => {
+
+                                setTimeout(() => {
                                 gameplayLoop(game);
 
                                 document.querySelector('#fq-left-arrow').classList.add('glow');
                                 document.querySelector('#fq-right-arrow').classList.remove('glow');
+                                document.querySelector('.board.computer').classList.add('active');
+
+
 
                                 document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
                                     if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
@@ -249,7 +254,7 @@ export const DOM = () => {
                                     }
 
                                 })
-                                // }, 1300);
+                                }, 1300);
 
                             }
 
@@ -464,6 +469,8 @@ export const DOM = () => {
             }
 
             const startNewGame = () => {
+                content.innerHTML = "";
+
                 this.loadInGameScreen();
                 document.removeEventListener('click', startNewGame)
             }
