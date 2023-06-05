@@ -37,16 +37,17 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
             document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
 
             let getShip = enemy.gameBoard.board[lastHit()].occupiedBy;
-            if (enemy.gameBoard.ships[getShip].isSunk() === true) {
-                document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
+            if (enemy.gameBoard.ships[getShip]) {
+                if (enemy.gameBoard.ships[getShip].isSunk() === true) {
+                    document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
 
-                enemy.gameBoard.ships[getShip].occupying.forEach(el => {
-                    document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
-                })
+                    enemy.gameBoard.ships[getShip].occupying.forEach(el => {
+                        document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
+                    })
+
+                }
 
             }
-
-
             switch (chosenAttack) {
                 case moveset[0]:
                     currentDirection = 'up';
