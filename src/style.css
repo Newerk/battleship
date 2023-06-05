@@ -468,7 +468,15 @@ h6 {
 .board-container.computer {
   justify-self: left;
   margin-left: 6.8rem;
+}
 
+.sunk {
+  opacity: .2;
+
+}
+
+.sunk:hover {
+  opacity: .2;
 
 }
 
