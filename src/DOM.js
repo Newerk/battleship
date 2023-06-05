@@ -216,7 +216,7 @@ export const DOM = () => {
                                         game.cpu.gameBoard.ships[getShip].occupying.forEach(el => {
                                             document.querySelector('.board.computer').querySelector(`#${el}`).classList.add('sunk');
                                         })
-                                        
+
                                     }
 
                                 } else {
@@ -233,7 +233,7 @@ export const DOM = () => {
 
                                 // setTimeout(() => {
                                 gameplayLoop(game);
-                
+
                                 document.querySelector('#fq-left-arrow').classList.add('glow');
                                 document.querySelector('#fq-right-arrow').classList.remove('glow');
 
@@ -251,29 +251,25 @@ export const DOM = () => {
                                 })
                                 // }, 1300);
 
-                                if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
-                                    switch (true) {
-                                        case game.cpu.gameBoard.allShipsSunk():
-                                            document.querySelector('#subtitles-box').textContent = `You Win!`;
-
-                                            break;
-
-                                        case game.player.gameBoard.allShipsSunk():
-                                            document.querySelector('#subtitles-box').textContent = `You Lost`;
-
-                                            break;
-                                    }
-                                    setTimeout(() => {
-                                        this.loadGameOverScreen();
-                                    }, 2000);
-
-                                }
                             }
 
+                            if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
+                                switch (true) {
+                                    case game.cpu.gameBoard.allShipsSunk():
+                                        document.querySelector('#subtitles-box').textContent = `You Win!`;
 
-                            // if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
-                            //     this.loadGameOverScreen();
-                            // }
+                                        break;
+
+                                    case game.player.gameBoard.allShipsSunk():
+                                        document.querySelector('#subtitles-box').textContent = `You Lost`;
+
+                                        break;
+                                }
+                                setTimeout(() => {
+                                    this.loadGameOverScreen();
+                                }, 2000);
+
+                            }
 
                         }
 

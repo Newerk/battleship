@@ -39,6 +39,11 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
             let getShip = enemy.gameBoard.board[lastHit()].occupiedBy;
             if (enemy.gameBoard.ships[getShip].isSunk() === true) {
                 document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
+
+                enemy.gameBoard.ships[getShip].occupying.forEach(el => {
+                    document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
+                })
+
             }
 
 
@@ -85,7 +90,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     enemy.gameBoard.ships[getShip].occupying.forEach(el => {
                         document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
                     })
-    
+
                 }
 
 
@@ -133,7 +138,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
                         enemy.gameBoard.ships[getShip].occupying.forEach(el => {
                             document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
-                        })        
+                        })
 
                     }
 
@@ -195,7 +200,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                             enemy.gameBoard.ships[getShip].occupying.forEach(el => {
                                 document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
                             })
-            
+
                         }
 
 
