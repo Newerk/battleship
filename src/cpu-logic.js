@@ -85,13 +85,14 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 document.querySelector('#subtitles-box').textContent = `${attackBacktracker} was a hit.  `;
 
                 let getShip = enemy.gameBoard.board[attackBacktracker].occupiedBy;
-                if (enemy.gameBoard.ships[getShip].isSunk() === true) {
-                    document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
+                if (enemy.gameBoard.ships[getShip]) {
+                    if (enemy.gameBoard.ships[getShip].isSunk() === true) {
+                        document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
 
-                    enemy.gameBoard.ships[getShip].occupying.forEach(el => {
-                        document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
-                    })
-
+                        enemy.gameBoard.ships[getShip].occupying.forEach(el => {
+                            document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
+                        })
+                    }
                 }
 
 
@@ -134,15 +135,16 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     cpu.attack(enemy, coord);
                     document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
                     let getShip = enemy.gameBoard.board[lastHit()].occupiedBy;
-                    if (enemy.gameBoard.ships[getShip].isSunk() === true) {
-                        document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
+                    if (enemy.gameBoard.ships[getShip]) {
+                        if (enemy.gameBoard.ships[getShip].isSunk() === true) {
+                            document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
 
-                        enemy.gameBoard.ships[getShip].occupying.forEach(el => {
-                            document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
-                        })
+                            enemy.gameBoard.ships[getShip].occupying.forEach(el => {
+                                document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
+                            })
 
+                        }
                     }
-
 
 
                     if (enemy.board[coord].occupiedBy === 'water') {
@@ -195,15 +197,16 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                         document.querySelector('#subtitles-box').textContent = `${latestMove()} was a hit.  `;
 
                         let getShip = enemy.gameBoard.board[latestMove()].occupiedBy;
-                        if (enemy.gameBoard.ships[getShip].isSunk() === true) {
-                            document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
+                        if (enemy.gameBoard.ships[getShip]) {
+                            if (enemy.gameBoard.ships[getShip].isSunk() === true) {
+                                document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
 
-                            enemy.gameBoard.ships[getShip].occupying.forEach(el => {
-                                document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
-                            })
+                                enemy.gameBoard.ships[getShip].occupying.forEach(el => {
+                                    document.querySelector('.board.player').querySelector(`#${el}`).classList.add('sunk');
+                                })
 
+                            }
                         }
-
 
                     } else {
                         document.querySelector('#subtitles-box').textContent = `${latestMove()} was a miss.  `;
