@@ -3,7 +3,7 @@ import { Player } from "./player";
 import { cpuAttack } from "./cpu-logic";
 
 
-export const setupGame = () => {
+export function setupGame() {
     let player = Player();
     let cpu = Player();
 
@@ -15,7 +15,6 @@ export const setupGame = () => {
     }
 }
 
-export const gameplayLoop = (currentGame) => {
+export function gameplayLoop(currentGame) {
     cpuAttack(currentGame.cpu, currentGame.player);
-
 } 

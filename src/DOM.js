@@ -210,30 +210,36 @@ export const DOM = () => {
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
                                     let getShip = game.cpu.gameBoard.board[pixel.id].occupiedBy;
-                                    if (game.cpu.gameBoard.ships[getShip].isSunk() === true) {
-                                        document.querySelector('#subtitles-box').textContent += `You destroyed ${getShip} 💥💥💥`;
+                                    if (game.cpu.gameBoard.ships[getShip]) {
+                                        if (game.cpu.gameBoard.ships[getShip].isSunk() === true) {
+                                            document.querySelector('#subtitles-box').textContent += `You destroyed ${getShip} 💥💥💥`;
 
-                                        game.cpu.gameBoard.ships[getShip].occupying.forEach(el => {
-                                            document.querySelector('.board.computer').querySelector(`#${el}`).classList.add('sunk');
-                                        })
+                                            game.cpu.gameBoard.ships[getShip].occupying.forEach(el => {
+                                                document.querySelector('.board.computer').querySelector(`#${el}`).classList.add('sunk');
+                                            })
 
+                                        }
                                     }
 
                                 } else {
                                     pixel.classList.add('miss');
+
                                     game.player.attack(game.cpu, pixel.id);
                                     document.querySelector('#subtitles-box').textContent = `${pixel.id} was a miss. `;
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
 
                                 }
 
+                                if (pixel.classList.length > 1) {//make pixel unable to be clicked more than once**********!!!!!!IMPORTANT, DONT FORGET TO UNCOMMENT
+                                    pixel.removeEventListener('click', clickToAttack);
+                                }
 
                                 document.querySelector('#fq-left-arrow').classList.remove('glow');
                                 document.querySelector('#fq-right-arrow').classList.add('glow');
                                 document.querySelector('.board.computer').classList.remove('active');
 
 
-                                setTimeout(() => {
+                                // setTimeout(() => {
                                 gameplayLoop(game);
 
                                 document.querySelector('#fq-left-arrow').classList.add('glow');
@@ -254,29 +260,30 @@ export const DOM = () => {
                                     }
 
                                 })
-                                }, 1300);
-
-                            }
-
-                            if (game.cpu.gameBoard.allShipsSunk() === true || game.player.gameBoard.allShipsSunk() === true) {
                                 switch (true) {
                                     case game.cpu.gameBoard.allShipsSunk():
                                         document.querySelector('#subtitles-box').textContent = `You Win!`;
+                                        setTimeout(() => {
+                                            this.loadGameOverScreen();
+                                        }, 1300);
 
                                         break;
 
                                     case game.player.gameBoard.allShipsSunk():
                                         document.querySelector('#subtitles-box').textContent = `You Lost`;
+                                        setTimeout(() => {
+                                            this.loadGameOverScreen();
+                                        }, 1300);
 
                                         break;
                                 }
-                                setTimeout(() => {
-                                    this.loadGameOverScreen();
-                                }, 1300);
+
+                                // }, 1300);
 
                             }
 
                         }
+
 
                         const clickToAddShip = () => {
                             if (pixel.parentElement.classList.contains('player')) {
