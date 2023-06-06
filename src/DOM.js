@@ -239,7 +239,7 @@ export const DOM = () => {
                                 document.querySelector('.board.computer').classList.remove('active');
 
 
-                                // setTimeout(() => {
+                                setTimeout(() => {
                                 gameplayLoop(game);
 
                                 document.querySelector('#fq-left-arrow').classList.add('glow');
@@ -263,6 +263,13 @@ export const DOM = () => {
                                 switch (true) {
                                     case game.cpu.gameBoard.allShipsSunk():
                                         document.querySelector('#subtitles-box').textContent = `You Win!`;
+                                        document.querySelector('.board.computer').querySelectorAll('.pixel').forEach(el => {
+                                            if (el.classList.contains('hit')) {
+                                                el.classList.add('loser');
+                                            }
+                                        })
+
+
                                         setTimeout(() => {
                                             this.loadGameOverScreen();
                                         }, 1300);
@@ -271,6 +278,12 @@ export const DOM = () => {
 
                                     case game.player.gameBoard.allShipsSunk():
                                         document.querySelector('#subtitles-box').textContent = `You Lost`;
+                                        document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
+                                            if (el.classList.contains('hit')) {
+                                                el.classList.add('loser');
+                                            }
+                                        })
+
                                         setTimeout(() => {
                                             this.loadGameOverScreen();
                                         }, 1300);
@@ -278,7 +291,7 @@ export const DOM = () => {
                                         break;
                                 }
 
-                                // }, 1300);
+                                }, 1300);
 
                             }
 
