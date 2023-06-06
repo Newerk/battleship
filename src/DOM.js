@@ -240,56 +240,57 @@ export const DOM = () => {
 
 
                                 setTimeout(() => {
-                                gameplayLoop(game);
+                                    gameplayLoop(game);
 
-                                document.querySelector('#fq-left-arrow').classList.add('glow');
-                                document.querySelector('#fq-right-arrow').classList.remove('glow');
-                                document.querySelector('.board.computer').classList.add('active');
+                                    document.querySelector('#fq-left-arrow').classList.add('glow');
+                                    document.querySelector('#fq-right-arrow').classList.remove('glow');
+                                    document.querySelector('.board.computer').classList.add('active');
 
 
 
-                                document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
-                                    if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
-                                        el.classList.add('hit');
+                                    document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
+                                        if (game.player.hitsOnPersonalBoard[game.player.hitsOnPersonalBoard.length - 1] === el.id) {
+                                            el.classList.add('hit');
 
+                                        }
+
+                                        if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
+                                            el.classList.add('miss');
+
+                                        }
+
+                                    })
+                                    switch (true) {
+                                        case game.cpu.gameBoard.allShipsSunk():
+                                            document.querySelector('#subtitles-box').textContent = `You Win!`;
+                                            document.querySelector('.board.computer').querySelectorAll('.pixel').forEach(el => {
+                                                if (el.classList.contains('hit')) {
+                                                    el.classList.add('loser');
+                                                }
+                                            })
+                                            document.querySelector('.board.computer').classList.remove('active');
+
+                                            setTimeout(() => {
+                                                this.loadGameOverScreen();
+                                            }, 1300);
+
+                                            break;
+
+                                        case game.player.gameBoard.allShipsSunk():
+                                            document.querySelector('#subtitles-box').textContent = `You Lost`;
+                                            document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
+                                                if (el.classList.contains('hit')) {
+                                                    el.classList.add('loser');
+                                                }
+                                            })
+                                            document.querySelector('.board.computer').classList.remove('active');
+
+                                            setTimeout(() => {
+                                                this.loadGameOverScreen();
+                                            }, 1300);
+
+                                            break;
                                     }
-
-                                    if (game.player.missesOnPersonalBoard[game.player.missesOnPersonalBoard.length - 1] === el.id) {
-                                        el.classList.add('miss');
-
-                                    }
-
-                                })
-                                switch (true) {
-                                    case game.cpu.gameBoard.allShipsSunk():
-                                        document.querySelector('#subtitles-box').textContent = `You Win!`;
-                                        document.querySelector('.board.computer').querySelectorAll('.pixel').forEach(el => {
-                                            if (el.classList.contains('hit')) {
-                                                el.classList.add('loser');
-                                            }
-                                        })
-
-
-                                        setTimeout(() => {
-                                            this.loadGameOverScreen();
-                                        }, 1300);
-
-                                        break;
-
-                                    case game.player.gameBoard.allShipsSunk():
-                                        document.querySelector('#subtitles-box').textContent = `You Lost`;
-                                        document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
-                                            if (el.classList.contains('hit')) {
-                                                el.classList.add('loser');
-                                            }
-                                        })
-
-                                        setTimeout(() => {
-                                            this.loadGameOverScreen();
-                                        }, 1300);
-
-                                        break;
-                                }
 
                                 }, 1300);
 

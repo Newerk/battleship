@@ -482,6 +482,8 @@ h6 {
 
 .loser {
   background-color: #ff0015;
+  text-shadow: 0 0 10px #ff0015;
+
   opacity: 1;
 }
 
