@@ -3,6 +3,7 @@ import { gameplayLoop, setupGame } from "./game-loop";
 import { Gameboard } from "./gameboard";
 import "./style.css";
 
+
 export const DOM = () => {
     let content = document.createElement('div');
     content.setAttribute('style', 'height: 100vh; width: 100vw')

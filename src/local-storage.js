@@ -13,4 +13,5 @@ import { SpriteCollection } from "./assets/characters/sprite-collection";
 
     }
 
+    //local storage should also keep track if the audio is muted or not. There will be a music and sfx option on the top left corner of all pages(title, char select, game, gaveover)
 })();
