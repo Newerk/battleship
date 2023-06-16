@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import { DOM } from './DOM';
 import './local-storage'
-import { MusicCollection } from './assets/audio/music/music-collection';
 import { audioController } from './audio-control';
 
 //crt effect

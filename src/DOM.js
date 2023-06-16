@@ -1,4 +1,6 @@
+import { SfxCollection } from "./assets/audio/sfx/sfx-collection";
 import { SpriteCollection } from "./assets/characters/sprite-collection";
+import { audioController } from "./audio-control";
 import { gameplayLoop, setupGame } from "./game-loop";
 import { Gameboard } from "./gameboard";
 import "./style.css";
@@ -39,6 +41,7 @@ export const DOM = () => {
             const enterEvent = (e) => {
                 if (e.key === "Enter") {
                     this.loadCharacterSelectScreen();
+                    console.log('play next screen sfx');
                     document.removeEventListener('keypress', enterEvent);
                 }
             }
@@ -209,11 +212,17 @@ export const DOM = () => {
                                     game.player.attack(game.cpu, pixel.id);
                                     document.querySelector('#subtitles-box').textContent = `${pixel.id} was a hit. `;
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
+                                    console.log('play hit sfx');
+                                    audioController().playSfx(SfxCollection().hit);
+
 
                                     let getShip = game.cpu.gameBoard.board[pixel.id].occupiedBy;
                                     if (game.cpu.gameBoard.ships[getShip]) {
                                         if (game.cpu.gameBoard.ships[getShip].isSunk() === true) {
                                             document.querySelector('#subtitles-box').textContent += `You destroyed ${getShip} 💥💥💥`;
+                                            console.log('play sinking sfx');
+                                            audioController().playSfx(SfxCollection().sunk);
+
 
                                             game.cpu.gameBoard.ships[getShip].occupying.forEach(el => {
                                                 document.querySelector('.board.computer').querySelector(`#${el}`).classList.add('sunk');
@@ -224,6 +233,9 @@ export const DOM = () => {
 
                                 } else {
                                     pixel.classList.add('miss');
+                                    console.log('play miss sfx');
+                                    audioController().playSfx(SfxCollection().miss);
+
 
                                     game.player.attack(game.cpu, pixel.id);
                                     document.querySelector('#subtitles-box').textContent = `${pixel.id} was a miss. `;
@@ -264,6 +276,8 @@ export const DOM = () => {
                                     switch (true) {
                                         case game.cpu.gameBoard.allShipsSunk():
                                             document.querySelector('#subtitles-box').textContent = `You Win!`;
+                                            console.log('play winner sfx');
+
                                             document.querySelector('.board.computer').querySelectorAll('.pixel').forEach(el => {
                                                 if (el.classList.contains('hit')) {
                                                     el.classList.add('loser');
@@ -279,6 +293,8 @@ export const DOM = () => {
 
                                         case game.player.gameBoard.allShipsSunk():
                                             document.querySelector('#subtitles-box').textContent = `You Lost`;
+                                            console.log('play loser sfx');
+
                                             document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
                                                 if (el.classList.contains('hit')) {
                                                     el.classList.add('loser');
@@ -303,6 +319,10 @@ export const DOM = () => {
                         const clickToAddShip = () => {
                             if (pixel.parentElement.classList.contains('player')) {
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
+                                console.log('play adding ship sfx');
+                                audioController().playSfx(SfxCollection().placeShip);
+
+
 
                                 if (game.player.occupiedCoords.length === 17) {
                                     document.removeEventListener('keydown', changeOrientation)
@@ -377,6 +397,7 @@ export const DOM = () => {
             const enterEvent = (e) => {
                 if (e.key === "Enter") {
                     this.loadInGameScreen();
+                    console.log('play next screen sfx');
                     document.removeEventListener('keypress', enterEvent);
                 }
             }

@@ -665,6 +665,18 @@ h6 {
 
 }
 
+/*--------------------------------------------------------------------*/
+
+#music-btn::after {
+  content: ' ';
+  display: block;
+  background-image: url(./assets/symbols/no-audio.svg);
+}
+
+#sfx-btn {
+
+}
+
 
 /*------------------------------CRT EFFECT-----------------------------*/
 
