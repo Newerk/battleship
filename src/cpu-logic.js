@@ -99,7 +99,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     if (enemy.gameBoard.ships[getShip].isSunk() === true) {
                         document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
                         console.log('play sunk sfx');
-                        playSfx();
+                        playSfx(SfxCollection().sunk);
 
 
                         enemy.gameBoard.ships[getShip].occupying.forEach(el => {
