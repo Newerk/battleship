@@ -484,6 +484,7 @@ export const DOM = () => {
         loadGameOverScreen() {
             content.innerHTML = "";
             content.className = 'game-over-screen';
+            playMusic();
 
             const returnToTitle = document.createElement('button');
             returnToTitle.id = 'return-title-btn';
@@ -506,11 +507,13 @@ export const DOM = () => {
 
             const goToTitleScreen = () => {
                 this.loadTitleScreen();
+                playMusic();
                 document.removeEventListener('click', goToTitleScreen)
 
             }
             const goToCharSelect = () => {
                 this.loadCharacterSelectScreen();
+                playMusic();
                 document.removeEventListener('click', goToCharSelect)
 
             }
@@ -519,6 +522,7 @@ export const DOM = () => {
                 content.innerHTML = "";
 
                 this.loadInGameScreen();
+                playMusic();
 
                 document.removeEventListener('click', startNewGame)
             }
