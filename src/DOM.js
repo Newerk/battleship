@@ -1,10 +1,11 @@
 import { SfxCollection } from "./assets/audio/sfx/sfx-collection";
 import { SpriteCollection } from "./assets/characters/sprite-collection";
-import { audioController } from "./audio-control";
+import { audioController, audioStatus, playMusic, playSfx } from "./audio-control";
 import { gameplayLoop, setupGame } from "./game-loop";
 import { Gameboard } from "./gameboard";
 import "./style.css";
 
+import { MusicCollection } from "./assets/audio/music/music-collection";
 
 export const DOM = () => {
     let content = document.createElement('div');
@@ -213,7 +214,7 @@ export const DOM = () => {
                                     document.querySelector('#subtitles-box').textContent = `${pixel.id} was a hit. `;
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
                                     console.log('play hit sfx');
-                                    audioController().playSfx(SfxCollection().hit);
+                                    playSfx(SfxCollection().hit);
 
 
                                     let getShip = game.cpu.gameBoard.board[pixel.id].occupiedBy;
@@ -221,7 +222,7 @@ export const DOM = () => {
                                         if (game.cpu.gameBoard.ships[getShip].isSunk() === true) {
                                             document.querySelector('#subtitles-box').textContent += `You destroyed ${getShip} 💥💥💥`;
                                             console.log('play sinking sfx');
-                                            audioController().playSfx(SfxCollection().sunk);
+                                            playSfx(SfxCollection().sunk);
 
 
                                             game.cpu.gameBoard.ships[getShip].occupying.forEach(el => {
@@ -234,7 +235,7 @@ export const DOM = () => {
                                 } else {
                                     pixel.classList.add('miss');
                                     console.log('play miss sfx');
-                                    audioController().playSfx(SfxCollection().miss);
+                                    playSfx(SfxCollection().miss);
 
 
                                     game.player.attack(game.cpu, pixel.id);
@@ -320,8 +321,7 @@ export const DOM = () => {
                             if (pixel.parentElement.classList.contains('player')) {
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
                                 console.log('play adding ship sfx');
-                                audioController().playSfx(SfxCollection().placeShip);
-
+                                playSfx(SfxCollection().placeShip);
 
 
                                 if (game.player.occupiedCoords.length === 17) {
@@ -397,8 +397,12 @@ export const DOM = () => {
             const enterEvent = (e) => {
                 if (e.key === "Enter") {
                     this.loadInGameScreen();
+                    playMusic();
+
                     console.log('play next screen sfx');
+
                     document.removeEventListener('keypress', enterEvent);
+
                 }
             }
 
@@ -515,6 +519,7 @@ export const DOM = () => {
                 content.innerHTML = "";
 
                 this.loadInGameScreen();
+
                 document.removeEventListener('click', startNewGame)
             }
 

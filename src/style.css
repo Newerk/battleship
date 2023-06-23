@@ -105,13 +105,14 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
 /*--------------------------------------------------------------------*/
 .audio-controls {
   z-index: 10;
   display: flex;
   flex-direction: column;
   height: 3rem;
-  width: 7rem;
+  width: 10rem;
   position: absolute;
   left: 0;
 }
@@ -667,14 +668,20 @@ h6 {
 
 /*--------------------------------------------------------------------*/
 
-#music-btn::after {
-  content: ' ';
-  display: block;
-  background-image: url(./assets/symbols/no-audio.svg);
+#music-btn,
+#sfx-btn {
+  font-family: 'Tactical';
+  color: #FFF;
+  text-align: start;
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+
 }
 
-#sfx-btn {
-
+#music-btn:hover,
+#sfx-btn:hover {
+  margin-left: 1rem;
 }
 
 

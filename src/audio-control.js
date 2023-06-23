@@ -1,8 +1,17 @@
 import { MusicCollection } from "./assets/audio/music/music-collection";
 
+let titleScreenMusic = MusicCollection().titleScreen;
+let inGameMusic = MusicCollection().inGame;
+let gameOverMusic = MusicCollection().gameOverScreen;
 
-let musicPlaying = false;
-let sfxActive = false;
+
+export let audioStatus = {
+    musicPlaying: false,
+    titleMusicPlaying: false,
+    inGameMusicPlaying: false,
+    gameOverMusicPlaying: false,
+    sfxActive: false,
+}
 
 export function audioController() {
     const audioControls = document.createElement('div');
@@ -10,70 +19,67 @@ export function audioController() {
     const music = document.createElement('button');
     music.id = 'music-btn';
     music.textContent = 'Music 🔇'
-    let titleScreenMusic = MusicCollection().titleScreen;
-    let gameOverMusic = MusicCollection().gameOverScreen;
 
     music.addEventListener('click', function toggleMusic() {
-        if (document.querySelector('.title-screen')) {
-            if (musicPlaying === false) {
-                titleScreenMusic.play();
-                musicPlaying = true;
-                music.textContent = 'Music 🔊'
-
-
-            } else {
-                titleScreenMusic.pause();
-                musicPlaying = false;
-                music.textContent = 'Music 🔇'
-
-            }
+        if (audioStatus.musicPlaying === false) {
+            audioStatus.musicPlaying = true;
+            music.textContent = 'Music 🔊'
+        } else {
+            audioStatus.musicPlaying = false;
+            music.textContent = 'Music 🔇'
         }
-
-        if (document.querySelector('.game-over-screen')) {
-            if (musicPlaying === false) {
-                gameOverMusic.play();
-                musicPlaying = true;
-                music.textContent = 'Music 🔊'
-
-
-            } else {
-                gameOverMusic.pause();
-                musicPlaying = false;
-                music.textContent = 'Music 🔇'
-
-            }
-        }
-
+        playMusic();
     })
 
     const sfx = document.createElement('button');
     sfx.id = 'sfx-btn';
     sfx.textContent = 'Sfx 🔇';
 
-    sfx.addEventListener('click', function toggleMusic() {
-        if (sfxActive === false) {
-            sfxActive = true;
+    sfx.addEventListener('click', function toggleSfx() {
+        if (audioStatus.sfxActive === false) {
+            audioStatus.sfxActive = true;
             sfx.textContent = 'Sfx 🔊'
 
-
         } else {
-            sfxActive = false;
+            audioStatus.sfxActive = false;
             sfx.textContent = 'Sfx 🔇'
 
         }
     })
 
-
-
     audioControls.append(music, sfx);
     document.body.appendChild(audioControls);
+}
 
-    return {
-        playSfx: (sfxFile) => {
-            if (sfxActive === true) {
-                sfxFile.play();
-            }
-        }
+export function playSfx(sfxFile) {
+    if (audioStatus.sfxActive === true) {
+        sfxFile.play();
     }
+}
 
+export function playMusic() {
+    if (audioStatus.musicPlaying === true) {
+        if (document.querySelector('.title-screen')) {
+            titleScreenMusic.play();
+            inGameMusic.pause();
+            gameOverMusic.pause();
+
+        }
+        if (document.querySelector('.in-game-screen')) {
+            inGameMusic.play();
+            titleScreenMusic.pause();
+            gameOverMusic.pause();
+
+        }
+        if (document.querySelector('.game-over-screen')) {
+            gameOverMusic.play();
+            titleScreenMusic.pause();
+            inGameMusic.pause();
+
+        }
+    } else {
+        titleScreenMusic.pause();
+        inGameMusic.pause();
+        gameOverMusic.pause();
+    }
 }
