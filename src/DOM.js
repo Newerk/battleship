@@ -1,20 +1,29 @@
 import { SfxCollection } from "./assets/audio/sfx/sfx-collection";
 import { SpriteCollection } from "./assets/characters/sprite-collection";
-import { audioController, audioStatus, playMusic, playSfx } from "./audio-control";
+import { playMusic, playSfx } from "./audio-control";
 import { gameplayLoop, setupGame } from "./game-loop";
 import { Gameboard } from "./gameboard";
 import "./style.css";
 
-import { MusicCollection } from "./assets/audio/music/music-collection";
 
 export const DOM = () => {
     let content = document.createElement('div');
     content.setAttribute('style', 'height: 100vh; width: 100vw')
     content.id = 'content';
+
+    content.style.opacity = 0;
+
+
     return {
         loadTitleScreen() {
             content.innerHTML = "";
             content.className = 'title-screen';
+
+            setTimeout(() => {
+                content.setAttribute('style', 'opacity: 1')
+            }, 250)
+
+
 
             const topText = document.createElement('div');
             topText.id = 'top-text';
@@ -41,17 +50,39 @@ export const DOM = () => {
 
             const enterEvent = (e) => {
                 if (e.key === "Enter") {
-                    this.loadCharacterSelectScreen();
-                    console.log('play next screen sfx');
-                    document.removeEventListener('keypress', enterEvent);
+
+                    content.style.opacity = 0;
+
+
+                    setTimeout(() => {
+                        this.loadCharacterSelectScreen();
+                        console.log('play next screen sfx');
+                        document.removeEventListener('keypress', enterEvent);
+
+                    }, 500)
                 }
             }
             document.addEventListener('keypress', enterEvent);
+
+            message.addEventListener('click', () => {
+                content.style.opacity = 0;
+
+
+                setTimeout(() => {
+                    this.loadCharacterSelectScreen();
+                    playMusic();
+                    message.removeEventListener('click', enterEvent);
+                }, 500)
+            })
+
 
         },
         loadInGameScreen() {
             content.innerHTML = "";
             content.className = 'in-game-screen';
+            setTimeout(() => {
+                content.setAttribute('style', 'opacity: 1')
+            }, 250)
 
             const game = setupGame();
 
@@ -287,7 +318,12 @@ export const DOM = () => {
                                             document.querySelector('.board.computer').classList.remove('active');
 
                                             setTimeout(() => {
+                                                content.style.opacity = 0;
+                                            }, 1000)
+
+                                            setTimeout(() => {
                                                 this.loadGameOverScreen();
+
                                             }, 1300);
 
                                             break;
@@ -302,6 +338,10 @@ export const DOM = () => {
                                                 }
                                             })
                                             document.querySelector('.board.computer').classList.remove('active');
+
+                                            setTimeout(() => {
+                                                content.style.opacity = 0;
+                                            }, 1000)
 
                                             setTimeout(() => {
                                                 this.loadGameOverScreen();
@@ -393,15 +433,20 @@ export const DOM = () => {
         loadCharacterSelectScreen() {
             content.innerHTML = "";
             content.className = 'char-select-screen';
+            setTimeout(() => {
+                content.setAttribute('style', 'opacity: 1')
+            }, 250)
 
             const enterEvent = (e) => {
                 if (e.key === "Enter") {
-                    this.loadInGameScreen();
-                    playMusic();
 
-                    console.log('play next screen sfx');
+                    content.style.opacity = 0;
+                    setTimeout(() => {
+                        this.loadInGameScreen();
+                        playMusic();
+                        document.removeEventListener('keypress', enterEvent);
 
-                    document.removeEventListener('keypress', enterEvent);
+                    }, 500)
 
                 }
             }
@@ -410,8 +455,13 @@ export const DOM = () => {
             startGame.id = 'start-game';
             startGame.textContent = 'Press Enter to Continue'
             startGame.addEventListener('click', () => {
-                this.loadInGameScreen();
-                document.removeEventListener('click', enterEvent);
+                content.style.opacity = 0;
+                setTimeout(()=> {
+                    this.loadInGameScreen();
+                    playMusic();
+                    document.removeEventListener('click', enterEvent);
+    
+                },500)
 
             })
 
@@ -484,6 +534,11 @@ export const DOM = () => {
         loadGameOverScreen() {
             content.innerHTML = "";
             content.className = 'game-over-screen';
+            setTimeout(() => {
+                content.setAttribute('style', 'opacity: 1')
+            }, 250)
+
+
             playMusic();
 
             const returnToTitle = document.createElement('button');
@@ -506,25 +561,45 @@ export const DOM = () => {
             changeCharacter.textContent = 'Change Character';
 
             const goToTitleScreen = () => {
-                this.loadTitleScreen();
-                playMusic();
-                document.removeEventListener('click', goToTitleScreen)
+                content.style.opacity = 0;
+
+
+                setTimeout(() => {
+                    this.loadTitleScreen();
+
+                    playMusic();
+                    document.removeEventListener('click', goToTitleScreen)
+
+                }, 500)
 
             }
             const goToCharSelect = () => {
-                this.loadCharacterSelectScreen();
-                playMusic();
-                document.removeEventListener('click', goToCharSelect)
+                content.style.opacity = 0;
+
+
+                setTimeout(() => {
+                    this.loadCharacterSelectScreen();
+                    playMusic();
+                    document.removeEventListener('click', goToCharSelect)
+
+                }, 500)
+
 
             }
 
             const startNewGame = () => {
-                content.innerHTML = "";
+                content.style.opacity = 0;
 
-                this.loadInGameScreen();
-                playMusic();
 
-                document.removeEventListener('click', startNewGame)
+                setTimeout(() => {
+                    content.innerHTML = "";
+                    this.loadInGameScreen();
+
+                    playMusic();
+                    document.removeEventListener('click', startNewGame)
+
+                }, 500)
+
             }
 
             returnToTitle.addEventListener('click', goToTitleScreen);
