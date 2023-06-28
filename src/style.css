@@ -107,6 +107,16 @@ h6 {
 }
 
 /*--------------------------------------------------------------------*/
+
+
+
+.title-screen, .in-game-screen, .char-select-screen, .game-over-screen {
+  transition: opacity .5s;
+  opacity: 0;
+}
+
+
+/*--------------------------------------------------------------------*/
 .audio-controls {
   z-index: 10;
   display: flex;
@@ -127,6 +137,10 @@ h6 {
   background-size: contain;
   background-position: center;
   background-color: black;
+  cursor: default;
+  height: 100vh;
+  width: 100vw;
+
 }
 
 #top-text {
@@ -164,7 +178,7 @@ h6 {
   color: #ff0015;
   transform: scaleY(0.5);
   transform-origin: 0 0;
-
+  cursor: pointer;
 
 }
 
@@ -603,6 +617,9 @@ h6 {
 }
 
 #return-title-btn {
+  position: absolute;
+
+  right: 0;
   font-family: 'Tactical';
   height: auto;
   width: auto;
