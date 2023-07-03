@@ -690,7 +690,7 @@ h6 {
   font-family: 'Tactical';
   color: #FFF;
   text-align: start;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   border-style: none;
   cursor: pointer;
 

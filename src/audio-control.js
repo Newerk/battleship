@@ -59,7 +59,7 @@ export function playSfx(sfxFile) {
 
 export function playMusic() {
     if (audioStatus.musicPlaying === true) {
-        if (document.querySelector('.title-screen') || document.querySelector('.char-select-screen')) {
+        if (document.querySelector('.title-screen') || document.querySelector('.char-select-screen') ) {
             titleScreenMusic.play();
             inGameMusic.pause();
             gameOverMusic.pause();
