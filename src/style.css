@@ -110,7 +110,10 @@ h6 {
 
 
 
-.title-screen, .in-game-screen, .char-select-screen, .game-over-screen {
+.title-screen,
+.in-game-screen,
+.char-select-screen,
+.game-over-screen {
   transition: opacity .5s;
   opacity: 0;
 }
@@ -690,7 +693,7 @@ h6 {
   font-family: 'Tactical';
   color: #FFF;
   text-align: start;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   border-style: none;
   cursor: pointer;
 
