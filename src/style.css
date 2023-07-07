@@ -278,9 +278,9 @@ h6 {
 
 #fq-mid-container {
   grid-column: 2;
-  margin: 1.5rem 0 1.5rem 0;
-  border-top: 3px #1F3029 solid;
-  border-bottom: 3px #1F3029 solid;
+  margin: 1.1rem 0 1.1rem 0;
+  border-top: 2px #1F3029 solid;
+  border-bottom: 2px #1F3029 solid;
 
   display: flex;
   justify-content: center;
@@ -293,11 +293,11 @@ h6 {
   background-color: #0F1818;
   height: 100%;
   width: 100%;
-  padding: 1rem;
+  padding: .75rem;
   display: grid;
   grid-template-columns: 1;
   grid-template-rows: repeat(9, 1fr);
-  gap: 4px;
+  gap: 2.8px;
 }
 
 .freq-bar {
@@ -313,8 +313,8 @@ h6 {
   position: absolute;
 
   background-color: #101818;
-  right: 1rem;
-  bottom: 1rem;
+  right: .75rem;
+  bottom: .75rem;
 
   height: 73%;
   width: 73%;
@@ -333,8 +333,8 @@ h6 {
 
   text-shadow: 0 0 10px #88F0C0;
 
-  font-size: 12vh;
-  margin-bottom: -28px;
+  font-size: 6rem;
+  margin-bottom: -1.3rem;
 }
 
 #fq-left-container,
