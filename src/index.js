@@ -11,8 +11,8 @@ document.body.appendChild(crt);
 audioController();
 
 //Make a fade in and out to black when changing screens. Perhaps this can be done w/ pure CSS
-DOM().loadTitleScreen();
+// DOM().loadTitleScreen();
 // DOM().loadCharacterSelectScreen();
-// DOM().loadInGameScreen();
+DOM().loadInGameScreen();
 // DOM().loadGameOverScreen();
 

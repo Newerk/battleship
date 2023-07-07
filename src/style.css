@@ -124,8 +124,8 @@ h6 {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  height: 3rem;
-  width: 10rem;
+  height: 26px;
+  width: 160px;
   position: absolute;
   left: 0;
 }
@@ -189,7 +189,7 @@ h6 {
 .in-game-screen {
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr;
-  grid-template-rows: 1fr auto 1.5fr;
+  grid-template-rows: 16.9rem 7.5rem auto;
 
   height: 100vh;
   width: 100vw;
@@ -235,7 +235,7 @@ h6 {
 #frequency-container {
   background-color: black;
   display: grid;
-  grid-template-rows: 2rem 1fr 2rem;
+  grid-template-rows: 1.5rem 1fr 1.5rem;
   grid-template-columns: 1fr;
 }
 
@@ -382,13 +382,13 @@ h6 {
   grid-column: span 3;
   grid-row: 2;
   font-family: sans-serif;
-  font-size: 3rem;
+  font-size: 2.3rem;
   font-family: 'Pixelated Serif';
 
   color: transparent;
   text-shadow: 0 0 2px #FFF;
 
-  height: 10rem;
+  /* height: 160px; */
   background-color: black;
   width: 100%;
   display: flex;
@@ -409,7 +409,7 @@ h6 {
 [class *=axis] {
   place-items: center;
   font-family: 'Pixelated Serif';
-  font-size: 1.6rem;
+  font-size: 2.5vh;
   color: #88F0C0;
   text-shadow: 0 0 10px #88F0C0;
 
@@ -423,7 +423,6 @@ h6 {
   grid-template-rows: 1;
 
   grid-column: 2 / 3;
-
 }
 
 .board-y-axis {
@@ -436,8 +435,8 @@ h6 {
 }
 
 .board {
-  height: 25rem;
-  width: 25rem;
+  height: 40vh;
+  width: 40vh;
   background-color: #1F3029;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -493,13 +492,13 @@ h6 {
 /*input of renderGameBoard()*/
 .board-container.player {
   justify-self: right;
-  margin-right: 6.8rem;
+  margin-right: 3.5rem;
 }
 
 /*input of renderGameBoard()*/
 .board-container.computer {
   justify-self: left;
-  margin-left: 6.8rem;
+  margin-left: 3.5rem;
 }
 
 .sunk {
@@ -706,6 +705,7 @@ h6 {
   background-color: transparent;
   border-style: none;
   cursor: pointer;
+  font-size: 12px;
 
 }
 
