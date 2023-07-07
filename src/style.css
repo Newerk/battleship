@@ -245,7 +245,7 @@ h6 {
   justify-content: center;
   height: 100%;
   font-family: 'Codec';
-  font-size: 2.5rem;
+  font-size: 1.9rem;
   color: #88F0C0;
   border-top: 3px #101818 solid;
   border-bottom: 3px #101818 solid;
@@ -262,11 +262,11 @@ h6 {
 #freq-footer-text {
   transform: scaleY(0.5);
   transform-origin: 0 0;
-  margin-bottom: -2rem;
+  margin-bottom: -1.3rem;
 
   background-color: #101818;
-  width: 12rem;
-  line-height: 3.5rem;
+  width: 9rem;
+  line-height: 2.8rem;
   text-align: center;
 }
 
@@ -355,10 +355,10 @@ h6 {
 
 #fq-left-arrow,
 #fq-right-arrow {
-  font-size: 2rem;
-  line-height: 2.6rem;
-  width: 6rem;
-  height: 2.3rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  width: 4.5rem;
+  height: 1.8rem;
   text-align: center;
 
   color: #284038;
