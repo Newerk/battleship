@@ -399,8 +399,8 @@ h6 {
 
 .board-container {
   display: grid;
-  grid-template-columns: 2.5rem 1fr;
-  grid-template-rows: 2.5rem 1fr;
+  grid-template-columns: 1.9rem 1fr;
+  grid-template-rows: 1.9rem 1fr;
   height: max-content;
   width: max-content;
 
@@ -409,7 +409,7 @@ h6 {
 [class *=axis] {
   place-items: center;
   font-family: 'Pixelated Serif';
-  font-size: 2.5vh;
+  font-size: 1.2rem;
   color: #88F0C0;
   text-shadow: 0 0 10px #88F0C0;
 
@@ -435,8 +435,8 @@ h6 {
 }
 
 .board {
-  height: 40vh;
-  width: 40vh;
+  height: 18.5rem;
+  width: 18.5rem;
   background-color: #1F3029;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -492,13 +492,13 @@ h6 {
 /*input of renderGameBoard()*/
 .board-container.player {
   justify-self: right;
-  margin-right: 3.5rem;
+  margin-right: 5.3rem;
 }
 
 /*input of renderGameBoard()*/
 .board-container.computer {
   justify-self: left;
-  margin-left: 3.5rem;
+  margin-left: 5.3rem;
 }
 
 .sunk {
