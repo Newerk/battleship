@@ -152,20 +152,20 @@ h6 {
   align-items: center;
   color: #ebc295;
   opacity: .9;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 
 }
 
 #sub-title {
   font-family: 'Tactical';
-  font-size: 1.5rem;
-  margin-bottom: -1.5rem;
+  font-size: 1.12rem;
+  margin-bottom: -1.12rem;
 
 }
 
 #title {
   font-family: 'MGS';
-  font-size: 6rem;
+  font-size: 4.5rem;
 
 }
 
@@ -174,9 +174,9 @@ h6 {
 }
 
 #message {
-  margin-top: -4rem;
+  margin-top: -3rem;
   font-family: 'Codec';
-  font-size: 3rem;
+  font-size: 2.25rem;
   grid-row: 3;
   color: #ff0015;
   transform: scaleY(0.5);
