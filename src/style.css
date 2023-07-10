@@ -188,7 +188,7 @@ h6 {
 /*--------------------------------------------------------------------*/
 .in-game-screen {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-columns: 1fr auto 1fr;
   grid-template-rows: 16.9rem 7.5rem auto;
 
   height: 100vh;
@@ -208,14 +208,14 @@ h6 {
 
 #codec-container {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
-  grid-column: span 3;
+  grid-template-columns: 1fr minmax(10rem, 1fr) 1.5fr minmax(10rem, 1fr) 1fr;
+  grid-column: 2;
   grid-row: 1;
   cursor: default;
 }
 
 #player-pic {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 1;
   background-color: black;
   background-repeat: no-repeat;
@@ -224,7 +224,7 @@ h6 {
 }
 
 #enemy-pic {
-  grid-column: 3;
+  grid-column: 4;
   grid-row: 1;
   background-color: black;
   background-repeat: no-repeat;
@@ -233,6 +233,8 @@ h6 {
 }
 
 #frequency-container {
+  grid-column: 3;
+
   background-color: black;
   display: grid;
   grid-template-rows: 1.5rem 1fr 1.5rem;
@@ -272,7 +274,7 @@ h6 {
 
 #freq-middle {
   display: grid;
-  grid-template-columns: 1fr 2.5fr 1fr;
+  grid-template-columns: 1fr minmax(21.5rem, 2.5fr) 1fr;
   grid-template-rows: 1fr;
 }
 
