@@ -656,6 +656,7 @@ h6 {
   grid-row: 2;
   font-size: 10rem;
   justify-self: center;
+  margin-left: -2.6rem;
   cursor: default;
 }
 
@@ -670,14 +671,13 @@ h6 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  gap: 15rem;
   z-index: 2;
 }
 
 #play-again {
   grid-column: 1;
-  justify-self: end;
-  margin-right: 6rem;
+  justify-self: start;
+  margin-left: 6rem;
   transition: .2s ease-out;
 
 }
@@ -685,6 +685,10 @@ h6 {
 #change-character {
   grid-column: 2;
   transition: .2s ease-out;
+
+  justify-self: end;
+  margin-right: -2.6rem;
+
 
 }
 
