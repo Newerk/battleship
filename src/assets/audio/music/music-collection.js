@@ -1,6 +1,5 @@
 import Introduction from '../music/Introduction.flac'
 import Enclosure from '../music/Enclosure.flac'
-
 import Cavern from "../music/Cavern.flac";
 import Colosseo from "../music/Colosseo.flac";
 import Encounter from "../music/Encounter.flac";
@@ -12,7 +11,7 @@ import VRTraining from "../music/VR Training.flac";
 export const MusicCollection = () => {
     const titleScreen = new Audio(Introduction);
     titleScreen.volume = 0.5;
-    titleScreen.addEventListener('ended', function () {//loops the song over and over
+    titleScreen.addEventListener('ended', function () {
         this.currentTime = 0;
         this.play();
     })
@@ -27,7 +26,7 @@ export const MusicCollection = () => {
 
     const gameOverScreen = new Audio(Enclosure);
     gameOverScreen.volume = 0.5;
-    gameOverScreen.addEventListener('ended', function () {//loops the song over and over
+    gameOverScreen.addEventListener('ended', function () {
         this.currentTime = 0;
         this.play();
     })

@@ -275,7 +275,7 @@ export const DOM = () => {
 
                                 }
 
-                                if (pixel.classList.length > 1) {//make pixel unable to be clicked more than once**********!!!!!!IMPORTANT, DONT FORGET TO UNCOMMENT
+                                if (pixel.classList.length > 1) {
                                     pixel.removeEventListener('click', clickToAttack);
                                 }
 

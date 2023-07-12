@@ -19,11 +19,10 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
         ]
     }
 
-    const latestMove = () => enemy.allAttackedLocationsPersonalBoard.at(-1);//update latest move
+    const latestMove = () => enemy.allAttackedLocationsPersonalBoard.at(-1);
     const lastHit = () => enemy.hitsOnPersonalBoard.at(-1);
 
     if (currentDirection === undefined) {
-        //run a random attack to jumpstart the logic if the cpu logic is currently not being applied
         cpu.randomAttack(enemy);
 
         const moveset = populateMoveset(latestMove());
@@ -34,8 +33,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         const chosenAttack = nextPossibleMoves[Math.floor(Math.random() * nextPossibleMoves.length)];
 
-        //check if attack was a hit or miss
-        if (enemy.hitsOnPersonalBoard.length !== enemyBoardHits) { //attack was hit
+        if (enemy.hitsOnPersonalBoard.length !== enemyBoardHits) {
             document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
             console.log('play hit sfx');
             playSfx(SfxCollection().hit);
@@ -70,7 +68,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                     break;
             }
 
-        } else {//attack was a miss
+        } else {
             console.log('attack was a miss')
             currentDirection = undefined;
             document.querySelector('#subtitles-box').textContent = `${latestMove()} was a miss. `;

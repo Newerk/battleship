@@ -18,7 +18,7 @@ function hoverEvent(element, description) {
         element.style.cursor = 'crosshair';
     })
     element.addEventListener('mouseleave', () => {
-        element.style.opacity = 0.5; //this needs to be reconsidered. I want the selected char to keep 1 opacity when mouseleave is active
+        element.style.opacity = 0.5; 
     })
 
 }

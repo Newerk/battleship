@@ -34,7 +34,7 @@ export const Gameboard = () => {
 
 
                 for (let i = 0; i < selectedShip.length; i++) {
-                    // Ships cannot extend past the board
+
                     if (!this.board[`${coord[0]}${count}`]) {
                         for (let j = i; j > 0; j--) {
                             _shipOccupiedCoords.pop();
@@ -42,7 +42,7 @@ export const Gameboard = () => {
                         }
                         return false;
                     }
-                    //Ships cannot overlap
+
                     if (_.includes(_shipOccupiedCoords, `${coord[0]}${count}`)) {
                         for (let j = i; j > 0; j--) {
                             this.board[`${coord[0]}${count}`].occupiedBy = 'water';
@@ -65,7 +65,7 @@ export const Gameboard = () => {
                 let digits = parseInt(coord.slice(1));
 
                 for (let i = 0; i < selectedShip.length; i++) {
-                    // Ships cannot extend past the board
+
                     if (!this.board[`${letters[count]}${digits}`]) {
                         for (let j = i; j > 0; j--) {
                             _shipOccupiedCoords.pop();
@@ -73,7 +73,7 @@ export const Gameboard = () => {
                         }
                         return false;
                     }
-                    //Ships cannot overlap
+
                     if (_.includes(_shipOccupiedCoords, `${letters[count]}${digits}`)) {
                         for (let j = i; j > 0; j--) {
                             this.board[`${letters[count]}${digits}`].occupiedBy = 'water';
@@ -105,21 +105,20 @@ export const Gameboard = () => {
 
                     if (_.includes(shipType.occupying, coord)) {
                         shipType.hit();
-                        // shipType.isSunk();
 
                     }
                 }
-                return true; //valid move
+                return true;
 
             }
             if (!_.includes(_shipOccupiedCoords, coord) && !_.includes(_allAttacksMade, coord)) {
                 _misses.push(coord);
                 _allAttacksMade.push(coord);
 
-                return true;//valid move
+                return true;
             } else {
 
-                return false;//move was invalid
+                return false;
             }
 
 
