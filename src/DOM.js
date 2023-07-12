@@ -56,7 +56,6 @@ export const DOM = () => {
 
                     setTimeout(() => {
                         this.loadCharacterSelectScreen();
-                        console.log('play next screen sfx');
                         document.removeEventListener('keypress', enterEvent);
 
                     }, 500)
@@ -244,15 +243,13 @@ export const DOM = () => {
                                     game.player.attack(game.cpu, pixel.id);
                                     document.querySelector('#subtitles-box').textContent = `${pixel.id} was a hit. `;
                                     document.querySelector('#freq-coord').textContent = pixel.id[0] + '.' + pixel.id.slice(1);
-                                    console.log('play hit sfx');
                                     playSfx(SfxCollection().hit);
 
 
                                     let getShip = game.cpu.gameBoard.board[pixel.id].occupiedBy;
                                     if (game.cpu.gameBoard.ships[getShip]) {
                                         if (game.cpu.gameBoard.ships[getShip].isSunk() === true) {
-                                            document.querySelector('#subtitles-box').textContent += `You destroyed ${getShip} 💥💥💥`;
-                                            console.log('play sinking sfx');
+                                            document.querySelector('#subtitles-box').textContent += `You destroyed ${getShip}`;
                                             playSfx(SfxCollection().sunk);
 
 
@@ -265,7 +262,6 @@ export const DOM = () => {
 
                                 } else {
                                     pixel.classList.add('miss');
-                                    console.log('play miss sfx');
                                     playSfx(SfxCollection().miss);
 
 
@@ -308,7 +304,6 @@ export const DOM = () => {
                                     switch (true) {
                                         case game.cpu.gameBoard.allShipsSunk():
                                             document.querySelector('#subtitles-box').textContent = `You Win!`;
-                                            console.log('play winner sfx');
 
                                             document.querySelector('.board.computer').querySelectorAll('.pixel').forEach(el => {
                                                 if (el.classList.contains('hit')) {
@@ -330,7 +325,6 @@ export const DOM = () => {
 
                                         case game.player.gameBoard.allShipsSunk():
                                             document.querySelector('#subtitles-box').textContent = `You Lost`;
-                                            console.log('play loser sfx');
 
                                             document.querySelector('.board.player').querySelectorAll('.pixel').forEach(el => {
                                                 if (el.classList.contains('hit')) {
@@ -360,7 +354,6 @@ export const DOM = () => {
                         const clickToAddShip = () => {
                             if (pixel.parentElement.classList.contains('player')) {
                                 let previewShip = ghostShip.placeShip(Object.values(ghostShip.ships)[currentShipIndex], pixel.id, orientation);
-                                console.log('play adding ship sfx');
                                 playSfx(SfxCollection().placeShip);
 
 

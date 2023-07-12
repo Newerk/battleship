@@ -28,7 +28,6 @@ export const Player = () => {
         randomAttack(enemy) {
             const randomCoord = _randomCoordinate();
             if (_.includes(enemy.allAttackedLocationsPersonalBoard, randomCoord)) {
-                console.log('repeat coord. running random attack again')
                 return this.randomAttack(enemy);
             }
             return enemy.gameBoard.receiveAttack(randomCoord);

@@ -35,7 +35,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         if (enemy.hitsOnPersonalBoard.length !== enemyBoardHits) {
             document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
-            console.log('play hit sfx');
             playSfx(SfxCollection().hit);
 
             let getShip = enemy.gameBoard.board[lastHit()].occupiedBy;
@@ -69,10 +68,8 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
             }
 
         } else {
-            console.log('attack was a miss')
             currentDirection = undefined;
             document.querySelector('#subtitles-box').textContent = `${latestMove()} was a miss. `;
-            console.log('play miss sfx');
             playSfx(SfxCollection().miss);
 
         }
@@ -88,7 +85,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
             if (enemyBoardHits !== enemy.hitsOnPersonalBoard.length) {
                 document.querySelector('#subtitles-box').textContent = `${attackBacktracker} was a hit.  `;
-                console.log('play hit sfx');
                 playSfx(SfxCollection().hit);
 
 
@@ -96,7 +92,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 if (enemy.gameBoard.ships[getShip]) {
                     if (enemy.gameBoard.ships[getShip].isSunk() === true) {
                         document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
-                        console.log('play sunk sfx');
                         playSfx(SfxCollection().sunk);
 
 
@@ -109,7 +104,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
             } else {
                 document.querySelector('#subtitles-box').textContent = `${attackBacktracker} was a miss.  `;
-                console.log('play miss sfx');
                 playSfx(SfxCollection().miss);
 
 
@@ -148,14 +142,12 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                 if (_.includes(Object.keys(enemy.board), coord) && !_.includes(enemy.allAttackedLocationsPersonalBoard, coord)) {
                     cpu.attack(enemy, coord);
                     document.querySelector('#subtitles-box').textContent = `${lastHit()} was a hit.  `;
-                    console.log('play hit sfx');
                     playSfx(SfxCollection().hit);
 
                     let getShip = enemy.gameBoard.board[lastHit()].occupiedBy;
                     if (enemy.gameBoard.ships[getShip]) {
                         if (enemy.gameBoard.ships[getShip].isSunk() === true) {
                             document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
-                            console.log('play sunk sfx');
                             playSfx(SfxCollection().sunk);
 
 
@@ -169,11 +161,9 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
                     if (enemy.board[coord].occupiedBy === 'water') {
                         document.querySelector('#subtitles-box').textContent = `${coord} was a miss. `;
-                        console.log('play miss sfx');
                         playSfx(SfxCollection().miss);
 
 
-                        console.log('attack was a miss. prev attack was a hit')
 
                         while (_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
                             let store = backTracker
@@ -199,9 +189,7 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                         }
                         if (!enemy.board[backTracker] || !_.includes(enemy.allAttackedLocationsPersonalBoard, backTracker)) {
                             oppositeDirection();
-                            console.log(`switching direction to ${currentDirection}`)
                             backTrackerIsActive = true;
-                            console.log(`backtracker is now ${backTrackerIsActive}`)
                             attackBacktracker = backTracker;
 
                         }
@@ -216,7 +204,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
                     if (enemy.board[latestMove()].occupiedBy !== 'water') {
                         document.querySelector('#subtitles-box').textContent = `${latestMove()} was a hit.  `;
-                        console.log('play hit sfx');
                         playSfx(SfxCollection().hit);
 
 
@@ -224,7 +211,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
                         if (enemy.gameBoard.ships[getShip]) {
                             if (enemy.gameBoard.ships[getShip].isSunk() === true) {
                                 document.querySelector('#subtitles-box').textContent = `Your ${getShip} was sunk`;
-                                console.log('play sunk sfx');
                                 playSfx(SfxCollection().sunk);
 
 
@@ -237,7 +223,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
                     } else {
                         document.querySelector('#subtitles-box').textContent = `${latestMove()} was a miss.  `;
-                        console.log('play miss sfx');
                         playSfx(SfxCollection().miss);
                     }
 
@@ -266,7 +251,6 @@ export function cpuAttack(cpu, enemy, direction = currentDirection) {
 
         }
     }
-    console.log(currentDirection)
 }
 
 function oppositeDirection() {
