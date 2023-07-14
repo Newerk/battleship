@@ -458,6 +458,8 @@ export const DOM = () => {
 
             })
 
+            const centerContainer = document.createElement('div');
+            centerContainer.id = 'cs-center';
 
             const playerPicture = document.createElement('div');
             playerPicture.id = 'cs-player-pic';
@@ -518,7 +520,9 @@ export const DOM = () => {
             addRowsAndImages(playerCharGrid);
             addRowsAndImages(cpuCharGrid);
 
-            content.append(playerPicture, computerPicture, descriptonsContainer, playerCharGrid, cpuCharGrid, startGame);
+            centerContainer.append(playerPicture, computerPicture, descriptonsContainer, playerCharGrid, cpuCharGrid)
+
+            content.append(centerContainer, startGame);
 
             document.body.appendChild(content);
 
